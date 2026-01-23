@@ -4,16 +4,16 @@ Repository for WWU Game design club's IVX team collaborative game, winter 2026
 Lead by Cole Vanderkolk and Camden Perkins
 
 Collaborators:
-Audio by:
+1. Audio by:
 - First name Last name
 - First name Last name
-Assets by:
+2. Assets by:
 - First name Last name
 - First name Last name
-Code by:
+3. Code by:
 - First name Last name
 - First name Last name
-Story by:
+4. Story by:
 - First name Last name
 - First name Last name
 
