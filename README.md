@@ -18,8 +18,9 @@ Story by:
 - First name Last name
 
 Development stage: 
-As of Jan 23 2026: Design and storyboarding 
-As of ___________:
-As of ___________:
+- As of Jan 23 2026: Design and storyboarding
+- As of ___________:
+- As of ___________:
+
 Completion goal: Feburary 13 2026
 
