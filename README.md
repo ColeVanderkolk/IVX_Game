@@ -14,7 +14,7 @@ Collaborators:
 - Madden Rota
 - Phiney Parent (phineythedm)
 4. Story by:
-- First name Last name
+- Shane Hermanides
 - First name Last name
 
 Development stage: 
