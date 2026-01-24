@@ -11,7 +11,6 @@ Collaborators:
 - Nathan Christner
 - First name Last name
 3. Code by:
-- First name Last name
 - Madden Rota
 - Phiney Parent (phineythedm)
 4. Story by:
