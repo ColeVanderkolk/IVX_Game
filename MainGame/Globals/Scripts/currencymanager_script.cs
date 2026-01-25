@@ -37,6 +37,12 @@ public partial class currencymanager_script : Node
     // Array to hold all currencies
     private Currency[] currencies;
 
+    [Signal]
+    public delegate void AddCurrencyEventHandler(int id, int amount);
+
+    [Signal]
+    public delegate void RemoveCurrencyEventHandler(int id, int amount);
+
     /*
     * Dynamically creates each currency defined in enum and dictionary above
     * all currencies default at 0
@@ -63,6 +69,7 @@ public partial class currencymanager_script : Node
             return false;
         }
         currencies[id].value += amount;
+        EmitSignal(SignalName.AddCurrency, id, amount);
         return true;
     }
 
@@ -78,6 +85,7 @@ public partial class currencymanager_script : Node
             return false;
         }
         currencies[id].value -= amount;
+        EmitSignal(SignalName.RemoveCurrency, id, amount);
         return true;
     }
 
