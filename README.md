@@ -16,7 +16,7 @@ Collaborators:
 - Alex Stephens (Eev)
 4. Story by:
 - Shane Hermanides
-- First name Last name
+- Paige Cook
 
 Development stage: 
 - As of Jan 23 2026: Design and storyboarding
