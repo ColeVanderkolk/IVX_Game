@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cabpuscxt5yas"]
+
+[ext_resource type="Script" uid="uid://cb2aqawatgfg8" path="res://Menus/Scripts/MainMenu.cs" id="1_7cam4"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_7cam4")
