@@ -19,20 +19,20 @@ public partial class MainMenu : Menu
 		StartButton = GetNode<Button>("MarginContainer/VBoxContainer/StartButton");
 		QuitButton = GetNode<Button>("MarginContainer/VBoxContainer/QuitButton");
 
-        StartButton.ButtonDown += () => OnStartButtonPressed();
-        QuitButton.ButtonDown += () => OnQuitButtonPressed();
+		StartButton.ButtonDown += () => OnStartButtonPressed();
+		QuitButton.ButtonDown += () => OnQuitButtonPressed();
 	}
 
 	private void OnStartButtonPressed()
 	{
 		EmitSignal(SignalName.StartButtonPressed);
-        GD.Print("Start Button Pressed!");
+		GD.Print("Start Button Pressed!");
 	}
 
 	private void OnQuitButtonPressed()
 	{
 		EmitSignal(SignalName.QuitButtonPressed);
-        GD.Print("Quit Button Pressed!");
+		GD.Print("Quit Button Pressed!");
 	}
 
 }
