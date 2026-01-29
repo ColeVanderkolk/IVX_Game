@@ -7,6 +7,8 @@ public partial class GameController : Node
 	public const string MainMenuFilepath = "res://Menus/Scenes/main_menu.tscn";
 	public const string OptionsMenuFilepath = "res://Menus/Scenes/options_menu.tscn";
 
+	private TransitionHandler TransHandler; // TransitionHandler used to play scene Transition Effects.
+
 	private MainMenu CurrentMainMenu; // currently loaded main menu
 	private OptionsMenu CurrentOptionsMenu; // currently loaded options menu
 	private Menu CurrentOpenedMenu; // menu currently on screen

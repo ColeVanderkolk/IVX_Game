@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class TransitionHandler : CanvasLayer
 {
@@ -18,13 +19,19 @@ public partial class TransitionHandler : CanvasLayer
 		Player = GetNode<AnimationPlayer>("AnimationPlayer");
 	}
 
-	public void TransitionIn()
+	public async Task TransitionIn()
 	{
 		Player.Play("in");
+
+        await ToSignal(Player, Godot.AnimationPlayer.SignalName.AnimationFinished);
+        EmitSignal(SignalName.TransitionedIn);
 	}
 
-	public void TransitionOut()
+	public async Task TransitionOut()
 	{
 		Player.Play("out");
+
+        await ToSignal(Player, Godot.AnimationPlayer.SignalName.AnimationFinished);
+        EmitSignal(SignalName.TransitionedOut);
 	}
 }
