@@ -3,10 +3,12 @@ using System;
 
 public partial class MainMenu : Menu
 {
+	// Buttons:
 	private Button StartButton;
 	private Button QuitButton;
 	private Button OptionsButton;
 
+	// Signals:
 	[Signal]
 	public delegate void StartButtonPressedEventHandler();
 
@@ -20,11 +22,12 @@ public partial class MainMenu : Menu
 	{
 		base._Ready();
 		
-		// Initialize buttons and connect signals
+		// Initialize buttons
 		StartButton = GetNode<Button>("MarginContainer/VBoxContainer/StartButton");
 		QuitButton = GetNode<Button>("MarginContainer/VBoxContainer/QuitButton");
 		OptionsButton = GetNode<Button>("MarginContainer/VBoxContainer/OptionsButton");
 
+		// Connect button signals
 		StartButton.ButtonDown += () => OnStartButtonPressed();
 		OptionsButton.ButtonDown += () => OnOptionsButtonPressed();
 		QuitButton.ButtonDown += () => OnQuitButtonPressed();
