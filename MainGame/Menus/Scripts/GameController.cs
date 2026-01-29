@@ -6,7 +6,7 @@ public partial class GameController : Node
 
 	public const string MainMenuFilepath = "res://Menus/Scenes/main_menu.tscn";
 
-	private MainMenu MainMenu;
+	private MainMenu CurrentMainMenu; // currently loaded main menu
 
 	public GameController()
 	{
@@ -18,14 +18,19 @@ public partial class GameController : Node
 		base._Ready();
 		
 		// Instantiate a Main Menu & add it to the scene tree
-		MainMenu = LoadMainMenu();
-		AddChild(MainMenu);
+		CurrentMainMenu = LoadMainMenu();
+		AddChild(CurrentMainMenu);
 
 	}
 
 	// Load and return a new MainMenu node. Initialize & connect its signals.
 	private MainMenu LoadMainMenu()
 	{
+		if (CurrentMainMenu is not null)
+		{
+			GD.Print("WARNING! There is a currently loaded main menu.");
+		}
+
 		MainMenu TempMenu = (MainMenu)ResourceLoader.Load<PackedScene>(MainMenuFilepath).Instantiate();
 		TempMenu.QuitButtonPressed += () => QuitGame();
 
@@ -36,5 +41,7 @@ public partial class GameController : Node
 	{
 		GD.Print("Quitting game.");
 	}
+
+	
 
 }
