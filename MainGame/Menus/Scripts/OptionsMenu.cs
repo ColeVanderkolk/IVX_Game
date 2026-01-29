@@ -11,7 +11,7 @@ public partial class OptionsMenu : Menu
 	{
 		base._Ready();
 		
-		BackButton = GetNode<Button>("MarginContainer/VboxContainer/TopBar/BackButton");
+		BackButton = GetNode<Button>("MarginContainer/VBoxContainer/TopBar/BackButton");
 	}
 
 	private void OnBackButtonPressed()

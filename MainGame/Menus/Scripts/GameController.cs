@@ -5,8 +5,10 @@ public partial class GameController : Node
 {
 
 	public const string MainMenuFilepath = "res://Menus/Scenes/main_menu.tscn";
+	public const string OptionsMenuFilepath = "res://Menus/Scenes/options_menu.tscn";
 
 	private MainMenu CurrentMainMenu; // currently loaded main menu
+	private OptionsMenu CurrentOptionsMenu; // currently loaded options menu
 	private Menu CurrentOpenedMenu; // menu currently on screen
 
 	public GameController()
@@ -21,6 +23,9 @@ public partial class GameController : Node
 		// Instantiate a Main Menu & add it to the scene tree
 		CurrentMainMenu = LoadMainMenu();
 		OpenMenu(CurrentMainMenu);
+
+		//CurrentOptionsMenu = LoadOptionsMenu();
+		//OpenMenu(CurrentOptionsMenu);
 
 	}
 
@@ -37,7 +42,11 @@ public partial class GameController : Node
 		AddChild(CurrentOpenedMenu);
 	}
 
-	// Load and return a new MainMenu node. Initialize & connect its signals.
+	//------------------------//
+	// MENU LOADING FUNCTIONS //
+	//------------------------//
+
+	// Load and return a new MainMenu node. Initialize it & connect its signals.
 	private MainMenu LoadMainMenu()
 	{
 		if (CurrentMainMenu is not null) // Ideally a mainMenu shouldn't be loaded while one is active :P
@@ -47,8 +56,38 @@ public partial class GameController : Node
 
 		MainMenu TempMenu = (MainMenu)ResourceLoader.Load<PackedScene>(MainMenuFilepath).Instantiate();
 		TempMenu.QuitButtonPressed += () => QuitGame();
+		TempMenu.OptionsButtonPressed += () => MainMenuOptionsButtonPressed();
 
 		return TempMenu;
+	}
+
+// Load and return a new OptionsMenu node. Initialize it & connect its signals.
+	private OptionsMenu LoadOptionsMenu()
+	{
+		if (CurrentOptionsMenu is not null)
+		{
+			GD.Print("WARNING! There is a currently loaded options menu.");
+		}
+
+		OptionsMenu TempMenu = (OptionsMenu)ResourceLoader.Load<PackedScene>(OptionsMenuFilepath).Instantiate();
+
+		return TempMenu;
+	}
+
+	//------------------------//
+	// Button Press Functions //
+	//------------------------//
+
+private void MainMenuOptionsButtonPressed()
+	{
+		GD.Print("Opening Options Menu.");
+
+		if (CurrentOptionsMenu is null)
+		{
+			CurrentOptionsMenu = LoadOptionsMenu();
+		}
+
+		OpenMenu(CurrentOptionsMenu);
 	}
 
 	private void QuitGame()
@@ -56,7 +95,4 @@ public partial class GameController : Node
 		GD.Print("Quitting game.");
 		GetTree().Quit();
 	}
-
-	
-
 }
