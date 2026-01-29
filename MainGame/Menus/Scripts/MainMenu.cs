@@ -5,6 +5,7 @@ public partial class MainMenu : Menu
 {
 	private Button StartButton;
 	private Button QuitButton;
+	private Button OptionsButton;
 
 	[Signal]
 	public delegate void StartButtonPressedEventHandler();
@@ -18,6 +19,7 @@ public partial class MainMenu : Menu
 		
 		StartButton = GetNode<Button>("MarginContainer/VBoxContainer/StartButton");
 		QuitButton = GetNode<Button>("MarginContainer/VBoxContainer/QuitButton");
+		OptionsButton = GetNode<Button>("MarginContainer/VBoxContainer/OptionsButton");
 
 		StartButton.ButtonDown += () => OnStartButtonPressed();
 		QuitButton.ButtonDown += () => OnQuitButtonPressed();
