@@ -16,22 +16,26 @@ public partial class TransitionHandler : CanvasLayer
 	{
 		base._Ready();
 
+		Visible = false; // Turn visibility off so you can click the buttons.
+
 		Player = GetNode<AnimationPlayer>("AnimationPlayer");
 	}
 
 	public async Task TransitionIn()
 	{
+		Visible = true;
 		Player.Play("in");
 
-        await ToSignal(Player, Godot.AnimationPlayer.SignalName.AnimationFinished);
-        EmitSignal(SignalName.TransitionedIn);
+		await ToSignal(Player, Godot.AnimationPlayer.SignalName.AnimationFinished);
+		EmitSignal(SignalName.TransitionedIn);
 	}
 
 	public async Task TransitionOut()
 	{
 		Player.Play("out");
-
-        await ToSignal(Player, Godot.AnimationPlayer.SignalName.AnimationFinished);
-        EmitSignal(SignalName.TransitionedOut);
+		await ToSignal(Player, Godot.AnimationPlayer.SignalName.AnimationFinished);
+		
+		Visible = false;
+		EmitSignal(SignalName.TransitionedOut);
 	}
 }

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class GameController : Node
 {
@@ -8,6 +9,14 @@ public partial class GameController : Node
 	public const string OptionsMenuFilepath = "res://Menus/Scenes/options_menu.tscn";
 
 	private TransitionHandler TransHandler; // TransitionHandler used to play scene Transition Effects.
+
+	// Menu enum used by TransitionToMenu.
+	// This way the method can check whether a menu is loaded before loading it in.
+	enum Screens
+	{
+		MAINMENU,
+		OPTIONSMENU
+	}
 
 	private MainMenu CurrentMainMenu; // currently loaded main menu
 	private OptionsMenu CurrentOptionsMenu; // currently loaded options menu
@@ -25,10 +34,6 @@ public partial class GameController : Node
 		// Instantiate a Main Menu & add it to the scene tree
 		CurrentMainMenu = LoadMainMenu();
 		OpenMenu(CurrentMainMenu);
-
-		//CurrentOptionsMenu = LoadOptionsMenu();
-		//OpenMenu(CurrentOptionsMenu);
-
 	}
 
 	// opens the menu: Removes the current Menu from the scene tree.
@@ -44,6 +49,42 @@ public partial class GameController : Node
 		AddChild(CurrentOpenedMenu);
 	}
 
+	// Plays a transition effect & opens the specified screen.
+	// If the specified menu hasn't been loaded, load it.
+	// Functionality for opening the game screen is coming soon.
+	// Enum is used so you can call this function without knowing whether the menu is loaded in.
+	private async Task TransitionToScreen(Screens M)
+	{
+		Menu NewMenu = CurrentMainMenu;
+		// NewMenu is initialized to the CurrentMainMenu
+		// But will be changed depending on which menu is specified.
+	
+		// load menus if they are not loaded in.
+		// Set NewMenu equal to correct menu.
+		if (M == Screens.MAINMENU)
+		{
+			if (CurrentMainMenu is null)
+			{
+				CurrentMainMenu = LoadMainMenu();
+			}
+			NewMenu = CurrentMainMenu;
+		} else if (M == Screens.OPTIONSMENU)
+		{
+			if (CurrentOptionsMenu is null)
+			{
+				CurrentOptionsMenu = LoadOptionsMenu();
+			}
+			NewMenu = CurrentOptionsMenu;
+		}
+
+		// Swap to new menu while screen is covered in transition.
+		await TransHandler.TransitionIn();
+
+		OpenMenu(NewMenu);
+
+		await TransHandler.TransitionOut();
+	}
+
 	//------------------------//
 	// MENU LOADING FUNCTIONS //
 	//------------------------//
@@ -55,6 +96,8 @@ public partial class GameController : Node
 		{
 			GD.Print("WARNING! There is a currently loaded main menu.");
 		}
+
+		TransHandler = GetNode<TransitionHandler>("TransitionHandler");
 
 		MainMenu TempMenu = (MainMenu)ResourceLoader.Load<PackedScene>(MainMenuFilepath).Instantiate();
 		TempMenu.QuitButtonPressed += () => QuitGame();
@@ -85,29 +128,23 @@ private void MainMenuOptionsButtonPressed()
 	{
 		GD.Print("Opening Options Menu.");
 
-		if (CurrentOptionsMenu is null)
-		{
-			CurrentOptionsMenu = LoadOptionsMenu();
-		}
-
-		OpenMenu(CurrentOptionsMenu);
+		TransitionToScreen(Screens.OPTIONSMENU);
 	}
 
 	private void OptionsMenuBackButtonPressed()
 	{
 		GD.Print("Openeing Main Menu.");
 
-		if (CurrentMainMenu is null)
-		{
-			CurrentMainMenu = LoadMainMenu();
-		}
-
-		OpenMenu(CurrentMainMenu);
+		TransitionToScreen(Screens.MAINMENU);
 	}
 
-	private void QuitGame()
+	private async Task QuitGame()
 	{
 		GD.Print("Quitting game.");
+
+		// Play the Transition In before closing the game.
+		await TransHandler.TransitionIn();
+
 		GetTree().Quit();
 	}
 }
