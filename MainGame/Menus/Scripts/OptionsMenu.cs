@@ -6,19 +6,21 @@ public partial class OptionsMenu : Menu
 {
 	private Button BackButton;
 
-    [Signal]
-    public delegate void BackButtonPressedEventHandler();
+	[Signal]
+	public delegate void BackButtonPressedEventHandler();
 
 	public override void _Ready()
 	{
 		base._Ready();
 		
 		BackButton = GetNode<Button>("MarginContainer/VBoxContainer/TopBar/BackButton");
+
+		BackButton.ButtonDown += () => OnBackButtonPressed();
 	}
 
 	private void OnBackButtonPressed()
 	{
 		GD.Print("Back Button Pressed!");
-        EmitSignal(SignalName.BackButtonPressed);
+		EmitSignal(SignalName.BackButtonPressed);
 	}
 }

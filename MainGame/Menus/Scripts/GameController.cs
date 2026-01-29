@@ -70,6 +70,7 @@ public partial class GameController : Node
 		}
 
 		OptionsMenu TempMenu = (OptionsMenu)ResourceLoader.Load<PackedScene>(OptionsMenuFilepath).Instantiate();
+		TempMenu.BackButtonPressed += () => OptionsMenuBackButtonPressed();
 
 		return TempMenu;
 	}
@@ -88,6 +89,18 @@ private void MainMenuOptionsButtonPressed()
 		}
 
 		OpenMenu(CurrentOptionsMenu);
+	}
+
+	private void OptionsMenuBackButtonPressed()
+	{
+		GD.Print("Openeing Main Menu.");
+
+		if (CurrentMainMenu is null)
+		{
+			CurrentMainMenu = LoadMainMenu();
+		}
+
+		OpenMenu(CurrentMainMenu);
 	}
 
 	private void QuitGame()
