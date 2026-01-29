@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv8basp2stfyr"]
+
+[ext_resource type="Shader" uid="uid://cer1r3vpftey0" path="res://Menus/Shaders/horizontal_split.gdshader" id="1_gao1u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jo4pg"]
+shader = ExtResource("1_gao1u")
+shader_parameter/progress = 0.0
+shader_parameter/fill = false
+
+[node name="TransitionHandler" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_jo4pg")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
