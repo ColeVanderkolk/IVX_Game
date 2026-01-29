@@ -25,14 +25,14 @@ public partial class MainMenu : Menu
 
 	private void OnStartButtonPressed()
 	{
-		EmitSignal(SignalName.StartButtonPressed);
 		GD.Print("Start Button Pressed!");
+		EmitSignal(SignalName.StartButtonPressed);
 	}
 
 	private void OnQuitButtonPressed()
 	{
-		EmitSignal(SignalName.QuitButtonPressed);
 		GD.Print("Quit Button Pressed!");
+		EmitSignal(SignalName.QuitButtonPressed);
 	}
 
 }
