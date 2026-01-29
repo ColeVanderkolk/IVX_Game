@@ -6,6 +6,8 @@ public partial class OptionsMenu : Menu
 {
 	private Button BackButton;
 
+    [Signal]
+    public delegate void BackButtonPressedEventHandler();
 
 	public override void _Ready()
 	{
@@ -17,5 +19,6 @@ public partial class OptionsMenu : Menu
 	private void OnBackButtonPressed()
 	{
 		GD.Print("Back Button Pressed!");
+        EmitSignal(SignalName.BackButtonPressed);
 	}
 }
