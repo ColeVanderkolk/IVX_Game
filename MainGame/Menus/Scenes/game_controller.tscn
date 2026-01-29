@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://crrpqcgossres"]
+[gd_scene load_steps=3 format=3 uid="uid://crrpqcgossres"]
 
 [ext_resource type="Script" uid="uid://5esja3erl2cx" path="res://Menus/Scripts/GameController.cs" id="1_e4b6q"]
+[ext_resource type="PackedScene" uid="uid://cv8basp2stfyr" path="res://Menus/Scenes/transition_handler.tscn" id="2_h3chh"]
 
 [node name="GameController" type="Node"]
 script = ExtResource("1_e4b6q")
+
+[node name="TransitionHandler" parent="." instance=ExtResource("2_h3chh")]
