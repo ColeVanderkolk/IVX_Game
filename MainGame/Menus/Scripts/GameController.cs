@@ -26,7 +26,7 @@ public partial class GameController : Node
 	// Load and return a new MainMenu node. Initialize & connect its signals.
 	private MainMenu LoadMainMenu()
 	{
-		if (CurrentMainMenu is not null)
+		if (CurrentMainMenu is not null) // Ideally a mainMenu shouldn't be loaded while one is active :P
 		{
 			GD.Print("WARNING! There is a currently loaded main menu.");
 		}
@@ -40,6 +40,7 @@ public partial class GameController : Node
 	private void QuitGame()
 	{
 		GD.Print("Quitting game.");
+		GetTree().Quit();
 	}
 
 	
