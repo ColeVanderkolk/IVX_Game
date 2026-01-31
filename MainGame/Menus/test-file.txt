@@ -1,4 +1,0 @@
-This is a temporary text file I've created
-for the purpose of testing out
-branching and pushing to branches on git & github.
-Pay no attention to this, real features are on their way.
