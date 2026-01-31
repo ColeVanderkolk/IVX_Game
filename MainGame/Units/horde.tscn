@@ -1,19 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqi12twiio58s"]
 
-[ext_resource type="PackedScene" uid="uid://dlr4afw6i6ndu" path="res://Units/unit.tscn" id="1_0xkah"]
+[ext_resource type="Script" uid="uid://c4q7kkcy5ydsw" path="res://Units/horde.gd" id="1_rtys4"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_rtys4"]
+radius = 2.0
 
 [node name="Horde" type="Node3D"]
+script = ExtResource("1_rtys4")
 
 [node name="Hitbox" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
 shape = SubResource("CylinderShape3D_rtys4")
-
-[node name="Unit" parent="." instance=ExtResource("1_0xkah")]
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.937695, 0.3474594, 0, -0.3474594, 0.937695, 0, 1.2008328, 2.4842334)
-
-[node name="Unit2" parent="." instance=ExtResource("1_0xkah")]

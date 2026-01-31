@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch8rlyv2dciye"]
+
+[ext_resource type="PackedScene" uid="uid://bqi12twiio58s" path="res://Units/horde.tscn" id="1_0thl8"]
+[ext_resource type="Script" uid="uid://cryj3o0h7vhth" path="res://Units/horde_example_environment.gd" id="1_eub5d"]
+
+[node name="HordeExampleEnvironment" type="Node3D"]
+script = ExtResource("1_eub5d")
+
+[node name="Horde" parent="." instance=ExtResource("1_0thl8")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8470756, 0.53147256, 0, -0.53147256, 0.8470756, 0, 6.553583, 9.546968)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+omni_range = 18.0
