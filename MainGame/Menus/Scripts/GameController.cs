@@ -31,6 +31,9 @@ public partial class GameController : Node
 	{
 		base._Ready();
 		
+		// Instantiate TransitionHandler
+		TransHandler = GetNode<TransitionHandler>("TransitionHandler");
+
 		// Instantiate a Main Menu & add it to the scene tree
 		CurrentMainMenu = LoadMainMenu();
 		OpenScreen(CurrentMainMenu);
@@ -53,7 +56,7 @@ public partial class GameController : Node
 	// If the specified menu hasn't been loaded, load it.
 	// Functionality for opening the game screen is coming soon.
 	// Enum is used so you can call this function without knowing whether the menu is loaded in.
-	private async Task TransitionToScreen(Screens M)
+	private async Task TransitionToScreen(Screens S)
 	{
 		Node NewScreen = CurrentMainMenu;
 		// NewMenu is initialized to the CurrentMainMenu
@@ -61,14 +64,14 @@ public partial class GameController : Node
 	
 		// load menus if they are not loaded in.
 		// Set NewMenu equal to correct menu.
-		if (M == Screens.MAINMENU)
+		if (S == Screens.MAINMENU)
 		{
 			if (CurrentMainMenu is null)
 			{
 				CurrentMainMenu = LoadMainMenu();
 			}
 			NewScreen = CurrentMainMenu;
-		} else if (M == Screens.OPTIONSMENU)
+		} else if (S == Screens.OPTIONSMENU)
 		{
 			if (CurrentOptionsMenu is null)
 			{
@@ -96,8 +99,6 @@ public partial class GameController : Node
 		{
 			GD.Print("WARNING! There is a currently loaded main menu.");
 		}
-
-		TransHandler = GetNode<TransitionHandler>("TransitionHandler");
 
 		MainMenu TempMenu = (MainMenu)ResourceLoader.Load<PackedScene>(MainMenuFilepath).Instantiate();
 		TempMenu.QuitButtonPressed += () => QuitGame();
