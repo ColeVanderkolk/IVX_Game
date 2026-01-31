@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class MainMenu : Menu
+public partial class MainMenu : Control
 {
 	// Buttons:
 	private Button StartButton;

@@ -20,7 +20,7 @@ public partial class GameController : Node
 
 	private MainMenu CurrentMainMenu; // currently loaded main menu
 	private OptionsMenu CurrentOptionsMenu; // currently loaded options menu
-	private Menu CurrentOpenedMenu; // menu currently on screen
+	private Node CurrentOpenedScreen; // menu currently on screen
 
 	public GameController()
 	{
@@ -33,20 +33,20 @@ public partial class GameController : Node
 		
 		// Instantiate a Main Menu & add it to the scene tree
 		CurrentMainMenu = LoadMainMenu();
-		OpenMenu(CurrentMainMenu);
+		OpenScreen(CurrentMainMenu);
 	}
 
 	// opens the menu: Removes the current Menu from the scene tree.
 	// Adds the menu M to the scene tree & makes it the current Menu.
-	private void OpenMenu(Menu M)
+	private void OpenScreen(Node M)
 	{
-		if (CurrentOpenedMenu is not null)
+		if (CurrentOpenedScreen is not null)
 		{
-			RemoveChild(CurrentOpenedMenu);
+			RemoveChild(CurrentOpenedScreen);
 		}
 
-		CurrentOpenedMenu = M;
-		AddChild(CurrentOpenedMenu);
+		CurrentOpenedScreen = M;
+		AddChild(CurrentOpenedScreen);
 	}
 
 	// Plays a transition effect & opens the specified screen.
@@ -55,7 +55,7 @@ public partial class GameController : Node
 	// Enum is used so you can call this function without knowing whether the menu is loaded in.
 	private async Task TransitionToScreen(Screens M)
 	{
-		Menu NewMenu = CurrentMainMenu;
+		Node NewScreen = CurrentMainMenu;
 		// NewMenu is initialized to the CurrentMainMenu
 		// But will be changed depending on which menu is specified.
 	
@@ -67,20 +67,20 @@ public partial class GameController : Node
 			{
 				CurrentMainMenu = LoadMainMenu();
 			}
-			NewMenu = CurrentMainMenu;
+			NewScreen = CurrentMainMenu;
 		} else if (M == Screens.OPTIONSMENU)
 		{
 			if (CurrentOptionsMenu is null)
 			{
 				CurrentOptionsMenu = LoadOptionsMenu();
 			}
-			NewMenu = CurrentOptionsMenu;
+			NewScreen = CurrentOptionsMenu;
 		}
 
 		// Swap to new menu while screen is covered in transition.
 		await TransHandler.TransitionIn();
 
-		OpenMenu(NewMenu);
+		OpenScreen(NewScreen);
 
 		await TransHandler.TransitionOut();
 	}
