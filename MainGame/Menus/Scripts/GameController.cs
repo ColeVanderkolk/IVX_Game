@@ -41,14 +41,14 @@ public partial class GameController : Node
 
 	// opens the menu: Removes the current Menu from the scene tree.
 	// Adds the menu M to the scene tree & makes it the current Menu.
-	private void OpenScreen(Node M)
+	private void OpenScreen(Node S)
 	{
 		if (CurrentOpenedScreen is not null)
 		{
 			RemoveChild(CurrentOpenedScreen);
 		}
 
-		CurrentOpenedScreen = M;
+		CurrentOpenedScreen = S;
 		AddChild(CurrentOpenedScreen);
 	}
 

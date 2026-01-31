@@ -8,3 +8,4 @@ This includes menus as well as the main game area.
 **TransitionToScene(Scenes S)** takes an enum value S for which scene to transition to.
 This method handles loading & managing different screens.
 This should be the only method that needs to be called.
+
