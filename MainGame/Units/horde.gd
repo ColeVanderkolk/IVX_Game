@@ -67,6 +67,7 @@ func mitosis(numUnits : int):
 	return newHorde
 
 func startMoving(xCoord : float, zCoord : float):
+	look_at(Vector3(xCoord, position.y, zCoord))
 	moving = true
 	targetX = xCoord
 	targetZ = zCoord
