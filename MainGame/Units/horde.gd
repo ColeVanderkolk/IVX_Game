@@ -18,6 +18,7 @@ func _physics_process(delta: float) -> void:
 	print(moving)
 	if moving:
 		move(delta)
+	print(moving)
 
 func addUnit(health = 1, damage = 1, speed = 1):
 	var newUnit = load("res://Units/unit.tscn").instantiate()
@@ -76,11 +77,14 @@ func move(delta : float):
 	position.x += avgSpeed * delta * dirX
 	position.z += avgSpeed * delta * dirZ
 	
-	if position.x == targetX:
+	if dirX != getDirection(position.x, targetX):
+		print("target location reached")
 		moving = false
 
 func getDirection(coord1, coord2):
 	if coord1 > coord2:
 		return -1
+	elif coord1 == coord2:
+		return 0
 	else:
 		return 1
