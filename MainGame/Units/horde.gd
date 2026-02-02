@@ -80,7 +80,7 @@ func mitosis(numUnits : int):
 # Commands the horde to move to a specific coordinate (x, z)
 # No need to include y because the horde never moves up or down
 func startMoving(xCoord : float, zCoord : float):
-	look_at(Vector3(xCoord, position.y, zCoord))
+	#look_at(Vector3(xCoord, position.y, zCoord))
 	moving = true
 	targetX = xCoord
 	targetZ = zCoord
@@ -89,14 +89,31 @@ func startMoving(xCoord : float, zCoord : float):
 
 # Called in _physics_process to move the horde at a constant speed to the target coordinates
 func move(delta : float):
-	var dirX = getDirection(position.x, targetX)
-	var dirZ = getDirection(position.z, targetZ)
-	position.x += avgSpeed * delta * dirX
-	position.z += avgSpeed * delta * dirZ
-	
-	if dirX != getDirection(position.x, targetX):
+	#var dirX = getDirection(position.x, targetX)
+	#var dirZ = getDirection(position.z, targetZ)
+	var distanceX : float = targetX - position.x
+	var distanceZ : float = targetZ - position.z
+	var angle = atan(distanceZ / distanceX)
+	#print("current angle: " + str(angle))
+	var newPositionX = move_toward(position.x, targetX, avgSpeed * delta * abs(cos(angle)))
+	var newPositionZ = move_toward(position.z, targetZ, avgSpeed * delta * abs(sin(angle)))
+	position.x = newPositionX
+	position.z = newPositionZ
+	#print("current x: " + str(newPositionX))
+	#print("target x: " + str(targetX))
+	#print("current z: " + str(newPositionZ))
+	#print("target z: " + str(targetZ))
+	if position.x == targetX and position.z == targetZ:
 		stopedMoving.emit()
 		moving = false
+		print("Target reached")
+	
+	#if dirX != getDirection(position.x, targetX):
+	#	stopedMoving.emit()
+	#	moving = false
+	#if dirZ != getDirection(position.z, targetZ):
+	#	stopedMoving.emit()
+	#	moving = false
 
 # Returns -1, 0, or 1 depending on what is needed for the horde to move in the right direction
 # Helper method for move method
