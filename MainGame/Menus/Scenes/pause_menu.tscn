@@ -39,10 +39,10 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Button" type="Button" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ReturnButton" type="Button" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Resume Game"
 
-[node name="Button2" type="Button" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit To Menu"
