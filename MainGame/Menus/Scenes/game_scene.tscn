@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt62anvbdurwd"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vmwp7"]
+
+[node name="GameScene" type="Node"]
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.53242004, 0)
+mesh = SubResource("BoxMesh_vmwp7")
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(0.8871961, -0.3319484, 0.320458, 0.0767553, 0.791051, 0.60691595, -0.45496342, -0.5138567, 0.7272961, 0.9992899, 2.0477664, 1.7866764)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
+transform = Transform3D(0.9840439, 0, 0.17792642, -0.036515947, 0.97871363, 0.20195591, -0.17413901, -0.20523065, 0.96309716, 1.3325031, 1.9438, 5.972261)

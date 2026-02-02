@@ -7,6 +7,7 @@ public partial class GameController : Node
 
 	public const string MainMenuFilepath = "res://Menus/Scenes/main_menu.tscn";
 	public const string OptionsMenuFilepath = "res://Menus/Scenes/options_menu.tscn";
+	public const string GameSceneFilepath = "res://Menus/Scenes/game_scene.tscn";
 
 	private TransitionHandler TransHandler; // TransitionHandler used to play scene Transition Effects.
 
@@ -15,11 +16,13 @@ public partial class GameController : Node
 	enum Screens
 	{
 		MAINMENU,
-		OPTIONSMENU
+		OPTIONSMENU,
+		GAMESCENE
 	}
 
 	private MainMenu CurrentMainMenu; // currently loaded main menu
 	private OptionsMenu CurrentOptionsMenu; // currently loaded options menu
+	private Node CurrentGameScene; // currently loaded game scene
 	private Node CurrentOpenedScreen; // menu currently on screen
 
 	public GameController()
@@ -78,6 +81,13 @@ public partial class GameController : Node
 				CurrentOptionsMenu = LoadOptionsMenu();
 			}
 			NewScreen = CurrentOptionsMenu;
+		} else if (S == Screens.GAMESCENE)
+		{
+			if (CurrentGameScene is null)
+			{
+				CurrentGameScene = LoadGameScene();
+			}
+			NewScreen = CurrentGameScene;
 		}
 
 		// Swap to new menu while screen is covered in transition.
@@ -88,9 +98,9 @@ public partial class GameController : Node
 		await TransHandler.TransitionOut();
 	}
 
-	//------------------------//
-	// MENU LOADING FUNCTIONS //
-	//------------------------//
+	//-------------------------//
+	// SCENE LOADING FUNCTIONS //
+	//-------------------------//
 
 	// Load and return a new MainMenu node. Initialize it & connect its signals.
 	private MainMenu LoadMainMenu()
@@ -101,13 +111,14 @@ public partial class GameController : Node
 		}
 
 		MainMenu TempMenu = (MainMenu)ResourceLoader.Load<PackedScene>(MainMenuFilepath).Instantiate();
+		TempMenu.StartButtonPressed += () => MainMenuStartButtonPressed();
 		TempMenu.QuitButtonPressed += () => QuitGame();
 		TempMenu.OptionsButtonPressed += () => MainMenuOptionsButtonPressed();
 
 		return TempMenu;
 	}
 
-// Load and return a new OptionsMenu node. Initialize it & connect its signals.
+	// Load and return a new OptionsMenu node. Initialize it & connect its signals.
 	private OptionsMenu LoadOptionsMenu()
 	{
 		if (CurrentOptionsMenu is not null)
@@ -121,11 +132,29 @@ public partial class GameController : Node
 		return TempMenu;
 	}
 
+	private Node LoadGameScene()
+	{
+		if (CurrentGameScene is not null)
+		{
+			GD.Print("WARNING! There is a currently loaded game scene.");
+		}
+
+		Node tempScene = (Node)ResourceLoader.Load<PackedScene>(GameSceneFilepath).Instantiate();
+		return tempScene; 
+	}
+
 	//------------------------//
 	// Button Press Functions //
 	//------------------------//
 
-private void MainMenuOptionsButtonPressed()
+	private void MainMenuStartButtonPressed()
+	{
+		GD.Print("Opening Game Scene.");
+
+		TransitionToScreen(Screens.GAMESCENE);
+	}
+
+	private void MainMenuOptionsButtonPressed()
 	{
 		GD.Print("Opening Options Menu.");
 
