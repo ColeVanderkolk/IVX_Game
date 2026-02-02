@@ -9,16 +9,20 @@ var moving = false # Controls whether the horde is moving
 var targetX = null # The x value of where the horde is moving to
 var targetZ = null # The z value of where the horde is moving to
 
+# Signals
+signal startedMoving()
+signal stopedMoving()
+signal unitAdded()
+signal mitosisHappened()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	print(moving)
 	if moving:
 		move(delta)
-	print(moving)
 
 # Adds a unit to the horde. Use parameters to set it's stats
 func addUnit(health = 1, damage = 1, speed = 1, _tier : int = 1):
@@ -28,6 +32,7 @@ func addUnit(health = 1, damage = 1, speed = 1, _tier : int = 1):
 	newUnit.speed = speed
 	units.append(newUnit)
 	add_child(newUnit)
+	unitAdded.emit()
 	
 	repositionUnits()
 	
@@ -69,6 +74,7 @@ func mitosis(numUnits : int):
 	repositionUnits()
 	
 	get_parent().add_child(newHorde)
+	mitosisHappened.emit()
 	return newHorde
 
 # Commands the horde to move to a specific coordinate (x, z)
@@ -78,6 +84,8 @@ func startMoving(xCoord : float, zCoord : float):
 	moving = true
 	targetX = xCoord
 	targetZ = zCoord
+	startedMoving.emit()
+	
 
 # Called in _physics_process to move the horde at a constant speed to the target coordinates
 func move(delta : float):
@@ -87,7 +95,7 @@ func move(delta : float):
 	position.z += avgSpeed * delta * dirZ
 	
 	if dirX != getDirection(position.x, targetX):
-		print("target location reached")
+		stopedMoving.emit()
 		moving = false
 
 # Returns -1, 0, or 1 depending on what is needed for the horde to move in the right direction

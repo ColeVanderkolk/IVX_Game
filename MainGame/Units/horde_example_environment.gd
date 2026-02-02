@@ -4,7 +4,8 @@ var testLocations = [Vector2(1, 2),
 					Vector2(-2, 4), 
 					Vector2(3, 4),
 					Vector2(3, 10),
-					Vector2(-10, -10)]
+					Vector2(-10, -10),
+					Vector2(0,0)]
 var i = 0
 
 # Called when the node enters the scene tree for the first time.
