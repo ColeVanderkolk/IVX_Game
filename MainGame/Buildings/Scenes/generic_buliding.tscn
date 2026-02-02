@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0huid33if1iu"]
+
+[ext_resource type="Script" uid="uid://dg5xh8rpy0ucu" path="res://Buildings/Scripts/buildings_colliderscript.cs" id="1_h86b2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s7uag"]
+size = Vector3(1, 0.33, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h86b2"]
+size = Vector3(1, 0.33, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_cybug"]
+
+[node name="GenericBuliding" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+script = ExtResource("1_h86b2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_s7uag")
+
+[node name="DefunctMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_h86b2")
+
+[node name="AssimMesh" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CylinderMesh_cybug")
+
+[connection signal="input_event" from="StaticBody3D" to="StaticBody3D" method="OnMouseClick"]
