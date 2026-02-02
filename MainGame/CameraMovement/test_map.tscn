@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://crvdneec7ijej"]
+[gd_scene format=3 uid="uid://crvdneec7ijej"]
 
 [ext_resource type="Texture2D" uid="uid://cn754qlwar5ts" path="res://Assets/GridTextures/Dark/texture_04.png" id="1_0ku3b"]
 [ext_resource type="Script" uid="uid://drmxxtueica54" path="res://CameraMovement/CamMove.cs" id="2_mqyve"]
@@ -8,35 +8,45 @@ albedo_texture = ExtResource("1_0ku3b")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_nhn67"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_mqyve"]
-
 [sub_resource type="Curve" id="Curve_mqyve"]
-_data = [Vector2(0.0077519417, 0.003262639), 0.0, 3.9394453, 0, 0, Vector2(0.50775194, 0.7030995), 0.54714525, 0.54714525, 0, 0, Vector2(1, 1), 0.5759424, 0.0, 0, 0]
-point_count = 3
+_limits = [-1.0, 1.0, -1.0, 1.0]
+_data = [Vector2(-1, -1), 0.0, 0.74906385, 0, 0, Vector2(-0.50000006, -0.5955056), 0.85238266, 0.224719, 0, 0, Vector2(0, 0), 3.7463148, 3.7428703, 0, 0, Vector2(0.51, 0.5955056), 0.40933114, 0.7839042, 0, 0, Vector2(1, 1), 0.5759424, 0.0, 0, 0]
+point_count = 5
+metadata/_snap_enabled = true
+metadata/_snap_count = 2
 
-[node name="TestMap" type="Node3D"]
+[sub_resource type="SphereMesh" id="SphereMesh_mqyve"]
 
-[node name="Ground" type="Node3D" parent="."]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nhn67"]
+albedo_color = Color(0.43529412, 0.8039216, 0.039215688, 1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+[node name="TestMap" type="Node3D" unique_id=494240130]
+
+[node name="Ground" type="Node3D" parent="." unique_id=543138898]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=53958752]
 transform = Transform3D(185.35875, 0, 0, 0, 1, 0, 0, 0, 185.35875, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_mqyve")
 mesh = SubResource("PlaneMesh_nhn67")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground" groups=["Ground"]]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground" unique_id=28619765 groups=["Ground"]]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
-shape = SubResource("BoxShape3D_mqyve")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=708033572]
 transform = Transform3D(0.7071068, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.7071068, -0.5, 0.5, 0, 10, 0)
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1505250854]
 transform = Transform3D(0.7071068, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.7071068, -0.5, 0.5, -0.05337385, 10, -0.051741026)
 current = true
 fov = 66.3
 script = ExtResource("2_mqyve")
-EdgeScrollMargin = 200.0
+MoveSpeed = 20.0
+EdgeScrollMargin = 100.0
 edgeScrollSpeedCurve = SubResource("Curve_mqyve")
 MinHeight = 15.0
 MaxHeight = 150.0
+rotationSensitivity = 0.003
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=892643462]
+transform = Transform3D(2, 0, 0, 0, 0.983, 0, 0, 0, 2, 100, 0, 50)
+mesh = SubResource("SphereMesh_mqyve")
+surface_material_override/0 = SubResource("StandardMaterial3D_nhn67")

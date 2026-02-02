@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.Net;
 using System.Security.Cryptography;
 
 public partial class CamMove : Camera3D
@@ -14,12 +15,13 @@ public partial class CamMove : Camera3D
 
 	// Zoom settings
 	[Export] public float ZoomSpeed = 2.0f;
+	[Export] public float GroundLevel = 0f;
 	[Export] public float MinHeight = 5.0f;
 	[Export] public float MaxHeight = 50.0f;
 	[Export] public float PlaneHeight = 10.0f; // Y-axis height the camera moves along
 
 	[Export] public uint GroundLayerMask = 1; // Collision layer mask for ground (layer 1 by default)
-	[Export, Range(0, 1)] public float rotationSensitivity;
+	[Export, Range(0, 1)] public float rotationSensitivity = 0.001f;
 	private float _zoomVelocity;
 	private Vector3 _velocity = Vector3.Zero;
 	private float _currentZoom;
@@ -102,8 +104,11 @@ public partial class CamMove : Camera3D
 		float hMag = Math.Clamp(rDiff, 0, EdgeScrollMargin) - Math.Clamp(lDiff, 0, EdgeScrollMargin);
 		float vMag = -Math.Clamp(tDiff, 0, EdgeScrollMargin) + Math.Clamp(bDiff, 0, EdgeScrollMargin);
 
+		// hMag = edgeScrollSpeedCurve.Sample(hMag/EdgeScrollMargin);
+		// vMag = edgeScrollSpeedCurve.Sample(vMag/EdgeScrollMargin);
+
 		// Check edges
-		edgeVelocity += MoveSpeed * (Plane.PlaneXZ.Project(Transform.Basis.X * hMag) + Plane.PlaneXZ.Project(Transform.Basis.Z * vMag)) / EdgeScrollMargin;
+		edgeVelocity += 1.5f * MoveSpeed * (Plane.PlaneXZ.Project(Transform.Basis.X * hMag) + Plane.PlaneXZ.Project(Transform.Basis.Z * vMag)) / EdgeScrollMargin;
 		// Debug.Print("edge %:" + (Plane.PlaneXZ.Project(Transform.Basis.X * hMag) + Plane.PlaneXZ.Project(Transform.Basis.Z * vMag)) / EdgeScrollMargin);
 
 
@@ -116,18 +121,7 @@ public partial class CamMove : Camera3D
 	{
 		if (rotAnchor != null && rotAnchor.fresh)
 		{
-			var space = GetWorld3D().DirectSpaceState;
-			var query = PhysicsRayQueryParameters3D.Create(rotAnchor.from, rotAnchor.to, GroundLayerMask);
-			var result = space.IntersectRay(query);
-
-			if (result.Count > 0)
-			{
-				rotAnchor.fresh = false;
-				rotAnchor.place((Vector3)result["position"]);
-				GD.Print("ray hit the ground at " + rotAnchor.worldPos.ToString());
-			}
-
-
+			
 		}
 	}
 
@@ -136,29 +130,40 @@ public partial class CamMove : Camera3D
 		if (rotAnchor != null)
 		{
 			var offset = GetViewport().GetMousePosition().X - rotAnchor.screenPos;
-			var vtr = GlobalTransform.Origin - rotAnchor.worldPos;
-			var rv = vtr.Rotated(Vector3.Up, (float)(offset * rotationSensitivity * delta));
+
+			var vtr = rotAnchor.startingPosition - rotAnchor.worldPos;
+			var angle = (float)(offset * rotationSensitivity * delta);
+			var rv = vtr.Rotated(Vector3.Up, angle - rotAnchor.rotation);
+
+			
+			rotAnchor.rotation = angle + rotAnchor.rotation;
 			GlobalPosition = rotAnchor.worldPos + rv;
+
+			Transform = Transform.Rotated(Vector3.Up,-angle);
 		}
 	}
 
-	private class RotationAnchor
+	public class RotationAnchor
 	{
 
-		public RotationAnchor(float sp, Vector3 to, Vector3 from)
+		public RotationAnchor(float sp, Vector3 to, Vector3 from, Vector3 starting_position)
 		{
 			this.screenPos = sp;
 			this.to = to;
 			this.from = from;
 			this.fresh = true;
+			this.startingPosition = starting_position;
 		}
 
 		public void place(Vector3 worldPos)
 		{
 			this.worldPos = worldPos;
+			
 		}
 
 		public bool fresh;
+		public float rotation;
+		public Vector3 startingPosition;
 
 		public float screenPos;
 		public Vector3 worldPos;
@@ -198,20 +203,38 @@ public partial class CamMove : Camera3D
 
 				}
 
-				if (mouseButton.ButtonIndex == MouseButton.Right)
+			}
+				if (mouseButton.ButtonIndex == MouseButton.Right && mouseButton.IsPressed())
 				{
 					var from = ProjectRayOrigin(mouseButton.Position);
+					var to = from + ProjectRayNormal(mouseButton.Position);
 					rotAnchor = new RotationAnchor(mouseButton.Position.X,
 													from,
-													from + ProjectRayNormal(mouseButton.Position) * 1000
+													from + ProjectRayNormal(mouseButton.Position) * 1000,
+													GlobalPosition
 												);
 
+					var vec = ProjectRayNormal(mouseButton.Position);
+					var forward = new Vector2(-vec.Z,vec.Y);
+					var ground = Vector2.Right;
+
+					var angle = Mathf.Acos(forward.Dot(ground) / (forward.Length() * ground.Length()));
+					var opp = GlobalPosition.Y;
+
+					var distance = opp / Mathf.Cos(angle);
+					var pointOnGround = Position + -Transform.Basis.Z * distance;
+
+					rotAnchor.place(pointOnGround);
+
+					GD.Print("point: " + pointOnGround);
+
+
 				}
-				else if (mouseButton.IsReleased())
+				else if (mouseButton.ButtonIndex == MouseButton.Right && mouseButton.IsReleased())
 				{
 					rotAnchor = null;
 				}
-			}
+
 		}
 	}
 }
