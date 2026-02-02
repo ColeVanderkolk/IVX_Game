@@ -93,7 +93,7 @@ func move(delta : float):
 	#var dirZ = getDirection(position.z, targetZ)
 	var distanceX : float = targetX - position.x
 	var distanceZ : float = targetZ - position.z
-	var angle = atan(distanceZ / distanceX)
+	var angle = atan2(distanceZ, distanceX)#atan(distanceZ / distanceX)
 	#print("current angle: " + str(angle))
 	var newPositionX = move_toward(position.x, targetX, avgSpeed * delta * abs(cos(angle)))
 	var newPositionZ = move_toward(position.z, targetZ, avgSpeed * delta * abs(sin(angle)))
@@ -106,7 +106,7 @@ func move(delta : float):
 	if position.x == targetX and position.z == targetZ:
 		stopedMoving.emit()
 		moving = false
-		print("Target reached")
+		#print("Target reached")
 	
 	#if dirX != getDirection(position.x, targetX):
 	#	stopedMoving.emit()
