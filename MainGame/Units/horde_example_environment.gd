@@ -19,7 +19,6 @@ func _process(_delta: float) -> void:
 		var x = testLocations[i].x
 		var y = testLocations[i].y
 		$Horde.startMoving(x, y)
-		print(i)
 		i += 1
 
 
