@@ -9,6 +9,12 @@ public partial class PauseMenu : CanvasLayer
 	private Button ReturnButton;
 	private Button QuitButton;
 
+	[Signal]
+	public delegate void ReturnButtonPressedEventHandler();
+
+	[Signal]
+	public delegate void QuitButtonPressedEventHandler();
+
 	public override void _Ready()
 	{
 		base._Ready();
@@ -19,8 +25,8 @@ public partial class PauseMenu : CanvasLayer
 		ReturnButton = GetNode<Button>("Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ReturnButton");
 		QuitButton = GetNode<Button>("Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/QuitButton");
 
-		ReturnButton.ButtonDown += () => ReturnButtonPressed();
-		QuitButton.ButtonDown += () => QuitButtonPressed();
+		ReturnButton.ButtonDown += () => OnReturnButtonPressed();
+		QuitButton.ButtonDown += () => OnQuitButtonPressed();
 	}
 
 	public override void _Input(InputEvent @event)
@@ -38,15 +44,18 @@ public partial class PauseMenu : CanvasLayer
 		Visible = active;
 	}
 
-	private void ReturnButtonPressed()
+	private void OnReturnButtonPressed()
 	{
 		GD.Print("Return Button Pressed!");
 		SetActive(false);
+
+		EmitSignal(SignalName.ReturnButtonPressed);
 	}
 
-	private void QuitButtonPressed()
+	private void OnQuitButtonPressed()
 	{
-		
+		GD.Print("Quit Button Pressed!");
+		EmitSignal(SignalName.QuitButtonPressed);
 	}
 
 }

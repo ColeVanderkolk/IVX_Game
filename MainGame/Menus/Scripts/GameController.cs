@@ -139,19 +139,57 @@ public partial class GameController : Node
 			GD.Print("WARNING! There is a currently loaded game scene.");
 		}
 
-		Node tempScene = (Node)ResourceLoader.Load<PackedScene>(GameSceneFilepath).Instantiate();
+		GameScene tempScene = (GameScene)ResourceLoader.Load<PackedScene>(GameSceneFilepath).Instantiate();
+		tempScene.QuitToMainMenu += () => PauseMenuQuitToMainPressed();
+
 		return tempScene; 
+	}
+
+	//---------------------------//
+	// Scene Unloading Functions //
+	//---------------------------//
+
+	// Unload menu scenes if they exist. This is to prevent background memory usage slowing the game.
+	// Set references to null. This makes sure the code works & it probably helps with memory.
+	private void UnloadMenus()
+	{
+		GD.Print("Unloading Menus.");
+
+		if (CurrentMainMenu is not null)
+		{
+			CurrentMainMenu.QueueFree();
+		}
+		CurrentMainMenu = null;
+
+		if (CurrentOptionsMenu is not null)
+		{
+			CurrentOptionsMenu.QueueFree();
+		}
+		CurrentOptionsMenu = null;
+	}
+
+	// Unload game scene if it exists. This is to prevent background memory usage slowing the game.
+	private void UnloadGameScene()
+	{
+		GD.Print("Unloading Game Scene.");
+
+		if (CurrentGameScene is not null)
+		{
+			CurrentGameScene.QueueFree();
+		}
+		CurrentGameScene = null;
 	}
 
 	//------------------------//
 	// Button Press Functions //
 	//------------------------//
 
-	private void MainMenuStartButtonPressed()
+	private async Task MainMenuStartButtonPressed()
 	{
 		GD.Print("Opening Game Scene.");
 
-		TransitionToScreen(Screens.GAMESCENE);
+		await TransitionToScreen(Screens.GAMESCENE);
+		UnloadMenus();
 	}
 
 	private void MainMenuOptionsButtonPressed()
@@ -166,6 +204,14 @@ public partial class GameController : Node
 		GD.Print("Openeing Main Menu.");
 
 		TransitionToScreen(Screens.MAINMENU);
+	}
+
+	private async Task PauseMenuQuitToMainPressed()
+	{
+		GD.Print("Opening Main Menu.");
+
+		await TransitionToScreen(Screens.MAINMENU);
+		UnloadGameScene();
 	}
 
 	private async Task QuitGame()
