@@ -25,4 +25,4 @@ mesh = SubResource("BoxMesh_h86b2")
 visible = false
 mesh = SubResource("CylinderMesh_cybug")
 
-[connection signal="input_event" from="StaticBody3D" to="StaticBody3D" method="OnMouseClick"]
+[connection signal="input_event" from="StaticBody3D" to="StaticBody3D" method="OnMouseEvent"]

@@ -6,13 +6,4 @@
 [node name="MineBuilding" instance=ExtResource("1_21tdx")]
 script = ExtResource("2_1mpvj")
 
-[node name="Timer" type="Timer" parent="." index="3"]
-
-[node name="Camera3D" type="Camera3D" parent="." index="4"]
-transform = Transform3D(0.97757053, 0.21060824, 0, -0.19596168, 0.9095863, 0.3664038, 0.07716767, -0.3581856, 0.9304559, 0, 1.1244928, 2.750357)
-fov = 28.125006
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Camera3D" index="0"]
-
 [connection signal="BuildingClicked" from="StaticBody3D" to="." method="OnAssimilate"]
-[connection signal="timeout" from="Timer" to="." method="OnMineTimeout"]
