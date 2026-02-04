@@ -23,13 +23,12 @@ func _process(_delta: float) -> void:
 		var y = testLocations[i].y
 		horde.startMoving(x, y)
 		i += 1
-
+	elif i == testLocations.size():
+		horde = horde.mitosis(horde.getSize() / 2)
+		i = 0
 
 func _on_timer_timeout() -> void:
 	if s < 10:
 		$Timer.start()
 		horde.addUnit(1, 1, i * 5)
-		s += horde.units.size()
-	elif i == testLocations.size():
-		i = 0
-		horde = horde.mitosis(horde.units.size() / 2)
+		s = horde.getSize()

@@ -117,3 +117,7 @@ func move(delta : float):
 		stopedMoving.emit()
 		moving = false
 		#print("Target reached")
+
+# Returns the number of units in the horde
+func getSize():
+	return units.size()
