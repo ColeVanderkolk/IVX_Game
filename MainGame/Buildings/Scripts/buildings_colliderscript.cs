@@ -4,6 +4,8 @@ using System;
 public partial class buildings_colliderscript : StaticBody3D
 {
 
+	// Building has been clicked
+	// includes mousePos in case this is helpful for UI idk
 	[Signal]
 	public delegate void BuildingClickedEventHandler(Vector3 mousePos);
 

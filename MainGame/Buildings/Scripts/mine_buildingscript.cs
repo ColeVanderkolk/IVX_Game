@@ -9,6 +9,10 @@ public partial class mine_buildingscript : Node3D
 	// Coins (?) generated per second
 	[Export]
 	private int COIN_RATE = 5;
+
+	// For sfx when assimilation happens?
+    [Signal]
+    public delegate void BuildingAssimilatedEventHandler();
 	
 	// Whether this mine can function
 	private bool Assimilated = false;
@@ -31,7 +35,7 @@ public partial class mine_buildingscript : Node3D
 	// signalled every second while assimillated
 	private void OnMineTimeout()
 	{
-		GD.Print("+5");
+		GD.Print("+5 for mining");
 		// currencymanager_script.add_currency((int)CURRENCIES.COIN, COIN_RATE);
 	}
 
@@ -44,6 +48,7 @@ public partial class mine_buildingscript : Node3D
 			Assimilated = true;
 			NewMesh.Visible = true;
 			OldMesh.Visible = false;
+			EmitSignal(SignalName.BuildingAssimilated);
 			mineTimer.Timeout += OnMineTimeout;
 		}
 

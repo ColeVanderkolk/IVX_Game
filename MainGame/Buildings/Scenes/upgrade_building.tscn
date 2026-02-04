@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqm2kback7rtj"]
+
+[ext_resource type="PackedScene" uid="uid://c0huid33if1iu" path="res://Buildings/Scenes/generic_buliding.tscn" id="1_bto61"]
+[ext_resource type="Script" uid="uid://ds0hjcaycqx4s" path="res://Buildings/Scripts/upgrade_buildingscript.cs" id="2_ku8tw"]
+
+[node name="UpgradeBuilding" instance=ExtResource("1_bto61")]
+script = ExtResource("2_ku8tw")
+UpgradeCosts = PackedInt32Array(10, 50)
+costType = 2
+
+[node name="Camera3D" type="Camera3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 0.9585914, 0.28478503, 0, -0.28478503, 0.9585914, 0, 0.55725914, 1.5897462)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera3D" index="0"]
+
+[connection signal="BuildingClicked" from="StaticBody3D" to="." method="OnAssimilate"]
+[connection signal="BuildingClicked" from="StaticBody3D" to="." method="OnUpgrade" binds= [0]]
