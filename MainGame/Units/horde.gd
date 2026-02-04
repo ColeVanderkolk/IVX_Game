@@ -75,10 +75,11 @@ func mitosis(numUnits : int):
 	var newHorde = load("res://Units/horde.tscn").instantiate()
 	
 	# Move units to the new horde
-	for i in range(numUnits):
-		newHorde.addUnit(units[0].health, units[0].damage, units[0].speed)
-		units[0].queue_free()
-		units.remove_at(0)
+	if numUnits <= units.size():
+		for i in range(numUnits):
+			newHorde.addUnit(units[0].health, units[0].damage, units[0].speed)
+			units[0].queue_free()
+			units.remove_at(0)
 	
 	# Reposition units in current horde to account for now missing units
 	repositionUnits()
