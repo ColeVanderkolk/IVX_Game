@@ -5,7 +5,7 @@
 
 [node name="UpgradeBuilding" instance=ExtResource("1_bto61")]
 script = ExtResource("2_ku8tw")
-UpgradeCosts = PackedInt32Array(10, 50)
+UPGRADE_COSTS = PackedInt32Array(10, 50)
 
 [connection signal="BuildingClicked" from="StaticBody3D" to="." method="OnAssimilate"]
 [connection signal="BuildingClicked" from="StaticBody3D" to="." method="OnUpgrade" binds= [0]]
