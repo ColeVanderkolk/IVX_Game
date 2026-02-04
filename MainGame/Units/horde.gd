@@ -25,9 +25,18 @@ func _physics_process(delta: float) -> void:
 		move(delta)
 
 # Adds a unit to the horde. Use parameters to set it's stats
-func addUnit(health = 1, damage = 1, speed = 1, _tier : int = 1):
+func addUnit(tier : int = 1, health = 1, damage = 1, speed = 1):
 	# Load new unit
-	var newUnit = load("res://Units/unit.tscn").instantiate()
+	var newUnit = null
+	if tier == 1:
+		newUnit = load("res://Units/Unit - Tier 1.tscn").instantiate()
+	elif tier == 2:
+		newUnit = load("res://Units/Unit - Tier 1.tscn").instantiate()
+	elif tier == 3:
+		newUnit = load("res://Units/Unit - Tier 1.tscn").instantiate()
+	else:
+		newUnit = load("res://Units/unit.tscn").instantiate()
+	
 	
 	# Set new unit stats
 	newUnit.health = health
@@ -77,7 +86,7 @@ func mitosis(numUnits : int):
 	# Move units to the new horde
 	if numUnits <= units.size():
 		for i in range(numUnits):
-			newHorde.addUnit(units[0].health, units[0].damage, units[0].speed)
+			newHorde.addUnit(units[0].tier, units[0].health, units[0].damage, units[0].speed)
 			units[0].queue_free()
 			units.remove_at(0)
 	

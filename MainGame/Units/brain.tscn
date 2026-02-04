@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cal8puqrs8ub4"]
 
-[ext_resource type="Script" uid="uid://lew7pi3b4ht1" path="res://Brain.gd" id="1_bl6ui"]
+[ext_resource type="Script" uid="uid://lew7pi3b4ht1" path="res://Units/Brain.gd" id="1_bl6ui"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_bl6ui"]
 

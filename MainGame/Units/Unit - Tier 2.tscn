@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt774te55iast"]
+
+[ext_resource type="Script" uid="uid://bbsr66wy7tgj0" path="res://Units/unit.gd" id="1_jtl0v"]
+[ext_resource type="PackedScene" uid="uid://cmrui51a3jk46" path="res://Units/3D-Assets/fleshcreature1.blend" id="2_mimp6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ahhs1"]
+radius = 0.9277344
+height = 1.8554688
+
+[node name="Unit - Tier 2" type="CharacterBody3D"]
+script = ExtResource("1_jtl0v")
+health = 2
+damage = 2
+speed = 6.0
+tier = 2
+metadata/_custom_type_script = "uid://bbsr66wy7tgj0"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09277344, 0)
+shape = SubResource("CapsuleShape3D_ahhs1")
+
+[node name="fleshcreature1" parent="." instance=ExtResource("2_mimp6")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
