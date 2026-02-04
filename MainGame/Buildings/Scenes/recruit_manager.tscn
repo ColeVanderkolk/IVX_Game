@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://5e6fvqqt11ut"]
+
+[ext_resource type="PackedScene" uid="uid://drovrskdt8d1q" path="res://Buildings/Scenes/recruit_building.tscn" id="1_ir506"]
+
+[node name="RecruitManager" type="Node"]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
+[node name="RecruitBuilding" parent="." instance=ExtResource("1_ir506")]
+
+[node name="RecruitBuilding2" parent="." instance=ExtResource("1_ir506")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0980062, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6098355, 1.7833304)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera3D"]
