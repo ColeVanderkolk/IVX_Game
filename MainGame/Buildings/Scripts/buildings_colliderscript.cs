@@ -17,7 +17,7 @@ public partial class buildings_colliderscript : StaticBody3D
 		{
 			if(mouseButton.Pressed == true && mouseButton.ButtonIndex == MouseButton.Left)
 			{
-				GD.Print("Clicked");
+				GD.Print("Clicked building");
 				EmitSignal(SignalName.BuildingClicked, pos);
 			}
 		}
