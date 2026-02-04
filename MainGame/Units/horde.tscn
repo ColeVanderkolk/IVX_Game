@@ -5,10 +5,12 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_rtys4"]
 radius = 2.0
 
-[node name="Horde" type="Node3D"]
+[node name="Horde" type="Node3D" groups=["Assimilated", "Horde"]]
 script = ExtResource("1_rtys4")
 
-[node name="Hitbox" type="Area3D" parent="."]
+[node name="Hitbox" type="Area3D" parent="." groups=["Assimilated", "Horde"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
 shape = SubResource("CylinderShape3D_rtys4")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

@@ -121,3 +121,11 @@ func move(delta : float):
 # Returns the number of units in the horde
 func getSize():
 	return units.size()
+
+
+func _on_hitbox_area_entered(area: Area3D) -> void:
+	if area.is_in_group("Enemy"):
+		pass # Do something
+	if area.is_in_group("Assimilated"):
+		pass # Do something
+	

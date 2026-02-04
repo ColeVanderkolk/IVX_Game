@@ -18,6 +18,12 @@ config/icon="res://icon.svg"
 
 project/assembly_name="Game"
 
+[global_group]
+
+Assimilated=""
+Enemy=""
+Horde=""
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

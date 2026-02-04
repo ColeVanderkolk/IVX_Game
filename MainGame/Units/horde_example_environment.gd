@@ -23,7 +23,7 @@ func _process(_delta: float) -> void:
 		var y = testLocations[i].y
 		horde.startMoving(x, y)
 		i += 1
-	elif i == testLocations.size():
+	elif !horde.moving and i == testLocations.size():
 		horde = horde.mitosis(horde.getSize() / 2)
 		i = 0
 

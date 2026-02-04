@@ -11,6 +11,7 @@ height = 0.94140625
 
 [node name="Unit" type="CharacterBody3D"]
 script = ExtResource("1_j3ort")
+metadata/_custom_type_script = "uid://bbsr66wy7tgj0"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
