@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://shi3iohprtps"]
+
+[ext_resource type="Script" uid="uid://drmxxtueica54" path="res://CameraMovement/CamMove.cs" id="1_nhw06"]
+
+[sub_resource type="Curve" id="Curve_mqyve"]
+_limits = [-1.0, 1.0, -1.0, 1.0]
+_data = [Vector2(-1, -1), 0.0, 1.4831462, 0, 0, Vector2(-0.5, -0.2962963), 0.76519996, 0.7193389, 0, 0, Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(2e-05, 0), 0.0, 0.0, 0, 0, Vector2(3e-05, 0), 0.0, 0.0, 0, 0, Vector2(4e-05, 0), 0.0, 0.0, 0, 0, Vector2(5e-05, 0), 0.0, 0.0, 0, 0, Vector2(6e-05, 0), 0.0, 0.0, 0, 0, Vector2(7e-05, 0), 0.0, 0.0, 0, 0, Vector2(8.0000005e-05, 0), 0.6105436, 0.61922514, 0, 0, Vector2(0.5, 0.25925928), 0.4798966, 1.571369, 0, 0, Vector2(0.99999, 1), 2.160843, 2.160843, 0, 0, Vector2(1, 1), 1.6343205, 0.0, 0, 0]
+point_count = 13
+metadata/_snap_enabled = true
+metadata/_snap_count = 54
+
+[node name="Camera3D" type="Camera3D" unique_id=1815146861]
+transform = Transform3D(0.7071068, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.7071068, -0.5, 0.5, 0, 0, 0)
+current = true
+fov = 66.3
+script = ExtResource("1_nhw06")
+MaxMoveSpeed = 1000.0
+MoveAcceleration = 500.0
+EdgeScrollMargin = 100.0
+edgeScrollSpeedCurve = SubResource("Curve_mqyve")
+ZoomAccel = 100.0
+MazZoomSpeed = 50.0
+MinHeight = 15.0
+MaxHeight = 150.0
+PlaneHeight = 41.995
+rotationSensitivity = 0.003

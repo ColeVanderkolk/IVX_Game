@@ -3,18 +3,21 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Security.Cryptography;
 
 public partial class CamMove : Camera3D
 {
 	// Movement settings
-	[Export] public float MoveSpeed = 10.0f;
+
+	[Export] public float MaxMoveSpeed = 25.0f;
+	[Export] public float MoveAcceleration = 12f;
 	[Export] public float EdgeScrollMargin = 20.0f; // pixels from edge to trigger scroll
-													// [Export] public float EdgeScrollSpeed = 8.0f;
 	[Export] Curve edgeScrollSpeedCurve;
 
 	// Zoom settings
-	[Export] public float ZoomSpeed = 2.0f;
+	[Export] public float ZoomAccel = 2.0f;
+	[Export] public float MazZoomSpeed = 5.0f;
 	[Export] public float GroundLevel = 0f;
 	[Export] public float MinHeight = 5.0f;
 	[Export] public float MaxHeight = 50.0f;
@@ -37,9 +40,12 @@ public partial class CamMove : Camera3D
 
 	public override void _Process(double delta)
 	{
+
+
 		HandleKeyboardMovement(delta);
 		HandleEdgeScrolling(delta);
 		HandleRotation(delta);
+		HandleZoom(delta);
 
 		// Apply movement
 		if (_velocity.LengthSquared() > 0)
@@ -47,37 +53,37 @@ public partial class CamMove : Camera3D
 
 			if (Input.IsKeyPressed(Key.Shift))
 			{
-				_velocity *= 2;
+				_velocity += _velocity.Normalized() * (float)(MoveAcceleration * delta); // readd accel for 2x speed
 			}
 
 			Vector3 newPosition = Position + _velocity * (float)delta;
 			Position = newPosition;
-
-			// _zoomVelocity = (float)Mathf.Clamp((_zoomVelocity * delta), -1, 1);
 		}
-		Fov = (float)Mathf.Clamp(Fov, MinHeight, MaxHeight);
+
+		_velocity = _velocity.LimitLength(MaxMoveSpeed);
+		_velocity *= 0.8f;
 	}
+
 
 	private void HandleKeyboardMovement(double delta)
 	{
-		_velocity = Vector3.Zero;
 
 		// Get input direction
 		Vector3 inputDir = Vector3.Zero;
 
-		if (Input.IsKeyPressed(Key.W))
+		if (Input.IsActionPressed("Move_Forward"))
 		{
 			inputDir -= Transform.Basis.Z;
 		}
-		if (Input.IsKeyPressed(Key.S))
+		if (Input.IsActionPressed("Move_Backward"))
 		{
 			inputDir += Transform.Basis.Z;
 		}
-		if (Input.IsKeyPressed(Key.A))
+		if (Input.IsActionPressed("Move_Left"))
 		{
 			inputDir -= Transform.Basis.X;
 		}
-		if (Input.IsKeyPressed(Key.D))
+		if (Input.IsActionPressed("Move_Right"))
 		{
 			inputDir += Transform.Basis.X;
 		}
@@ -85,7 +91,7 @@ public partial class CamMove : Camera3D
 		// Normalize to prevent faster diagonal movement
 		if (inputDir.LengthSquared() > 0)
 		{
-			_velocity = Plane.PlaneXZ.Project(inputDir).Normalized() * MoveSpeed;
+			_velocity += Plane.PlaneXZ.Project(inputDir).Normalized() * (float)(MoveAcceleration * delta);
 		}
 	}
 
@@ -94,34 +100,43 @@ public partial class CamMove : Camera3D
 		Vector2 mousePos = GetViewport().GetMousePosition();
 		Vector2 viewportSize = GetViewport().GetVisibleRect().Size;
 
-		Vector3 edgeVelocity = Vector3.Zero;
-
 		float lDiff = EdgeScrollMargin - mousePos.X;
 		float tDiff = EdgeScrollMargin - mousePos.Y;
 		float bDiff = mousePos.Y - (viewportSize.Y - EdgeScrollMargin);
 		float rDiff = mousePos.X - (viewportSize.X - EdgeScrollMargin);
 
+		// magnitude values represent number of pixels from inner-edge of the margin with direction
 		float hMag = Math.Clamp(rDiff, 0, EdgeScrollMargin) - Math.Clamp(lDiff, 0, EdgeScrollMargin);
 		float vMag = -Math.Clamp(tDiff, 0, EdgeScrollMargin) + Math.Clamp(bDiff, 0, EdgeScrollMargin);
 
-		// hMag = edgeScrollSpeedCurve.Sample(hMag/EdgeScrollMargin);
-		// vMag = edgeScrollSpeedCurve.Sample(vMag/EdgeScrollMargin);
+		// normalize and project these values onto curve to get fancy % of max speed per direction
+		hMag = edgeScrollSpeedCurve.Sample(hMag / EdgeScrollMargin);
+		vMag = edgeScrollSpeedCurve.Sample(vMag / EdgeScrollMargin);
+
 
 		// Check edges
-		edgeVelocity += 1.5f * MoveSpeed * (Plane.PlaneXZ.Project(Transform.Basis.X * hMag) + Plane.PlaneXZ.Project(Transform.Basis.Z * vMag)) / EdgeScrollMargin;
-		// Debug.Print("edge %:" + (Plane.PlaneXZ.Project(Transform.Basis.X * hMag) + Plane.PlaneXZ.Project(Transform.Basis.Z * vMag)) / EdgeScrollMargin);
-
+		var direction_power = Plane.PlaneXZ.Project(Transform.Basis.X).Normalized() * hMag + Plane.PlaneXZ.Project(Transform.Basis.Z).Normalized() * vMag;
+		var edgeVelocity = (float)(delta * MoveAcceleration) * direction_power;
 
 		// Add edge scrolling to velocity
 		_velocity += edgeVelocity;
 	}
 
 
-	public override void _PhysicsProcess(double delta)
+	private void HandleZoom(double delta)
 	{
-		if (rotAnchor != null && rotAnchor.fresh)
+		if (_zoomVelocity != 0)
 		{
-			
+			var displacement = Transform.Basis.Z * _zoomVelocity * (float)delta;
+			PlaneHeight = displacement.Y + Position.Y;
+
+			Vector3 newPosition = Position + displacement;
+			if (newPosition.Y < MaxHeight && newPosition.Y > MinHeight)
+			{
+				newPosition.Y = Mathf.Clamp(PlaneHeight, MinHeight, MaxHeight);
+				Position = newPosition;
+			}
+			_zoomVelocity = Mathf.Lerp(_zoomVelocity, 0, 0.1f);
 		}
 	}
 
@@ -129,46 +144,35 @@ public partial class CamMove : Camera3D
 	{
 		if (rotAnchor != null)
 		{
-			var offset = GetViewport().GetMousePosition().X - rotAnchor.screenPos;
+			var offset = GetViewport().GetMousePosition().X - rotAnchor.mouseStartingX;
 
 			var vtr = rotAnchor.startingPosition - rotAnchor.worldPos;
 			var angle = (float)(offset * rotationSensitivity * delta);
 			var rv = vtr.Rotated(Vector3.Up, angle - rotAnchor.rotation);
 
-			
+
 			rotAnchor.rotation = angle + rotAnchor.rotation;
 			GlobalPosition = rotAnchor.worldPos + rv;
 
-			Transform = Transform.Rotated(Vector3.Up,-angle);
+			Transform = Transform.Rotated(Vector3.Up, -angle);
 		}
 	}
 
 	public class RotationAnchor
 	{
 
-		public RotationAnchor(float sp, Vector3 to, Vector3 from, Vector3 starting_position)
+		public RotationAnchor(float sp, Vector3 starting_position, Vector3 anchor_pos)
 		{
-			this.screenPos = sp;
-			this.to = to;
-			this.from = from;
-			this.fresh = true;
+			this.mouseStartingX = sp;
+			this.worldPos = anchor_pos;
 			this.startingPosition = starting_position;
 		}
 
-		public void place(Vector3 worldPos)
-		{
-			this.worldPos = worldPos;
-			
-		}
-
-		public bool fresh;
 		public float rotation;
 		public Vector3 startingPosition;
 
-		public float screenPos;
+		public float mouseStartingX;
 		public Vector3 worldPos;
-		public Vector3 from;
-		public Vector3 to;
 	}
 
 	private RotationAnchor rotAnchor = null;
@@ -179,62 +183,57 @@ public partial class CamMove : Camera3D
 		{
 			if (mouseButton.Pressed)
 			{
-				float zoomChange = 0;
 
 				if (mouseButton.ButtonIndex == MouseButton.WheelUp)
 				{
-					zoomChange = -ZoomSpeed;
+					_zoomVelocity -= ZoomAccel;
 				}
 				else if (mouseButton.ButtonIndex == MouseButton.WheelDown)
 				{
-					zoomChange = ZoomSpeed;
-				}
-
-				if (zoomChange != 0)
-				{
-					var displacement = Transform.Basis.Z * zoomChange;
-					PlaneHeight = displacement.Y + Position.Y;
-
-					// Smoothly move to new height
-					Vector3 newPosition = Position;
-					newPosition += displacement;
-					newPosition.Y = Mathf.Clamp(PlaneHeight, MinHeight, MaxHeight);
-					Position = newPosition;
-
+					_zoomVelocity += ZoomAccel;
 				}
 
 			}
-				if (mouseButton.ButtonIndex == MouseButton.Right && mouseButton.IsPressed())
-				{
-					var from = ProjectRayOrigin(mouseButton.Position);
-					var to = from + ProjectRayNormal(mouseButton.Position);
-					rotAnchor = new RotationAnchor(mouseButton.Position.X,
-													from,
-													from + ProjectRayNormal(mouseButton.Position) * 1000,
-													GlobalPosition
+			if (mouseButton.ButtonIndex == MouseButton.Right && mouseButton.IsPressed())
+			{
+				var from = ProjectRayOrigin(mouseButton.Position);
+				var click = from + ProjectRayNormal(mouseButton.Position).Normalized();
+
+
+				var vec = -GlobalTransform.Basis.Z;
+				var forward = new Vector2(-vec.Z, vec.Y);
+				var ground = Vector2.Right;
+
+				var angle = Mathf.Abs((0.5f * Mathf.Pi) - Mathf.Acos(forward.Dot(ground)));// calculate angle between where you clicked projected outwards and the ground
+				angle = (0.5f * Mathf.Pi) - Mathf.Abs((GlobalRotation.X));
+				GD.Print("Angle: " + (angle) + "deg");
+
+				var adj = Position.Y - GroundLevel;
+				var opp = adj * Mathf.Tan(angle);
+
+				var onGround = opp * Plane.PlaneXZ.Project(-Transform.Basis.Z);
+				var pointOnGround = Position + onGround - new Vector3(0, Position.Y, 0);
+
+				rotAnchor = new RotationAnchor(mouseButton.Position.X,
+													GlobalPosition,
+													pointOnGround
 												);
 
-					var vec = ProjectRayNormal(mouseButton.Position);
-					var forward = new Vector2(-vec.Z,vec.Y);
-					var ground = Vector2.Right;
+				GD.Print("point: " + pointOnGround);
+				debuganchor.Position = pointOnGround;
 
-					var angle = Mathf.Acos(forward.Dot(ground) / (forward.Length() * ground.Length()));
-					var opp = GlobalPosition.Y;
+				Input.SetDefaultCursorShape(Input.CursorShape.Hsize);
 
-					var distance = opp / Mathf.Cos(angle);
-					var pointOnGround = Position + -Transform.Basis.Z * distance;
-
-					rotAnchor.place(pointOnGround);
-
-					GD.Print("point: " + pointOnGround);
-
-
-				}
-				else if (mouseButton.ButtonIndex == MouseButton.Right && mouseButton.IsReleased())
-				{
-					rotAnchor = null;
-				}
+			}
+			else if (mouseButton.ButtonIndex == MouseButton.Right && mouseButton.IsReleased())
+			{
+				Input.SetDefaultCursorShape(Input.CursorShape.Arrow);
+				Input.WarpMouse(new Vector2(rotAnchor.mouseStartingX, GetViewport().GetMousePosition().Y));
+				rotAnchor = null;
+			}
 
 		}
 	}
+
+	[Export] Node3D debuganchor;
 }
