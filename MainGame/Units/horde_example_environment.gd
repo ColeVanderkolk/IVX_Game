@@ -29,8 +29,7 @@ func _on_timer_timeout() -> void:
 	if s < 10:
 		$Timer.start()
 		horde.addUnit(1, 1, i * 5)
-		s = horde.units.size()
-	
-	if i == testLocations.size():
+		s += horde.units.size()
+	elif i == testLocations.size():
 		i = 0
-		horde = horde.mitosis(2)
+		horde = horde.mitosis(horde.units.size() / 2)
