@@ -31,9 +31,9 @@ func addUnit(tier : int = 1, health = 1, damage = 1, speed = 1):
 	if tier == 1:
 		newUnit = load("res://Units/Unit - Tier 1.tscn").instantiate()
 	elif tier == 2:
-		newUnit = load("res://Units/Unit - Tier 1.tscn").instantiate()
+		newUnit = load("res://Units/Unit - Tier 2.tscn").instantiate()
 	elif tier == 3:
-		newUnit = load("res://Units/Unit - Tier 1.tscn").instantiate()
+		newUnit = load("res://Units/Unit - Tier 3.tscn").instantiate()
 	else:
 		newUnit = load("res://Units/unit.tscn").instantiate()
 	

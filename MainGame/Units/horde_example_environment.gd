@@ -13,7 +13,7 @@ var s = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	horde.addUnit()
+	horde.addUnit(2)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -30,5 +30,5 @@ func _process(_delta: float) -> void:
 func _on_timer_timeout() -> void:
 	if s < 10:
 		$Timer.start()
-		horde.addUnit(1, 1, i * 5)
+		horde.addUnit(1, 1, 1, i * 5)
 		s = horde.getSize()
