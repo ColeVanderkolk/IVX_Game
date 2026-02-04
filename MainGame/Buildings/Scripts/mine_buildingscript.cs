@@ -6,9 +6,9 @@ public partial class mine_buildingscript : Node3D
 	// To periodically generate currency
 	private Timer mineTimer;
 
-	// Coins (?) generated per second
+	// Metal (?) generated per second
 	[Export]
-	private int COIN_RATE = 5;
+	private int METAL_RATE = 5;
 
 	// For sfx when assimilation happens?
     [Signal]
@@ -35,8 +35,8 @@ public partial class mine_buildingscript : Node3D
 	// signalled every second while assimillated
 	private void OnMineTimeout()
 	{
-		GD.Print("+5 for mining");
-		// currencymanager_script.add_currency((int)CURRENCIES.COIN, COIN_RATE);
+		GD.Print("+" + METAL_RATE + " for mining");
+		// currencymanager_script.add_currency((int)CURRENCIES.METAL, COIN_RATE);
 	}
 
 	// Should be signalled once the mine has been assimillated

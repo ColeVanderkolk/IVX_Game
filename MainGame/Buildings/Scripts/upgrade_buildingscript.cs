@@ -13,8 +13,8 @@ public partial class upgrade_buildingscript : Node3D
 
     // Storing the costs of upgrading units here for now
     [Export]
-    private int[] UpgradeCosts;
-    
+    private int[] UPGRADE_COSTS;
+
     [Export]
     private CURRENCIES CostType;
 
@@ -52,7 +52,7 @@ public partial class upgrade_buildingscript : Node3D
         if(Assimilated)
         {
             // if(currencyManager.removeCurrency(CostType, upgradeCosts[curLevel]))
-            GD.Print("-" + UpgradeCosts[curLevel] + " for upgrade");
+            GD.Print("-" + UPGRADE_COSTS[curLevel] + " for upgrading");
             EmitSignal(SignalName.UnitUpgraded, true);
             // else EmitSignal(SignalName.UnitUpgraded, false);
         }
