@@ -25,4 +25,4 @@ func _process(_delta: float) -> void:
 func _on_timer_timeout() -> void:
 	if $Horde.units.size() < 10:
 		$Timer.start()
-		$Horde.addUnit(1, 1, i)
+		$Horde.addUnit(1, 1, i * 5)

@@ -26,16 +26,23 @@ func _physics_process(delta: float) -> void:
 
 # Adds a unit to the horde. Use parameters to set it's stats
 func addUnit(health = 1, damage = 1, speed = 1, _tier : int = 1):
+	# Load new unit
 	var newUnit = load("res://Units/unit.tscn").instantiate()
+	
+	# Set new unit stats
 	newUnit.health = health
 	newUnit.damage = damage
 	newUnit.speed = speed
+	
+	# Add unit as child of horde and element in units
 	units.append(newUnit)
 	add_child(newUnit)
 	unitAdded.emit()
 	
+	# Reposition to accomodating changing horde size
 	repositionUnits()
 	
+	# Recalculate average speed
 	setAvgSpeed()
 
 # Helper method for repositionUnits
@@ -64,15 +71,19 @@ func repositionUnits():
 # Removes numUnits units from the horde and puts them in a new horde.
 # Returns a reference to the new horde
 func mitosis(numUnits : int):
+	# Load new horde
 	var newHorde = load("res://Units/horde.tscn").instantiate()
 	
+	# Move units to the new horde
 	for i in range(numUnits):
+		newHorde.addUnit(units[0].health, units[0].damage, units[0].speed)
 		units[0].queue_free()
 		units.remove_at(0)
-		newHorde.addUnit()
 	
+	# Reposition units in current horde to account for now missing units
 	repositionUnits()
 	
+	# Instantiate the new horde
 	get_parent().add_child(newHorde)
 	mitosisHappened.emit()
 	return newHorde
@@ -80,7 +91,7 @@ func mitosis(numUnits : int):
 # Commands the horde to move to a specific coordinate (x, z)
 # No need to include y because the horde never moves up or down
 func startMoving(xCoord : float, zCoord : float):
-	#look_at(Vector3(xCoord, position.y, zCoord))
+	look_at(Vector3(xCoord, position.y, zCoord))
 	moving = true
 	targetX = xCoord
 	targetZ = zCoord
@@ -89,38 +100,19 @@ func startMoving(xCoord : float, zCoord : float):
 
 # Called in _physics_process to move the horde at a constant speed to the target coordinates
 func move(delta : float):
-	#var dirX = getDirection(position.x, targetX)
-	#var dirZ = getDirection(position.z, targetZ)
+	# Calculate move
 	var distanceX : float = targetX - position.x
 	var distanceZ : float = targetZ - position.z
 	var angle = atan2(distanceZ, distanceX)
-	#print("current angle: " + str(angle))
 	var newPositionX = move_toward(position.x, targetX, avgSpeed * delta * abs(cos(angle)))
 	var newPositionZ = move_toward(position.z, targetZ, avgSpeed * delta * abs(sin(angle)))
+	
+	# Actually move by changing position
 	position.x = newPositionX
 	position.z = newPositionZ
-	#print("current x: " + str(newPositionX))
-	#print("target x: " + str(targetX))
-	#print("current z: " + str(newPositionZ))
-	#print("target z: " + str(targetZ))
+	
+	# Check to see if target is reached and moving is still neccesary
 	if position.x == targetX and position.z == targetZ:
 		stopedMoving.emit()
 		moving = false
 		#print("Target reached")
-	
-	#if dirX != getDirection(position.x, targetX):
-	#	stopedMoving.emit()
-	#	moving = false
-	#if dirZ != getDirection(position.z, targetZ):
-	#	stopedMoving.emit()
-	#	moving = false
-
-# Returns -1, 0, or 1 depending on what is needed for the horde to move in the right direction
-# Helper method for move method
-func getDirection(coord1, coord2):
-	if coord1 > coord2:
-		return -1
-	elif coord1 == coord2:
-		return 0
-	else:
-		return 1
