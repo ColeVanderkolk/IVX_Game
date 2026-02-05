@@ -37,15 +37,13 @@ func _physics_process(delta: float) -> void:
 func addUnit(tier : int = 1):
 	# Load new unit
 	var newUnit = null
-	if tier == 1:
-		newUnit = load("res://Units/Unit - Tier 1.tscn").instantiate()
-	elif tier == 2:
-		newUnit = load("res://Units/Unit - Tier 2.tscn").instantiate()
-	elif tier == 3:
-		newUnit = load("res://Units/Unit - Tier 3.tscn").instantiate()
-	else:
-		newUnit = load("res://Units/Unit - Tier 1.tscn").instantiate()
-	
+	match tier:
+		2:
+			newUnit = load("res://Units/Unit - Tier 2.tscn").instantiate()
+		3: 
+			newUnit = load("res://Units/Unit - Tier 3.tscn").instantiate()
+		_:
+			newUnit = load("res://Units/Unit - Tier 1.tscn").instantiate()
 	
 	# Add unit as child of horde and element in units
 	units.append(newUnit)
@@ -91,16 +89,19 @@ func repositionUnits():
 
 # Removes numUnits units from the horde and puts them in a new horde.
 # Returns a reference to the new horde
-func mitosis(numUnits : int):
+func mitosis(numUnits : int) -> Horde:
+	# Safty check
+	if numUnits < units.size():
+		return null
+	
 	# Load new horde
 	var newHorde = load("res://Units/horde.tscn").instantiate()
 	
 	# Move units to the new horde
-	if numUnits <= units.size():
-		for i in range(numUnits):
-			newHorde.addUnit(units[0].tier)
-			units[0].queue_free()
-			units.remove_at(0)
+	for i in range(numUnits):
+		var unit:Unit = units.pop_back()
+		newHorde.addUnit(unit.tier)
+		units.queue_free()
 	
 	# Reposition units in current horde to account for now missing units
 	repositionUnits()
@@ -118,7 +119,6 @@ func startMoving(xCoord : float, zCoord : float):
 	targetX = xCoord
 	targetZ = zCoord
 	startedMoving.emit()
-	
 
 # Called in _physics_process to move the horde at a constant speed to the target coordinates
 func move(delta : float):
@@ -154,9 +154,8 @@ func checkForDamage(area: Area3D):
 			takeDamage(horde)
 			harmable = false
 			$ImmunityFrames.start()
-		
 	# Case #2 where damage should be dealt
-	if horde.is_in_group("Assimilated") and is_in_group("Enemy"):
+	elif horde.is_in_group("Assimilated") and is_in_group("Enemy"):
 		#print("Enemy horde takes damage")
 		if harmable:
 			takeDamage(horde)
@@ -171,7 +170,7 @@ func takeDamage(attacker : Horde):
 		damageTaken -= unit.health
 		if damageTaken < 0:
 			unit.health = abs(damageTaken)
-			return
+			break
 		else:
 			var deadUnit = unit
 			units.erase(unit)
@@ -180,7 +179,6 @@ func takeDamage(attacker : Horde):
 	# Remove the horde from the game if it's empty
 	if units.size() < 1:
 		queue_free()
-
 
 func _on_immunity_frames_timeout() -> void:
 	harmable = true
