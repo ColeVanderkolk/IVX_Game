@@ -1,7 +1,10 @@
-[gd_scene load_steps=34 format=4 uid="uid://cugh3ljdo6xar"]
+[gd_scene load_steps=43 format=4 uid="uid://cugh3ljdo6xar"]
 
 [ext_resource type="Material" uid="uid://kyeomtr5tp1p" path="res://Assets/Models/Map/black.tres" id="1_kwjvk"]
-[ext_resource type="PackedScene" uid="uid://hwaflaoyfnfl" path="res://Assets/Models/Map/ivxmapground.fbx" id="2_sq3rb"]
+[ext_resource type="Material" uid="uid://c3vn8r02aeilj" path="res://Assets/Models/Map/wall.tres" id="2_243tp"]
+[ext_resource type="Texture2D" uid="uid://cq173a1asulcs" path="res://Assets/Models/Map/seemlessground.jpg" id="2_sq3rb"]
+[ext_resource type="Texture2D" uid="uid://c4yf13mdotjgx" path="res://Assets/Models/Map/lights2.png" id="4_n4p2l"]
+[ext_resource type="Texture2D" uid="uid://du3p18l2iywh7" path="res://Assets/Models/Map/lights3.png" id="5_vs1vt"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_l0558"]
 _surfaces = [{
@@ -284,9 +287,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3olsw")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5wb37"]
-albedo_color = Color(0.56, 0.56, 0.56, 1)
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_uutei"]
 _surfaces = [{
 "aabb": AABB(-0.09967641, -0.030174833, -0.00034242033, 0.19935282, 0.13521053, 0.017826922),
@@ -310,7 +310,7 @@ _surfaces = [{
 "index_count": 300,
 "index_data": PackedByteArray("FAB4AHkAeQAXABQAFgB5AHgAeAAVABYAAgB6AHsAewABAAIAAAB7AHoAegADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgAfAANAA4ADgB9AHwADAB8AH0AfQAPAAwAEAARABIAEgATABAAfgAZABoAGgB/AH4AGAB+AH8AfwAbABgAHAAdAIAAgACBABwAIgAgAIIAggCDACIAJAAlACYAJgAnACQAKAApACoAKgArACgAhACFAC4ALgAvAIQALAAtAIYAhgCHACwAMAAxADIAMgAzADAAiACJAB4AHgAfAIgAigCLADYANgA0AIoANwA1AIwAjACNADcAjgCPACMAIwAhAI4AOgA4AJAAkACRADoAPgA/AEAAQABDAD4AkgCTAEQARABFAJIARgBHAJQAlACVAEYATACWAJcAlwBOAEwAUgBTAFQAVABXAFIAVwBUAFgAWABZAFcAmABWAFUAVQCZAJgAWgCaAJsAmwBcAFoAmwCaAFsAWwBdAJsAnACdAJ4AngCfAJwAngCdAEoASgBLAJ4AoAChAKIAogCjAKAApAClAF8AXwBeAKQAYABhAGIAYgBjAGAAZABlAGYAZgBnAGQApgBCAEEAQQCnAKYAqACpADsAOwA5AKgATQBPAKoAqgCrAE0AaABpAGoAagBrAGgAbABtAG4AbgBvAGwArACtAK4ArgCvAKwAPQA8ALAAsACxAD0AsgCzAEgASABJALIAtAC1ALYAtgC3ALQAuAC5AFAAUABRALgAcABxAHIAcgBzAHAAdAB1AHYAdgB3AHQA"),
 "lods": [0.00034495225, PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQAGAAZABoAGgAbABgAHAAdAB4AHgAfABwAIAAhACIAIQAgACMAJAAlACYAJgAnACQAKAApACoAKgArACgALAAtAC4ALgAvACwAMAAxADIAMgAzADAANAA1ADYANQA0ADcAOAA5ADoAOQA4ADsAPAA4ADoAOgA9ADwAPgA/AEAAQQA/AD4APgBCAEEAQABDAD4AQwBAAEQARABFAEMARgBHAEgASABJAEYARgBKAEcASgBLAEcATABNAE4ATQBPAE4ATABOAFAAUABRAEwAUgBTAFQAVQBTAFIAUgBWAFUAVABXAFIAVwBUAFgAWABZAFcAWgBbAFwAWwBdAFwAXABeAFoAXgBcAF8AYABhAGIAYgBjAGAAZABlAGYAZgBnAGQAaABpAGoAagBrAGgAbABtAG4AbgBvAGwAcABxAHIAcgBzAHAAdAB1AHYAdgB3AHQA")],
-"material": SubResource("StandardMaterial3D_5wb37"),
+"material": ExtResource("2_243tp"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 186,
@@ -387,9 +387,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_a8xkj")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bsymf"]
-albedo_color = Color(0.45840502, 0.45840508, 0.45840502, 1)
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_1v48m"]
 _surfaces = [{
 "aabb": AABB(-0.25848988, 0.019534511, -0.00035323718, 0.49201903, 0.32027918, 0.01783774),
@@ -413,7 +410,7 @@ _surfaces = [{
 "index_count": 1296,
 "index_data": PackedByteArray("OgI7AgIAAgADADoCAAABADwCPAI9AgAAPgI/AgYABgAEAD4CPwI+AgcABwAFAD8CCAAJAAoACgALAAgADAANAA4ADgAPAAwAQAIRABIAEgBBAkACEABCAkMCQwITABAAFAAVABYAFgAXABQAGAAZABoAGgAbABgARAJFAh4AHgAcAEQCRQJEAh8AHwAdAEUCIAAhACIAIgAjACAAJAAlACYAJgAnACQARgIpACoAKgBHAkYCKABIAkkCSQIrACgASgJLAi4ALgAsAEoCSwJKAi8ALwAtAEsCTAJNAjIAMgAwAEwCTQJMAjMAMwAxAE0CTgJPAjYANgA0AE4CTwJOAjcANwA1AE8CUAJRAjoAOgA4AFACOwA5AFICUgJTAjsAVAJVAj4APgA/AFQCPAA9AFYCVgJXAjwAWAJZAloCWgJZAkMAQwBAAFoCWgJbAlgCQgBYAlsCWwJBAEIARABFAEYARgBHAEQASABJAEoASgBLAEgATABNAE4ATgBPAEwAUABRAFIAUgBTAFAAVABVAFYAVgBXAFQAXAJdAloAWgBYAFwCWwBZAF4CXgJfAlsAYAJhAl4AXgBfAGACXABdAGICYgJjAlwAZAJlAmIAYgBgAGQCZQJkAmMAYwBhAGUCZgJlAGYAZgBnAmYCZABmAmcCZwJnAGQAaAJpAGoAagBpAmgCaABoAmkCaQJrAGgAagJtAG4AbgBrAmoCbABsAm0CbQJvAGwAbgJxAHIAcgBvAm4CcABuAm8CbwJzAHAAcAJxAnYAdgB0AHACcQJwAncAdwB1AHECcgJzAnoAegB7AHICeAB5AHQCdAJ1AngAfAB9AH4AfgB/AHwAgACBAIIAggCDAIAAdgKFAIYAhgB3AnYChAB2AncCdwKHAIQAeAJ5AooAigCLAHgCeQJ4AogAiACJAHkCegJ7Ao4AjgCPAHoCewJ6AnwCfAJ9AnsCfgKRAJIAkgB/An4CkACAAoECgQKTAJAAlACVAJYAlgCXAJQAggKZAJoAmgCDAoICnACdAJ4AngCfAJwAoAChAKIAogCjAKAApAClAKYApgCnAKQAqACpAKoAqgCrAKgAhAKtAK4ArgCFAoQCrACGAocChwKvAKwAsACxAIgCiAKJArAAswCJAogCiAKyALMAtAC1ALYAtgC3ALQAigKLAroAugC4AIoCuwC5AIwCjAKNArsAjQCOAo8CjwKMAI0AmwCYAJACkAKRApsAvAC9AL4AvgC/ALwAwADBAMIAwgDDAMAAxADFAMYAxgDHAMQAyADJAMoAygDLAMgAzADNAM4AzgDPAMwAkgLRANIA0gCTApIC0ACSApMCkwLTANAAlAKVAtYA1gDUAJQClQKUAtcA1wDVAJUClgKXAtoA2gDYAJYClwKWAtsA2wDZAJcC3ADdAN4A3gDfANwA4ADhAJgCmAKZAuAAmQKYAuIA4gDjAJkCmgKbAuYA5gDkAJoCmwKaAucA5wDlAJsC6ADpAOoA6gDrAOgA7ADtAO4A7gDvAOwA8ADxAJwCnAKdAvAAnQKcAvIA8gDzAJ0CngKfAvQA9AD1AJ4CnwKeAvYA9gD3AJ8C+AD5APoA+gD7APgA/AD9AP4A/gD/APwAoAIBAQIBAgEEAaACoQIAAQMBAwGiAqECBQEGAQcBBwGjAgUBpAKlAggBCAEJAaQCCgELAQwBDAENAQoBDgEPARABEAERAQ4BpgKnAhIBEgETAaYCpwKmAhQBFAEVAacCFgEXAagCqAKpAhYBqQKoAhgBGAEZAakCGgEbARwBHAEdARoBHgEfASABIAEhAR4BIgEjASQBJAElASIBqgKrAiYBJgEnAaoCKAEpASoBKgErASgBrAItASwBLAGtAqwCLgEvATABMAExAS4BMgEzATQBNAE1ATIBNgE3Aa4CrgKvAjYBrwKuAjgBOAE5Aa8CsAKxAjwBPAE9AbACOgE7AbICsgKzAjoBPgE/AUABQAFBAT4BQgFDAUQBRAFFAUIBtAJHAUgBSAFGAbQCSQFKAbUCtQK2AkkBSwFMAU0BTQG3AksBtwJNAU4BTgFPAbcCUAFRAVIBUgFTAVABVAFVAVYBVgFXAVQBWAG4ArkCuQJaAVgBugJbAbsCuwK8AroCXQFeAb0CvQK+Al0BvwLAAsECwQJfAb8CYgFjAWQBZAFlAWIBZgFnAcICwgLDAmYBwwLCAmgBaAFpAcMCxALFAmoBagFrAcQCbAFtAcYCxgLHAmwBbgFvAXABcAFxAW4BcgFzAXQBdAF1AXIBdgF3AcgCyAJ5AXYByQLKAngBeAHLAskCfgHMAnwBfAF9AX4BzQKAAc4CzgLPAs0CgAHNAn8BfwGBAYABggGDAYQBhAGFAYIBhgGHAdAC0AKJAYYBiQHQAogBiAGKAYkBjQHRAosBiwGMAY0BjgGPAdIC0gLTAo4BkAGRAZIBkgGTAZABlAGVAZYBlgGXAZQBmAGZAdQC1AKbAZgBmwHUApoBmgGcAZsBnwHVAp0BnQGeAZ8B1QKfAaABoAGhAdUCogGjAaQBpAGlAaIBpgGnAagBqAGpAaYBqgGrAdYC1gLXAqoB1wLWAqwBrAGtAdcC2ALZArABsAGxAdgCrgGvAdoC2gLbAq4BsgGzAbQBtAG1AbIBtgHcAt0C3QLeArYB3wK6AbcBtwHgAt8C4QLiAuMC4wK/AeEC4gLhAsIBwgHDAeIC5ALlAr0BvQG+AeQCxAHFAcYBxgHHAcQB5gLJAcoBygHMAeYCyAHLAecC5wLoAsgB6QLPAc0BzQHOAekC0AHqAusC6wLRAdAB0gHTAdQB1AHVAdIB1gHXAdgB2AHZAdYB7ALtAmEBYQFgAewCWQFcAe4C7gLvAlkB2gHbAdwB3AHdAdoB8ALxAnsBewF6AfAC3gHfAeAB4AHhAd4BwAHyAvMC8wLBAcABuwG8AfQC9AL1ArsB4gHjAeQB5AHlAeIB9gL3ArgBuAG5AfYC5gHnAegB6AHpAeYB6gHrAfgC+ALtAeoB+QL6AuwB7AHuAfkC7wHwAfsC+wLxAe8B/ALzAfIB8gH9AvwC9AH1AfYB9gH3AfQB+AH5AfoB+gH7AfgB/AH9Af4C/gL/AfwB/wH+Av4B/gEAAv8BAQL/AgMCAwIFAgEC/wIBAgQCBAICAv8CBgIHAggCCAIJAgYCCgILAgwCDAINAgoCDgIPAgADAAMBAw4CAQMAAxACEAIRAgEDAgMDAxICEgITAgIDAwMCAxQCFAIVAgMDFgIXAhgCGAIZAhYCGgIbAhwCHAIdAhoCBAMFAx4CHgIfAgQDBQMEAyACIAIhAgUDIgIjAgYDBgMHAyICBwMGAyQCJAIlAgcDJgInAigCKAIpAiYCKgIrAiwCLAItAioCCAMJAy4CLgIvAggDCQMIAzACMAIxAgkDMgIzAgoDCgMLAzICCwMKAzQCNAI1AgsDNgI3AjgCOAI5AjYC"),
 "lods": [0.00014641992, PackedByteArray("AAABAAIAAgADAAAABAAFAAYABQAEAAcACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQAGAAZABoAGgAbABgAHAAdAB4AHQAcAB8AIAAhACIAIgAjACAAJAAlACYAJgAnACQAKAApACoAKgArACgALAAtAC4ALQAsAC8AMAAxADIAMQAwADMANAA1ADYANQA0ADcAOAA5ADoAOQA4ADsAPAA9AD4APgA/ADwAQABBAEIAQABCAEMARABFAEYARgBHAEQASABJAEoASgBLAEgATABNAE4ATgBPAEwAUABRAFIAUgBTAFAAVABVAFYAVgBXAFQAWABZAFoAWQBYAFsAXABdAF4AXgBfAFwAYABhAGIAYQBgAGMAZABlAGYAZgBnAGQAaABpAGoAagBrAGgAbABtAG4AbgBvAGwAcABxAHIAcgBzAHAAdAB1AHYAdQB0AHcAeAB5AHoAegB7AHgAfAB9AH4AfgB/AHwAgACBAIIAggCDAIAAhACFAIYAhgCHAIQAiACJAIoAigCLAIgAjACNAI4AjgCPAIwAkACRAJIAkgCTAJAAlACVAJYAlgCXAJQAmACZAJoAmgCbAJgAnACdAJ4AngCfAJwAoAChAKIAogCjAKAApAClAKYApgCnAKQAqACpAKoAqgCrAKgArACtAK4ArgCvAKwAsACxALIAswCwALIAtAC1ALYAtgC3ALQAuAC5ALoAuQC4ALsAvAC9AL4AvgC/ALwAwADBAMIAwgDDAMAAxADFAMYAxgDHAMQAyADJAMoAygDLAMgAzADNAM4AzgDPAMwA0ADRANIA0gDTANAA1ADVANYA1QDUANcA2ADZANoA2QDYANsA3ADdAN4A3gDfANwA4ADhAOIA4gDjAOAA5ADlAOYA5QDkAOcA6ADpAOoA6gDrAOgA7ADtAO4A7gDvAOwA8ADxAPIA8gDzAPAA9AD1APYA9gD3APQA+AD5APoA+gD7APgA/AD9AP4A/gD/APwAAAEBAQIBAwEBAQABAgEEAQABBQEGAQcBBQEHAQgBCAEJAQUBCgELAQwBDAENAQoBDgEPARABEAERAQ4BEgETARQBFAEVARIBFgEXARgBGAEZARYBGgEbARwBHAEdARoBHgEfASABIAEhAR4BIgEjASQBJAElASIBJQEkASYBJgEnASUBKAEpASoBKgErASgBLAEqASkBKQEtASwBLgEvATABMAExAS4BMgEzATQBNAE1ATIBNgE3ATgBOAE5ATYBOgE7ATwBPAE9AToBPgE/AUABQAFBAT4BQgFDAUQBRAFFAUIBRgFHAUgBRwFGAUkBSQFKAUcBSwFMAU0BSwFNAU4BTgFPAUsBUAFRAVIBUgFTAVABVAFVAVYBVgFXAVQBWAFZAVoBWQFbAVoBWQFcAVsBXQFeAV8BXwFgAV0BYAFfAWEBYgFjAWQBZAFlAWIBZgFnAWgBaAFpAWYBagFrAWwBbAFtAWoBbgFvAXABcAFxAW4BcgFzAXQBdAF1AXIBdgF3AXgBeAF5AXYBeAF6AXkBegF4AXsBfAF9AX4BfAF+AX8BfwGAAXwBfwGBAYABggGDAYQBhAGFAYIBhgGHAYgBiAGJAYYBiAGKAYkBiwGMAY0BiwGNAY4BjgGPAYsBkAGRAZIBkgGTAZABlAGVAZYBlgGXAZQBmAGZAZoBmgGbAZgBmgGcAZsBnQGeAZ8BnQGfAaABoAGhAZ0BogGjAaQBpAGlAaIBpgGnAagBqAGpAaYBqgGrAawBrAGtAaoBrgGvAbABsAGxAa4BsgGzAbQBtAG1AbIBtgG3AbgBuAG5AbYBtgG6AbcBtwG6AbsBuwG8AbcBvQG+Ab8BwAG+Ab0BvQHBAcABvQG/AcIBwgHDAb0BxAHFAcYBxgHHAcQByAHJAcoByAHLAckBygHMAcgBzQHOAc8B0AHPAc4BzgHRAdAB0gHTAdQB1AHVAdIB1gHXAdgB2AHZAdYB2gHbAdwB3AHdAdoB3gHfAeAB4AHhAd4B4gHjAeQB5AHlAeIB5gHnAegB6AHpAeYB6gHrAewB7AHtAeoB7AHuAe0B7wHwAfEB8gHxAfAB8AHzAfIB9AH1AfYB9gH3AfQB+AH5AfoB+gH7AfgB/AH9Af4B/gH/AfwB/gEAAv8BAQICAgMCAgIBAgQCAwIFAgECBgIHAggCCAIJAgYCCgILAgwCDAINAgoCDgIPAhACEAIRAg4CEgITAhQCFAIVAhICFgIXAhgCGAIZAhYCGgIbAhwCHAIdAhoCHgIfAiACIAIhAh4CIgIjAiQCJAIlAiICJgInAigCKAIpAiYCKgIrAiwCLAItAioCLgIvAjACMAIxAi4CMgIzAjQCNAI1AjICNgI3AjgCOAI5AjYC")],
-"material": SubResource("StandardMaterial3D_bsymf"),
+"material": ExtResource("2_243tp"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 780,
@@ -421,6 +418,73 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_1v48m")
+
+[sub_resource type="Environment" id="Environment_oc8to"]
+background_energy_multiplier = 0.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_a21u8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5uege"]
+resource_name = "Material.001"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_sq3rb")
+metallic = 0.89
+roughness = 0.04
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xsjop"]
+_surfaces = [{
+"aabb": AABB(-0.018717134, -0.026437301, 2.9802322e-10, 0.031549692, 0.0364373, 1e-05),
+"format": 34359742465,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwACAAQABAAFAAMA"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("pD9SPAnXIzwK16MvpD9SPAqT2LwK16Mv36T4OQqT2LwK16Mv36T4OQnXIzwK16MvrVSZvAqT2LwK16MvrVSZvAnXIzwK16Mv")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vp1qd"]
+resource_name = "Plane_007"
+_surfaces = [{
+"aabb": AABB(-0.018717134, -0.026437301, 2.9802322e-10, 0.031549692, 0.0364373, 1e-05),
+"attribute_data": PackedByteArray("Cj4SQmV6YsFfut9Bhf/dQTKERUBtvrZBeeQ6QUd+mMEuMw7CJZJzQaWk18Gjc9XB"),
+"format": 34359742487,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwACAAQABAAFAAMA"),
+"material": SubResource("StandardMaterial3D_5uege"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("pD9SPAnXIzwK16MvpD9SPAqT2LwK16Mv36T4OQqT2LwK16Mv36T4OQnXIzwK16MvrVSZvAqT2LwK16MvrVSZvAnXIzwK16Mv/3//fyXfa9D/f/9/Jd9r0P9//38l32vQ/3//fyXfa9D/f/9/Jd9r0P9//38l32vQ")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_xsjop")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vp1qd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b2huh"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("4_n4p2l")
+emission_enabled = true
+emission_energy_multiplier = 1.78
+emission_texture = ExtResource("4_n4p2l")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ud5m"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("5_vs1vt")
+emission_enabled = true
+emission_energy_multiplier = 1.78
+emission_texture = ExtResource("5_vs1vt")
 
 [node name="Map" type="Node2D"]
 
@@ -432,6 +496,21 @@ shadow_mesh = SubResource("ArrayMesh_1v48m")
 
 [node name="city2" type="MeshInstance3D" parent="MapNode/ivxmap4"]
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -56.011036, 5.4116116, 71.88356)
+mesh = SubResource("ArrayMesh_sq3rb")
+skeleton = NodePath("")
+
+[node name="city4" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+transform = Transform3D(-100, -8.742277e-06, 0, -1.0421608e-12, 1.1920931e-05, 48.52832, -8.742278e-06, 99.99999, -5.785028e-06, -54.857445, 2.4714243, 127.351654)
+mesh = SubResource("ArrayMesh_sq3rb")
+skeleton = NodePath("")
+
+[node name="city5" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+transform = Transform3D(-91.37795, 40.621033, 0, 4.842406e-06, 1.0893103e-05, 48.52832, 40.621033, 91.377945, -5.785028e-06, -96.5637, 2.4714262, 143.43977)
+mesh = SubResource("ArrayMesh_sq3rb")
+skeleton = NodePath("")
+
+[node name="city6" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+transform = Transform3D(93.438484, -35.62651, 0, -4.247011e-06, -1.1138736e-05, 48.52832, -35.62651, -93.43848, -5.7850275e-06, -123.42141, 10.078786, 133.75644)
 mesh = SubResource("ArrayMesh_sq3rb")
 skeleton = NodePath("")
 
@@ -515,5 +594,319 @@ transform = Transform3D(327.29803, 0, 0, 0, 1.9508483e-05, 327.29803, 0, -327.29
 mesh = SubResource("ArrayMesh_ijfh3")
 skeleton = NodePath("")
 
-[node name="ivxmapground" parent="." instance=ExtResource("2_sq3rb")]
+[node name="Lighting" type="Node3D" parent="MapNode"]
+transform = Transform3D(9.527743e-05, -132.67305, 788.15643, -799.245, -9.5277435e-05, 9.5277435e-05, 9.527743e-05, -788.15643, -132.67307, 10.950866, 22.075724, -38.426056)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 2.2689572e-11, 2.6828336e-11, 9.7144515e-17, 0.0012511807, -5.820766e-11, -2.94903e-17, 4.3655746e-11, 0.0012511807, 0.007969955, -0.03813466, 0.006029973)
+light_color = Color(1, 0.59904295, 0.47911286, 1)
+light_energy = 21.245
+omni_range = 19.930508
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 2.2689572e-11, 2.6828336e-11, 9.7144515e-17, 0.0012511807, -5.820766e-11, -2.94903e-17, 4.3655746e-11, 0.0012511807, 0.012801532, -0.03125756, -0.034824084)
+light_color = Color(0.48746252, 0.75629693, 0.93602, 1)
+light_energy = 21.245
+omni_range = 12.162179
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, -3.6647553e-11, -2.6068925e-10, 2.8551173e-10, 0.00010306403, 0.0012469286, 1.1779166e-11, -0.0012469286, 0.000103064005, 0.007969972, -0.0628265, 0.069173366)
+light_color = Color(1, 0.59904295, 0.47911286, 1)
+light_energy = 21.245
+omni_range = 19.930508
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, -3.6647553e-11, -2.6068925e-10, 2.8551173e-10, 0.00010306403, 0.0012469286, 1.1779166e-11, -0.0012469286, 0.000103064005, 0.01280156, -0.10297522, 0.058954354)
+light_color = Color(0.48746252, 0.75629693, 0.93602, 1)
+light_energy = 21.245
+omni_range = 12.162179
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, -3.6647598e-11, -2.6068922e-10, 2.8551173e-10, 0.000103064056, 0.0012469286, 1.177913e-11, -0.0012469286, 0.000103064034, 0.007969951, -0.06140197, -0.15240112)
+light_color = Color(1, 0.59904295, 0.47911286, 1)
+light_energy = 21.245
+omni_range = 19.930508
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, -3.6647598e-11, -2.6068922e-10, 2.8551173e-10, 0.000103064056, 0.0012469286, 1.177913e-11, -0.0012469286, 0.000103064034, 0.012801538, -0.1015507, -0.16262013)
+light_color = Color(0.48746252, 0.75629693, 0.93602, 1)
+light_energy = 21.245
+omni_range = 12.162179
+
+[node name="OmniLight3D7" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 2.805815e-10, -2.6597727e-10, 2.9079955e-10, -0.0012496711, -6.144692e-05, -3.0544975e-10, 6.144692e-05, -0.001249671, 0.007969961, -0.087256014, -0.12930433)
+light_color = Color(1, 0.59904295, 0.47911286, 1)
+light_energy = 21.245
+omni_range = 19.930508
+
+[node name="OmniLight3D8" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 2.805815e-10, -2.6597727e-10, 2.9079955e-10, -0.0012496711, -6.144692e-05, -3.0544975e-10, 6.144692e-05, -0.001249671, 0.0128015485, -0.09211843, -0.08816184)
+light_color = Color(0.48746252, 0.75629693, 0.93602, 1)
+light_energy = 21.245
+omni_range = 12.162179
+
+[node name="OmniLight3D9" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 2.1831846e-10, -3.5452538e-10, 3.3554898e-10, -0.0011959403, 0.0003676682, -2.4789013e-10, -0.00036766817, -0.0011959403, 0.009116938, -0.031478345, -0.09661718)
+light_color = Color(1, 0.59904295, 0.47911286, 1)
+light_energy = 21.245
+omni_range = 19.930508
+
+[node name="OmniLight3D27" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 2.1831846e-10, -3.5452538e-10, 3.3554898e-10, -0.0011959403, 0.0003676682, -2.4789013e-10, -0.00036766817, -0.0011959403, 0.014557614, -0.0653047, -0.102933444)
+light_color = Color(1, 0.59904295, 0.47911286, 1)
+light_energy = 21.245
+omni_range = 19.930508
+
+[node name="OmniLight3D10" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 2.1831846e-10, -3.5452538e-10, 3.3554898e-10, -0.0011959403, 0.0003676682, -2.4789013e-10, -0.00036766817, -0.0011959403, 0.013948531, -0.038967747, -0.058852144)
+light_color = Color(0.48746252, 0.75629693, 0.93602, 1)
+light_energy = 21.245
+omni_range = 12.162179
+
+[node name="OmniLight3D17" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 2.1831846e-10, -3.5452538e-10, 3.3554898e-10, -0.0011959403, 0.0003676682, -2.4789013e-10, -0.00036766817, -0.0011959403, 0.013948541, -0.08817052, -0.069756836)
+light_color = Color(0.48746252, 0.75629693, 0.93602, 1)
+light_energy = 21.245
+omni_range = 12.162179
+
+[node name="OmniLight3D18" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 2.1831846e-10, -3.5452538e-10, 3.3554898e-10, -0.0011959403, 0.0003676682, -2.4789013e-10, -0.00036766817, -0.0011959403, 0.017796058, -0.12646692, -0.0054456443)
+light_color = Color(0.48746252, 0.75629693, 0.93602, 1)
+light_energy = 21.245
+omni_range = 12.162179
+
+[node name="OmniLight3D19" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 2.1831846e-10, -3.5452538e-10, 3.3554898e-10, -0.0011959403, 0.0003676682, -2.4789013e-10, -0.00036766817, -0.0011959403, 0.013001379, -0.096181974, -0.029737672)
+light_color = Color(0.48746252, 0.75629693, 0.93602, 1)
+light_energy = 21.245
+omni_range = 12.162179
+
+[node name="OmniLight3D20" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 2.1831846e-10, -3.5452538e-10, 3.3554898e-10, -0.0011959403, 0.0003676682, -2.4789013e-10, -0.00036766817, -0.0011959403, 0.013001397, -0.14193039, 0.0029486802)
+light_color = Color(0.48746252, 0.75629693, 0.93602, 1)
+light_energy = 21.245
+omni_range = 12.162179
+
+[node name="OmniLight3D21" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 2.1831846e-10, -3.5452538e-10, 3.3554898e-10, -0.0011959403, 0.0003676682, -2.4789013e-10, -0.00036766817, -0.0011959403, 0.013001372, -0.10576527, -0.07123698)
+light_color = Color(0.48746252, 0.75629693, 0.93602, 1)
+light_energy = 21.245
+omni_range = 12.162179
+
+[node name="OmniLight3D22" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 2.1831846e-10, -3.5452538e-10, 3.3554898e-10, -0.0011959403, 0.0003676682, -2.4789013e-10, -0.00036766817, -0.0011959403, 0.01300138, -0.11388834, -0.0448145)
+light_color = Color(0.48746252, 0.75629693, 0.93602, 1)
+light_energy = 21.245
+omni_range = 12.162179
+
+[node name="OmniLight3D23" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 2.1831846e-10, -3.5452538e-10, 3.3554898e-10, -0.0011959403, 0.0003676682, -2.4789013e-10, -0.00036766817, -0.0011959403, 0.013001385, -0.11763553, -0.024982585)
+light_color = Color(0.48746252, 0.75629693, 0.93602, 1)
+light_energy = 21.245
+omni_range = 12.162179
+
+[node name="OmniLight3D24" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 2.1831846e-10, -3.5452538e-10, 3.3554898e-10, -0.0011959403, 0.0003676682, -2.4789013e-10, -0.00036766817, -0.0011959403, 0.013001391, -0.13536082, -0.021095403)
+light_color = Color(0.48746252, 0.75629693, 0.93602, 1)
+light_energy = 21.245
+omni_range = 12.162179
+
+[node name="OmniLight3D25" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 2.1831846e-10, -3.5452538e-10, 3.3554898e-10, -0.0011959403, 0.0003676682, -2.4789013e-10, -0.00036766817, -0.0011959403, 0.013001383, -0.12753528, -0.046550088)
+light_color = Color(0.48746252, 0.75629693, 0.93602, 1)
+light_energy = 21.245
+omni_range = 12.162179
+
+[node name="OmniLight3D26" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 2.1831846e-10, -3.5452538e-10, 3.3554898e-10, -0.0011959403, 0.0003676682, -2.4789013e-10, -0.00036766817, -0.0011959403, 0.013001364, -0.11224199, -0.12249215)
+light_color = Color(0.48746252, 0.75629693, 0.93602, 1)
+light_energy = 21.245
+omni_range = 12.162179
+
+[node name="OmniLight3D11" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 3.5952477e-10, -9.713849e-11, 6.610433e-11, -0.00046493235, -0.00116159, -3.4304878e-10, 0.00116159, -0.00046493232, 0.00911694, 0.010678481, -0.14971684)
+light_color = Color(1, 0.59904295, 0.47911286, 1)
+light_energy = 21.245
+omni_range = 19.930508
+
+[node name="OmniLight3D12" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 3.5952477e-10, -9.713849e-11, 6.610433e-11, -0.00046493235, -0.00116159, -3.4304878e-10, 0.00116159, -0.00046493232, 0.013948523, 0.046051685, -0.12815109)
+light_color = Color(0.48746252, 0.75629693, 0.93602, 1)
+light_energy = 21.245
+omni_range = 12.162179
+
+[node name="OmniLight3D13" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 3.595247e-10, -9.7138436e-11, 6.6104344e-11, -0.00046493235, -0.00116159, -3.4304873e-10, 0.00116159, -0.00046493232, 0.009116979, -0.05579438, 0.061656404)
+light_color = Color(1, 0.59904295, 0.47911286, 1)
+light_energy = 21.245
+omni_range = 19.930508
+
+[node name="OmniLight3D14" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 3.595247e-10, -9.7138436e-11, 6.6104344e-11, -0.00046493235, -0.00116159, -3.4304873e-10, 0.00116159, -0.00046493232, 0.013948563, -0.020421155, 0.08322221)
+light_color = Color(0.48746252, 0.75629693, 0.93602, 1)
+light_energy = 21.245
+omni_range = 12.162179
+
+[node name="OmniLight3D15" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 6.998327e-11, 5.2576127e-11, -3.2169892e-11, 0.0012125538, -0.00030849062, -4.1379705e-11, 0.0003084906, 0.0012125538, 0.009116981, -0.024294656, 0.04717673)
+light_color = Color(1, 0.59904295, 0.47911286, 1)
+light_energy = 21.245
+omni_range = 19.930508
+
+[node name="OmniLight3D16" type="OmniLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.0012511809, 6.998327e-11, 5.2576127e-11, -3.2169892e-11, 0.0012125538, -0.00030849062, -4.1379705e-11, 0.0003084906, 0.0012125538, 0.013948556, -0.0075569004, 0.009279534)
+light_color = Color(0.48746252, 0.75629693, 0.93602, 1)
+light_energy = 21.245
+omni_range = 12.162179
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MapNode/Lighting"]
+transform = Transform3D(0.000876458, 0.00047886264, -0.0007536347, 0.00041688822, 0.00071440527, 0.0009387665, 0.00078960694, -0.00090871815, 0.00034088892, -0.032335736, -3.7252903e-09, 3.7252903e-09)
+light_color = Color(0.76270664, 0.5521143, 0.4174529, 1)
+light_energy = 1.212
+light_indirect_energy = 0.0
+shadow_enabled = true
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="MapNode/Lighting/DirectionalLight3D"]
+environment = SubResource("Environment_oc8to")
+camera_attributes = SubResource("CameraAttributesPractical_a21u8")
+
+[node name="ivxmapground" type="Node3D" parent="MapNode"]
 transform = Transform3D(1.2889302, 0, 0, 0, 1.2889302, 0, 0, 0, 1.2889302, 8.808078, -1.2457771, -16.146088)
+
+[node name="Plane_007" type="MeshInstance3D" parent="MapNode/ivxmapground"]
+transform = Transform3D(6409.4766, 0, 0, 0, -0.00043647664, 2807.941, 0, -3661.4312, -0.00033473267, 0.45939872, 4.5009193, -12.106506)
+mesh = SubResource("ArrayMesh_vp1qd")
+skeleton = NodePath("")
+
+[node name="light planes" type="Node3D" parent="MapNode"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(-11.362611, 3.3881318e-21, 3.9502096, 1.5236486e-14, 12.029675, 4.3827077e-14, -3.9502096, 4.640003e-14, -11.362611, 87.66706, 27.839941, -35.272873)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(-11.362611, 3.3881318e-21, 3.9502096, 1.5236486e-14, 12.029675, 4.3827077e-14, -3.9502096, 4.640003e-14, -11.362611, -63.85923, 15.240961, 87.44513)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(-19.476019, 5.8989456e-21, 7.102306, 2.6116013e-14, 20.944403, 7.8799184e-14, -6.770835, 8.0785307e-14, -20.429482, 93.70906, 27.839941, 43.374172)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(-19.476019, 5.8989456e-21, 7.102306, 2.6116013e-14, 20.944403, 7.8799184e-14, -6.770835, 8.0785307e-14, -20.429482, 70.93846, 9.040142, 108.87283)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(-19.476019, 5.8989456e-21, 7.102306, 2.6116013e-14, 20.944403, 7.8799184e-14, -6.770835, 8.0785307e-14, -20.429482, 39.489067, 9.040142, 97.93946)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(-8.283313, 3.3881318e-21, 2.879692, 1.1107353e-14, 8.769601, 3.1949825e-14, -2.879692, 3.3825502e-14, -8.283313, 87.604256, 27.839941, -29.98651)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(-8.720512, 6.7762636e-21, -13.970398, -5.4359657e-14, 15.289307, 3.334287e-14, 14.093289, 5.897285e-14, -8.644471, 92.49855, 27.839941, -14.027648)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(-6.357229, 6.7762636e-21, -10.184383, -3.962803e-14, 11.145864, 2.4306864e-14, 10.27397, 4.2991052e-14, -6.301797, 91.22096, 27.839941, -14.82559)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(-11.362611, 3.3881318e-21, 3.9502096, 1.5236486e-14, 12.029675, 4.3827077e-14, -3.9502096, 4.640003e-14, -11.362611, 66.10939, 27.839941, -68.10463)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(-8.283313, 3.3881318e-21, 2.879692, 1.1107353e-14, 8.769601, 3.1949825e-14, -2.879692, 3.3825502e-14, -8.283313, 75.918526, 27.839941, -65.39519)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(-8.283313, 3.3881318e-21, 2.879692, 1.1107353e-14, 8.769601, 3.1949825e-14, -2.879692, 3.3825502e-14, -8.283313, -71.37635, 13.511799, 84.73193)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(1.1056559, 1.0164395e-20, -13.194514, -5.0892965e-14, 13.240758, -4.2646483e-15, 13.194514, 5.1071337e-14, 1.1056559, -82.197685, 15.328002, 90.56333)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(0.80602, 3.3881318e-21, -9.618766, -3.7100846e-14, 9.652477, -3.1089192e-15, 9.618766, 3.7230876e-14, 0.80602, -84.944695, 13.424758, 86.92699)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(1.1056559, 1.0164395e-20, -13.194514, -5.0892965e-14, 13.240758, -4.2646483e-15, 13.194514, 5.1071337e-14, 1.1056559, -101.697014, 15.328002, 92.19731)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
+
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(1.1056559, 1.0164395e-20, -13.194514, -5.0892965e-14, 13.240758, -4.2646483e-15, 13.194514, 5.1071337e-14, 1.1056559, -43.117474, 15.328002, 87.28854)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
+
+[node name="MeshInstance3D22" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(-8.283313, 3.3881318e-21, 2.879692, 1.1107353e-14, 8.769601, 3.1949825e-14, -2.879692, 3.3825502e-14, -8.283313, -93.69068, 13.511799, 119.617256)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
+
+[node name="MeshInstance3D23" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(1.1056559, 1.0164395e-20, -13.194514, -5.0892965e-14, 13.240758, -4.2646483e-15, 13.194514, 5.1071337e-14, 1.1056559, -20.382957, 15.328002, 99.961525)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
+
+[node name="MeshInstance3D24" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(0.80602, 3.3881318e-21, -9.618766, -3.7100846e-14, 9.652477, -3.1089192e-15, 9.618766, 3.7230876e-14, 0.80602, -39.88192, 13.424758, 93.77825)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
+
+[node name="MeshInstance3D25" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(1.1056559, 1.0164395e-20, -13.194514, -5.0892965e-14, 13.240758, -4.2646483e-15, 13.194514, 5.1071337e-14, 1.1056559, -39.882286, 15.328002, 101.595505)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
+
+[node name="MeshInstance3D26" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(1.1056559, 1.0164395e-20, -13.194514, -5.0892965e-14, 13.240758, -4.2646483e-15, 13.194514, 5.1071337e-14, 1.1056559, 18.697254, 15.328002, 96.68674)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(0.80602, 3.3881318e-21, -9.618766, -3.7100846e-14, 9.652477, -3.1089192e-15, 9.618766, 3.7230876e-14, 0.80602, -99.15965, 13.424758, 88.11815)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
+
+[node name="MeshInstance3D19" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(1.4915497, 6.2697786e-21, -17.799643, -6.8655564e-14, 17.862026, -5.7530922e-15, 17.799643, 6.889618e-14, 1.4915497, 49.10307, 13.424758, 97.83814)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
+
+[node name="MeshInstance3D20" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(1.4915497, 6.2697786e-21, -17.799643, -6.8655564e-14, 17.862026, -5.7530922e-15, 17.799643, 6.889618e-14, 1.4915497, 75.103386, 13.424758, 98.964424)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
+
+[node name="MeshInstance3D21" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(1.4915497, 6.2697786e-21, -17.799643, -6.8655564e-14, 17.862026, -5.7530922e-15, 17.799643, 6.889618e-14, 1.4915497, 23.9804, 9.073193, 103.24836)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(-8.720512, 6.7762636e-21, -13.970398, -5.4359657e-14, 15.289307, 3.334287e-14, 14.093289, 5.897285e-14, -8.644471, 90.59952, 27.839941, 17.03518)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="MapNode/light planes"]
+transform = Transform3D(-6.357229, 6.7762636e-21, -10.184383, -3.962803e-14, 11.145864, 2.4306864e-14, 10.27397, 4.2991052e-14, -6.301797, 89.83657, 27.839941, 7.819128)
+mesh = SubResource("PlaneMesh_vp1qd")
+surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
