@@ -27,6 +27,13 @@ Escape={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Clickable"
+3d_physics/layer_2="Friendlies"
+3d_physics/layer_3="Enemies"
+3d_physics/layer_4="Buildings"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
