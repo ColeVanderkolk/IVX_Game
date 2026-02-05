@@ -7,12 +7,16 @@ var totDamage : int
 
 @export var radius : float = 2.0; # How far units spawn from the 1st unit
 
+@onready var nav:NavigationAgent3D = $NavigationAgent3D
 var moving = false # Controls whether the horde is moving
 var targetX = null # The x value of where the horde is moving to
 var targetZ = null # The z value of where the horde is moving to
 
 var harmable = true # Turns off for immunity frames
 var in_combat:bool = false
+
+var enemy_target:Horde = null
+
 # Signals
 signal startedMoving()
 signal stopedMoving()
@@ -25,10 +29,17 @@ signal mitosisHappened()
 func _ready() -> void:
 	# Make the hitbox shape unique to this horde
 	$Hitbox/CollisionShape3D.shape = $Hitbox/CollisionShape3D.shape.duplicate()
+	
+	if is_in_group("Enemy"):
+		# This will be set to the "king" or "node" of our main guy
+		nav.target_position = Vector3.ZERO
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if moving and !in_combat:
+		var _target:Vector3 = nav.get_next_path_position()
+		targetX = _target.y
+		targetZ = _target.x
 		move(delta)
 	
 	if in_combat:
@@ -178,7 +189,7 @@ func takeDamage(attacker : Horde):
 	var damageTaken = attacker.totDamage
 	
 	# Apply damage to units
-	for unit:Unit in units:
+	for unit:Unit in units.duplicate():
 		damageTaken -= unit.health
 		if damageTaken < 0:
 			unit.health = abs(damageTaken)
@@ -203,7 +214,14 @@ func takeDamage(attacker : Horde):
 			else:
 				recalc()
 
+func enemy_target_update(_enemy_position:Vector3):
+	nav.target_position = _enemy_position
+	startMoving(_enemy_position.x, _enemy_position.z)
 
 func _on_immunity_frames_timeout() -> void:
 	harmable = true
 	#print("Immunity frames over")
+
+func _on_navigation_agent_3d_target_reached() -> void:
+	print("Arrived")
+	moving = false

@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://ch8rlyv2dciye"]
+[gd_scene load_steps=6 format=3 uid="uid://ch8rlyv2dciye"]
 
 [ext_resource type="PackedScene" uid="uid://bqi12twiio58s" path="res://Units/horde.tscn" id="1_0thl8"]
 [ext_resource type="Script" uid="uid://cryj3o0h7vhth" path="res://Units/horde_example_environment.gd" id="1_eub5d"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_eub5d"]
+vertices = PackedVector3Array(-49.5, 0.29878333, -49.5, -49.5, 0.29878333, 49.5, 49.5, 0.29878333, 49.5, 49.5, 0.29878333, -49.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qpokc"]
+size = Vector3(100, 0.2, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_eub5d"]
+size = Vector3(3.82, 2.8, 12)
 
 [node name="HordeExampleEnvironment" type="Node3D"]
 script = ExtResource("1_eub5d")
@@ -9,7 +19,7 @@ script = ExtResource("1_eub5d")
 [node name="AssimilatedHorde" parent="." groups=["Assimilated"] instance=ExtResource("1_0thl8")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.8470756, 0.53147256, 0, -0.53147256, 0.8470756, 0, 6.553583, 9.546968)
+transform = Transform3D(1, 0, 0, 0, 0.879524, 0.47585452, 0, -0.47585452, 0.879524, 0, 16.65125, 14.890301)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
@@ -20,6 +30,54 @@ wait_time = 3.0
 autostart = true
 
 [node name="EnemyHorde" parent="." groups=["Enemy"] instance=ExtResource("1_0thl8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.258503, 0, -4.73978)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.540985, 0, -38.11031)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_eub5d")
+
+[node name="Ground" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.101216674, 0)
+mesh = SubResource("BoxMesh_qpokc")
+skeleton = NodePath("../..")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+vertices = PackedVector3Array(12.001827, 0, -19.048393, 11.982012, 0, -7.6422024, 16.053444, 0, -7.535055, 16.044872, 0, -19.231346)
+
+[node name="NavigationObstacle3D2" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+vertices = PackedVector3Array(36.76805, 0, -10.34702, 39.13595, 0, -13.600467, 28.926365, 0, -20.354221, 27.13142, 0, -16.855274)
+
+[node name="NavigationObstacle3D3" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+vertices = PackedVector3Array(-3.7408752, 0, -16.15942, -3.8199644, 0, -19.694412, -16.456196, 0, -19.57863, -16.125988, 0, -15.7116585)
+
+[node name="NavigationObstacle3D4" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+vertices = PackedVector3Array(15.893664, 0, 15.924936, 12.006867, 0, 16.238136, 12.09011, 0, 3.8499618, 15.903388, 0, 3.860784)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.072132, 0, -13.337816)
+layers = 7
+mesh = SubResource("BoxMesh_eub5d")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.007935, 0, 9.686159)
+layers = 7
+mesh = SubResource("BoxMesh_eub5d")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.018987989, 0, 0.9998197, 0, 1, 0, -0.9998197, 0, -0.018987989, -9.782051, 0, -17.944)
+layers = 7
+mesh = SubResource("BoxMesh_eub5d")
+skeleton = NodePath("../MeshInstance3D2")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5420016, 0, 0.84037745, 0, 1, 0, -0.84037745, 0, 0.5420016, 33.16397, 0, -15.423332)
+layers = 7
+mesh = SubResource("BoxMesh_eub5d")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 29.465439, 0)
+light_energy = 10.006
+light_angular_distance = 15.8
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

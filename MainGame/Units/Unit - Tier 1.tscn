@@ -8,6 +8,7 @@ radius = 0.47070313
 height = 0.94140625
 
 [node name="Unit - Tier 1" type="CharacterBody3D"]
+platform_wall_layers = 6
 script = ExtResource("1_ch8fw")
 health = 1
 damage = 1

@@ -23,19 +23,23 @@ func _ready() -> void:
 	enemy_horde.addUnit(3)
 	enemy_horde.addUnit(3)
 	enemy_horde.addUnit(3)
+	enemy_horde.enemy_target_update(horde.global_position)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	if is_instance_valid(enemy_horde) and is_instance_valid(horde) :
+		enemy_horde.enemy_target_update(horde.global_position)
 	
-	if !horde.moving and testLocations.size() > i:
-		var x = testLocations[i].x
-		var y = testLocations[i].y
-		horde.startMoving(x, y)
-		i += 1
-	elif !horde.moving and i == testLocations.size():
-		horde = horde.mitosis(horde.getSize() / 2)
-		horde.add_to_group("Assimilated")
-		i = 0
+	pass
+	#if !horde.moving and testLocations.size() > i:
+		#var x = testLocations[i].x
+		#var y = testLocations[i].y
+		#horde.startMoving(x, y)
+		#i += 1
+	#elif !horde.moving and i == testLocations.size():
+		#horde = horde.mitosis(horde.getSize() / 2)
+		#horde.add_to_group("Assimilated")
+		#i = 0
 
 func _on_timer_timeout() -> void:
 	if s < 10:
