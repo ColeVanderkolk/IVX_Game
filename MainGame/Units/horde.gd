@@ -63,6 +63,7 @@ func recalc():
 	# Recalculate average speed and total damage
 	setAvgSpeed()
 	setTotDamage()
+	setHitBoxSize()
 
 # Helper method for repositionUnits
 func setPosition(unit : Node, index : int):
@@ -93,6 +94,9 @@ func repositionUnits():
 	for unit in units: 
 		setPosition(unit, index)
 		index += 1
+
+func setHitBoxSize():
+	$Hitbox/CollisionShape3D.shape.radius = pow(4 * units.size(), .33) + 2.0 
 
 # Removes numUnits units from the horde and puts them in a new horde.
 # Returns a reference to the new horde
