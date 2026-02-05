@@ -15,6 +15,9 @@ public partial class upgrade_buildingscript : Node3D
     [Export]
     private int[] UPGRADE_COSTS;
 
+    // current level of building
+    private int curLevel = 0;
+
     [Export]
     private CURRENCIES CostType;
 
@@ -47,7 +50,7 @@ public partial class upgrade_buildingscript : Node3D
     // Attempts to upgrade whatever unit requested this, deducting currency as needed
     // mousePos is here in case it's helpful for a future UI middleman
     // currently just uses same input as assimilate
-    private void OnUpgrade(Vector3 mousePos, int curLevel)
+    private void OnUpgrade(Vector3 mousePos)
     {
         if(Assimilated)
         {

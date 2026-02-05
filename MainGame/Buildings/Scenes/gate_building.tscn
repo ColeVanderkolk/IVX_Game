@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://hv71py2pmedd"]
 
 [ext_resource type="PackedScene" uid="uid://c0huid33if1iu" path="res://Buildings/Scenes/generic_buliding.tscn" id="1_hnoiu"]
-[ext_resource type="Script" uid="uid://d3crggfyrq8oa" path="res://gate_buildingscript.cs" id="2_0a5fk"]
+[ext_resource type="Script" uid="uid://d3crggfyrq8oa" path="res://Buildings/Scripts/gate_buildingscript.cs" id="2_0a5fk"]
 
 [node name="GateBuilding" instance=ExtResource("1_hnoiu")]
 script = ExtResource("2_0a5fk")
@@ -11,10 +11,5 @@ GATE_MAX_HP = 100
 
 [node name="StaticBody3D" parent="." index="0"]
 collision_layer = 1
-
-[node name="Camera3D" type="Camera3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 0.96714807, 0.25421372, 0, -0.25421372, 0.96714807, 0, 0.4822033, 1.453708)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Camera3D" index="0"]
 
 [connection signal="BuildingClicked" from="StaticBody3D" to="." method="OnPerformRepair"]
