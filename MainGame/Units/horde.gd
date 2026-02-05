@@ -1,4 +1,5 @@
 extends Node3D
+class_name Horde
 
 var units = [] # Contains pointers to all of the unit nodes in the horde
 var avgSpeed : float # The average of the speed stats of the horde's units
@@ -134,7 +135,11 @@ func getSize():
 
 func _on_hitbox_area_entered(area: Area3D) -> void:
 	if area.is_in_group("Enemy"):
-		pass # Do something
+		if is_in_group("Assimilated"):
+			takeDamage(area)
 	if area.is_in_group("Assimilated"):
-		pass # Do something
+		if is_in_group("Enemy"):
+			takeDamage(area)
+
+func takeDamage(area : Area3D):
 	
