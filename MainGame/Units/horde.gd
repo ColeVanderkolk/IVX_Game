@@ -176,6 +176,7 @@ func takeDamage(attacker : Horde):
 			# Assimilates enemy
 			if attacker.is_in_group("Assimilated"):
 				attacker.addUnit(deadUnit.tier)
+				#print("ASSIMILATED!")
 			
 			units.erase(unit)
 			deadUnit.die()

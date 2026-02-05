@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://y2bbkv134mwy"]
+[gd_scene load_steps=4 format=3 uid="uid://dqbxpvcxf1wb7"]
 
 [ext_resource type="Script" uid="uid://bbsr66wy7tgj0" path="res://Units/unit.gd" id="1_ch8fw"]
-[ext_resource type="PackedScene" uid="uid://b3hg54wc4mwlr" path="res://Units/3D-Assets/fleshcreature1plus.blend" id="2_vrk86"]
+[ext_resource type="PackedScene" uid="uid://cg3e71iw6h26j" path="res://Units/3D-Assets/fleshcreature1plus.glb" id="2_vrk86"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ahhs1"]
 radius = 0.47070313
@@ -20,4 +20,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09277344, 0)
 shape = SubResource("CapsuleShape3D_ahhs1")
 
 [node name="fleshcreature1plus" parent="." instance=ExtResource("2_vrk86")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
