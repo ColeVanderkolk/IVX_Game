@@ -139,24 +139,24 @@ func getSize():
 
 
 func _on_hitbox_area_entered(area: Area3D) -> void:
-	if area.is_in_group("Enemy") and is_in_group("Assimilated"):
-		takeDamage(area.get_parent())
-		print("Assimilated horde takes damage")
+	var horde = area.get_parent()
+	
+	if horde.is_in_group("Enemy") and is_in_group("Assimilated"):
+		takeDamage(horde)
+		#print("Assimilated horde takes damage")
 		
 		if harmable:
 			harmable = false
 			$ImmunityFrames.start()
 		
-	if area.is_in_group("Assimilated") and is_in_group("Enemy"):
-		takeDamage(area.get_parent())
-		print("Enemy horde takes damage")
+	if horde.is_in_group("Assimilated") and is_in_group("Enemy"):
+		takeDamage(horde)
+		#print("Enemy horde takes damage")
 		
 		if harmable:
 			harmable = false
 			$ImmunityFrames.start()
-	print("area entered" + str(area))
-	print("Assimilated: " + str(is_in_group("Assimilated")))
-	print("Enemy: " + str(is_in_group("Enemy")))
+
 
 func takeDamage(attacker : Horde):
 	var damageTaken = attacker.totDamage

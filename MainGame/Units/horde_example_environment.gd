@@ -29,6 +29,7 @@ func _process(_delta: float) -> void:
 		i += 1
 	elif !horde.moving and i == testLocations.size():
 		horde = horde.mitosis(horde.getSize() / 2)
+		horde.add_to_group("Assimilated")
 		i = 0
 
 func _on_timer_timeout() -> void:
