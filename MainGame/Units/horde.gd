@@ -12,7 +12,7 @@ var targetX = null # The x value of where the horde is moving to
 var targetZ = null # The z value of where the horde is moving to
 
 var harmable = true # Turns off for immunity frames
-
+var in_combat:bool = false
 # Signals
 signal startedMoving()
 signal stopedMoving()
@@ -23,13 +23,16 @@ signal mitosisHappened()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	# Make the hitbox shape unique to this horde
+	$Hitbox/CollisionShape3D.shape = $Hitbox/CollisionShape3D.shape.duplicate()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	if moving:
+	if moving and !in_combat:
 		move(delta)
 	
+	if in_combat:
+		in_combat = false
 	for area in hitbox.get_overlapping_areas():
 		checkForDamage(area)
 
@@ -50,6 +53,10 @@ func addUnit(tier : int = 1):
 	add_child(newUnit)
 	unitAdded.emit()
 	
+	recalc()
+
+# Recalculates hoard after unit change
+func recalc():
 	# Reposition to accomodating changing horde size
 	repositionUnits()
 	
@@ -102,8 +109,8 @@ func mitosis(numUnits : int) -> Horde:
 		var unit:Unit = units.pop_back()
 		newHorde.add_child(unit)
 	
-	# Reposition units in current horde to account for now missing units
-	repositionUnits()
+	# Recalc units in current horde to account for now missing units
+	recalc()
 	
 	# Instantiate the new horde
 	get_parent().add_child(newHorde)
@@ -149,6 +156,7 @@ func checkForDamage(area: Area3D):
 	# Case #1 where damage should be dealt
 	if horde.is_in_group("Enemy") and is_in_group("Assimilated"):
 		#print("Assimilated horde takes damage")
+		in_combat = true
 		if harmable:
 			takeDamage(horde)
 			harmable = false
@@ -156,6 +164,7 @@ func checkForDamage(area: Area3D):
 	# Case #2 where damage should be dealt
 	elif horde.is_in_group("Assimilated") and is_in_group("Enemy"):
 		#print("Enemy horde takes damage")
+		in_combat = true
 		if harmable:
 			takeDamage(horde)
 			harmable = false
@@ -176,14 +185,19 @@ func takeDamage(attacker : Horde):
 			# Assimilates enemy
 			if attacker.is_in_group("Assimilated"):
 				attacker.addUnit(deadUnit.tier)
-				#print("ASSIMILATED!")
 			
+			var _dead_glob_pos = deadUnit.global_position
+			remove_child(deadUnit)
+			get_parent().add_child(deadUnit)
+			deadUnit.global_position = _dead_glob_pos
 			units.erase(unit)
 			deadUnit.die()
-	
-	# Remove the horde from the game if it's empty
-	if units.size() < 1:
-		queue_free()
+			
+			# Remove the horde from the game if it's empty
+			if units.size() < 1:
+				queue_free()
+			else:
+				recalc()
 
 
 func _on_immunity_frames_timeout() -> void:
