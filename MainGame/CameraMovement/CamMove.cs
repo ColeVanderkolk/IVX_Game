@@ -28,6 +28,7 @@ public partial class CamMove : Camera3D
 	private float _zoomVelocity;
 	private Vector3 _velocity = Vector3.Zero;
 	private float _currentZoom;
+	private bool _edgeScrollingEnabled = true;
 
 	public override void _Ready()
 	{
@@ -43,7 +44,8 @@ public partial class CamMove : Camera3D
 
 
 		HandleKeyboardMovement(delta);
-		HandleEdgeScrolling(delta);
+		if (_edgeScrollingEnabled)
+			HandleEdgeScrolling(delta);
 		HandleRotation(delta);
 		HandleZoom(delta);
 
@@ -236,4 +238,17 @@ public partial class CamMove : Camera3D
 	}
 
 	[Export] Node3D debuganchor;
+
+	public bool ToggleEdgeScrolling(bool force)
+	{
+		var prev = _edgeScrollingEnabled;
+		_edgeScrollingEnabled = force;
+		return prev;
+	}
+	public bool ToggleEdgeScrolling()
+	{
+		var prev = _edgeScrollingEnabled;
+		_edgeScrollingEnabled = !_edgeScrollingEnabled;
+		return prev;
+	}
 }
