@@ -154,7 +154,9 @@ func _on_hitbox_area_entered(area: Area3D) -> void:
 		if harmable:
 			harmable = false
 			$ImmunityFrames.start()
-		
+	print("area entered" + str(area))
+	print("Assimilated: " + str(is_in_group("Assimilated")))
+	print("Enemy: " + str(is_in_group("Enemy")))
 
 func takeDamage(attacker : Horde):
 	var damageTaken = attacker.totDamage
