@@ -1,6 +1,7 @@
 extends Node3D
 
-@onready var horde: Node3D = $Horde
+@onready var horde: Horde = $AssimilatedHorde
+@onready var enemy_horde: Horde = $EnemyHorde
 
 var testLocations = [Vector2(1, 2), 
 					Vector2(-2, 4), 
@@ -14,6 +15,9 @@ var s = 1
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	horde.addUnit(3)
+	enemy_horde.addUnit(3)
+	enemy_horde.addUnit(3)
+	enemy_horde.addUnit(3)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -30,5 +34,5 @@ func _process(_delta: float) -> void:
 func _on_timer_timeout() -> void:
 	if s < 10:
 		$Timer.start()
-		horde.addUnit(2, 1, 1, i * 5)
+		horde.addUnit(2)
 		s = horde.getSize()

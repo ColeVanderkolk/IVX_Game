@@ -8,17 +8,9 @@ class_name Unit
 
 # Signals
 signal unitDeath()
-signal unitTakesDamage()
 
 func _physics_process(_delta: float) -> void:
 	pass
-
-func takeDamage(damageTaken : int):
-	unitTakesDamage.emit()
-	health -= damageTaken
-	if health < 0:
-		die()
-		return -health
 
 func die():
 	unitDeath.emit()

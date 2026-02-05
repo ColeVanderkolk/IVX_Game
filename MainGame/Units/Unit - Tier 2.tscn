@@ -11,7 +11,7 @@ height = 1.8554688
 script = ExtResource("1_jtl0v")
 health = 2
 damage = 2
-speed = 6.0
+speed = 5.0
 tier = 2
 metadata/_custom_type_script = "uid://bbsr66wy7tgj0"
 

@@ -3,12 +3,15 @@ class_name Horde
 
 var units = [] # Contains pointers to all of the unit nodes in the horde
 var avgSpeed : float # The average of the speed stats of the horde's units
+var totDamage : int
 
 @export var radius : float = 2.0; # How far units spawn from the 1st unit
 
 var moving = false # Controls whether the horde is moving
 var targetX = null # The x value of where the horde is moving to
 var targetZ = null # The z value of where the horde is moving to
+
+var harmable = true
 
 # Signals
 signal startedMoving()
@@ -26,7 +29,7 @@ func _physics_process(delta: float) -> void:
 		move(delta)
 
 # Adds a unit to the horde. Use parameters to set it's stats
-func addUnit(tier : int = 1, health = 1, damage = 1, speed = 1):
+func addUnit(tier : int = 1):
 	# Load new unit
 	var newUnit = null
 	if tier == 1:
@@ -39,11 +42,6 @@ func addUnit(tier : int = 1, health = 1, damage = 1, speed = 1):
 		newUnit = load("res://Units/unit.tscn").instantiate()
 	
 	
-	# Set new unit stats
-	newUnit.health = health
-	newUnit.damage = damage
-	newUnit.speed = speed
-	
 	# Add unit as child of horde and element in units
 	units.append(newUnit)
 	add_child(newUnit)
@@ -54,6 +52,7 @@ func addUnit(tier : int = 1, health = 1, damage = 1, speed = 1):
 	
 	# Recalculate average speed
 	setAvgSpeed()
+	setTotDamage()
 
 # Helper method for repositionUnits
 func setPosition(unit : Node, index : int):
@@ -71,6 +70,12 @@ func setAvgSpeed():
 		total += unit.speed
 	avgSpeed = total / units.size()
 
+func setTotDamage():
+	var total = 0
+	for unit in units:
+		total += unit.damage
+	totDamage = total
+
 # Positions the units in the horde to be evenly distributed around the 1st unit
 func repositionUnits():
 	var index = 1;
@@ -87,7 +92,7 @@ func mitosis(numUnits : int):
 	# Move units to the new horde
 	if numUnits <= units.size():
 		for i in range(numUnits):
-			newHorde.addUnit(units[0].tier, units[0].health, units[0].damage, units[0].speed)
+			newHorde.addUnit(units[0].tier)
 			units[0].queue_free()
 			units.remove_at(0)
 	
@@ -134,12 +139,40 @@ func getSize():
 
 
 func _on_hitbox_area_entered(area: Area3D) -> void:
-	if area.is_in_group("Enemy"):
-		if is_in_group("Assimilated"):
-			takeDamage(area)
-	if area.is_in_group("Assimilated"):
-		if is_in_group("Enemy"):
-			takeDamage(area)
+	if area.is_in_group("Enemy") and is_in_group("Assimilated"):
+		takeDamage(area.get_parent())
+		print("Assimilated horde takes damage")
+		
+		if harmable:
+			harmable = false
+			$ImmunityFrames.start()
+		
+	if area.is_in_group("Assimilated") and is_in_group("Enemy"):
+		takeDamage(area.get_parent())
+		print("Enemy horde takes damage")
+		
+		if harmable:
+			harmable = false
+			$ImmunityFrames.start()
+		
 
-func takeDamage(area : Area3D):
+func takeDamage(attacker : Horde):
+	var damageTaken = attacker.totDamage
 	
+	for unit in units:
+		damageTaken -= unit.health
+		if damageTaken < 0:
+			unit.health = abs(damageTaken)
+			return
+		else:
+			var deadUnit = unit
+			units.erase(unit)
+			deadUnit.die()
+	
+	if units.size() < 1:
+		queue_free()
+
+
+func _on_immunity_frames_timeout() -> void:
+	harmable = true
+	print("Immunity frames over")
