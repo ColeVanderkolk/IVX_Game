@@ -1,10 +1,11 @@
-[gd_scene load_steps=43 format=4 uid="uid://cugh3ljdo6xar"]
+[gd_scene load_steps=44 format=4 uid="uid://cugh3ljdo6xar"]
 
 [ext_resource type="Material" uid="uid://kyeomtr5tp1p" path="res://Assets/Models/Map/black.tres" id="1_kwjvk"]
 [ext_resource type="Material" uid="uid://c3vn8r02aeilj" path="res://Assets/Models/Map/wall.tres" id="2_243tp"]
 [ext_resource type="Texture2D" uid="uid://cq173a1asulcs" path="res://Assets/Models/Map/seemlessground.jpg" id="2_sq3rb"]
 [ext_resource type="Texture2D" uid="uid://c4yf13mdotjgx" path="res://Assets/Models/Map/lights2.png" id="4_n4p2l"]
 [ext_resource type="Texture2D" uid="uid://du3p18l2iywh7" path="res://Assets/Models/Map/lights3.png" id="5_vs1vt"]
+[ext_resource type="PackedScene" uid="uid://shi3iohprtps" path="res://CameraMovement/player.tscn" id="6_n4p2l"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_l0558"]
 _surfaces = [{
@@ -910,3 +911,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
 transform = Transform3D(-6.357229, 6.7762636e-21, -10.184383, -3.962803e-14, 11.145864, 2.4306864e-14, 10.27397, 4.2991052e-14, -6.301797, 89.83657, 27.839941, 7.819128)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
+
+[node name="Camera3D" parent="." instance=ExtResource("6_n4p2l")]
+transform = Transform3D(0.7071068, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.7071068, -0.5, 0.5, 0, 22.205564, 76.75156)

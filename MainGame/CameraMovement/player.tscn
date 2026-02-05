@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://shi3iohprtps"]
+[gd_scene load_steps=4 format=3 uid="uid://shi3iohprtps"]
 
 [ext_resource type="Script" uid="uid://drmxxtueica54" path="res://CameraMovement/CamMove.cs" id="1_nhw06"]
+[ext_resource type="PackedScene" uid="uid://cj6vd2x3nx5s5" path="res://CameraMovement/game_UI.tscn" id="2_jq0cr"]
 
 [sub_resource type="Curve" id="Curve_mqyve"]
 _limits = [-1.0, 1.0, -1.0, 1.0]
@@ -9,7 +10,7 @@ point_count = 13
 metadata/_snap_enabled = true
 metadata/_snap_count = 54
 
-[node name="Camera3D" type="Camera3D" unique_id=1815146861]
+[node name="Camera3D" type="Camera3D"]
 transform = Transform3D(0.7071068, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.7071068, -0.5, 0.5, 0, 0, 0)
 current = true
 fov = 66.3
@@ -24,3 +25,5 @@ MinHeight = 15.0
 MaxHeight = 150.0
 PlaneHeight = 41.995
 rotationSensitivity = 0.003
+
+[node name="Exp" parent="." instance=ExtResource("2_jq0cr")]
