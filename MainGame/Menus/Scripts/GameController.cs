@@ -53,6 +53,12 @@ public partial class GameController : Node
 
 		CurrentOpenedScreen = S;
 		AddChild(CurrentOpenedScreen);
+
+		// Display a new background image when displaying the main menu screen:
+		if (CurrentOpenedScreen == CurrentMainMenu)
+		{
+			CurrentMainMenu.loadNewBackgroundImage();
+		}
 	}
 
 	// Plays a transition effect & opens the specified screen.
