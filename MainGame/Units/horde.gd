@@ -11,13 +11,15 @@ var moving = false # Controls whether the horde is moving
 var targetX = null # The x value of where the horde is moving to
 var targetZ = null # The z value of where the horde is moving to
 
-var harmable = true
+var harmable = true # Turns off for immunity frames
 
 # Signals
 signal startedMoving()
 signal stopedMoving()
 signal unitAdded()
 signal mitosisHappened()
+
+@onready var hitbox: Area3D = $Hitbox
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,6 +29,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if moving:
 		move(delta)
+	
+	for area in hitbox.get_overlapping_areas():
+		checkForDamage(area)
 
 # Adds a unit to the horde. Use parameters to set it's stats
 func addUnit(tier : int = 1):
@@ -39,7 +44,7 @@ func addUnit(tier : int = 1):
 	elif tier == 3:
 		newUnit = load("res://Units/Unit - Tier 3.tscn").instantiate()
 	else:
-		newUnit = load("res://Units/unit.tscn").instantiate()
+		newUnit = load("res://Units/Unit - Tier 1.tscn").instantiate()
 	
 	
 	# Add unit as child of horde and element in units
@@ -50,7 +55,7 @@ func addUnit(tier : int = 1):
 	# Reposition to accomodating changing horde size
 	repositionUnits()
 	
-	# Recalculate average speed
+	# Recalculate average speed and total damage
 	setAvgSpeed()
 	setTotDamage()
 
@@ -70,6 +75,7 @@ func setAvgSpeed():
 		total += unit.speed
 	avgSpeed = total / units.size()
 
+# Sets the total damage from the unit stats
 func setTotDamage():
 	var total = 0
 	for unit in units:
@@ -137,30 +143,30 @@ func move(delta : float):
 func getSize():
 	return units.size()
 
-
-func _on_hitbox_area_entered(area: Area3D) -> void:
+# Runs in physics_process for each area
+func checkForDamage(area: Area3D):
 	var horde = area.get_parent()
 	
+	# Case #1 where damage should be dealt
 	if horde.is_in_group("Enemy") and is_in_group("Assimilated"):
-		takeDamage(horde)
 		#print("Assimilated horde takes damage")
-		
 		if harmable:
+			takeDamage(horde)
 			harmable = false
 			$ImmunityFrames.start()
 		
+	# Case #2 where damage should be dealt
 	if horde.is_in_group("Assimilated") and is_in_group("Enemy"):
-		takeDamage(horde)
 		#print("Enemy horde takes damage")
-		
 		if harmable:
+			takeDamage(horde)
 			harmable = false
 			$ImmunityFrames.start()
-
 
 func takeDamage(attacker : Horde):
 	var damageTaken = attacker.totDamage
 	
+	# Apply damage to units
 	for unit in units:
 		damageTaken -= unit.health
 		if damageTaken < 0:
@@ -171,10 +177,11 @@ func takeDamage(attacker : Horde):
 			units.erase(unit)
 			deadUnit.die()
 	
+	# Remove the horde from the game if it's empty
 	if units.size() < 1:
 		queue_free()
 
 
 func _on_immunity_frames_timeout() -> void:
 	harmable = true
-	print("Immunity frames over")
+	#print("Immunity frames over")
