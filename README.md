@@ -14,6 +14,7 @@ Collaborators:
 - Madden Rota
 - Phiney Parent (phineythedm)
 - Alex Stephens (Eev)
+- Justin Shaw
 4. Story by:
 - Shane Hermanides
 - Paige Cook
