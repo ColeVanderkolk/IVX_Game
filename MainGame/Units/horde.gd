@@ -61,8 +61,8 @@ func addUnit(tier : int = 1):
 func setPosition(unit : Node, index : int):
 	if index > 1:
 		var rotationAngle = 2 * PI * index / (units.size() -1)
-		unit.position.z = 2 * cos(rotationAngle)
-		unit.position.x = 2 * sin(rotationAngle)
+		unit.position.z = radius * cos(rotationAngle)
+		unit.position.x = radius * sin(rotationAngle)
 	else:
 		unit.position = Vector3.ZERO
 
@@ -91,17 +91,16 @@ func repositionUnits():
 # Returns a reference to the new horde
 func mitosis(numUnits : int) -> Horde:
 	# Safty check
-	if numUnits < units.size():
+	if numUnits > units.size() or numUnits < 1:
 		return null
 	
 	# Load new horde
-	var newHorde = load("res://Units/horde.tscn").instantiate()
+	var newHorde:Horde = load("res://Units/horde.tscn").instantiate()
 	
 	# Move units to the new horde
 	for i in range(numUnits):
 		var unit:Unit = units.pop_back()
-		newHorde.addUnit(unit.tier)
-		units.queue_free()
+		newHorde.add_child(unit)
 	
 	# Reposition units in current horde to account for now missing units
 	repositionUnits()
@@ -166,19 +165,25 @@ func takeDamage(attacker : Horde):
 	var damageTaken = attacker.totDamage
 	
 	# Apply damage to units
-	for unit in units:
+	for unit:Unit in units:
 		damageTaken -= unit.health
 		if damageTaken < 0:
 			unit.health = abs(damageTaken)
 			break
 		else:
-			var deadUnit = unit
+			var deadUnit:Unit = unit
+			
+			# Assimilates enemy
+			if attacker.is_in_group("Assimilated"):
+				attacker.addUnit(deadUnit.tier)
+			
 			units.erase(unit)
 			deadUnit.die()
 	
 	# Remove the horde from the game if it's empty
 	if units.size() < 1:
 		queue_free()
+
 
 func _on_immunity_frames_timeout() -> void:
 	harmable = true
