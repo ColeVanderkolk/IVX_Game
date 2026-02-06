@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cj6vd2x3nx5s5"]
+[gd_scene load_steps=6 format=3 uid="uid://cj6vd2x3nx5s5"]
 
 [ext_resource type="Script" uid="uid://c66pv6xclu6sh" path="res://CameraMovement/GameUi.cs" id="1_vyq54"]
 [ext_resource type="Texture2D" uid="uid://c153oa2m1ioiy" path="res://Assets/UI/UITemp.png" id="2_5xdjt"]
-[ext_resource type="Texture2D" uid="uid://1d7eexj3bkmg" path="res://icon.svg" id="3_5xdjt"]
+[ext_resource type="Texture2D" uid="uid://bcgh8frcxpov0" path="res://Assets/UI/WIN26GJ_iconCoin.png" id="3_kyuxl"]
+[ext_resource type="Texture2D" uid="uid://b26jmp0x3pcgh" path="res://Assets/UI/WIN26GJ_iconMetal.png" id="4_wci68"]
+[ext_resource type="Texture2D" uid="uid://dibr387wx7fpg" path="res://Assets/UI/WIN26GJ_iconBodies2.png" id="5_i8axt"]
 
 [node name="Exp" type="Control"]
 layout_mode = 3
@@ -129,7 +131,7 @@ columns = 2
 [node name="TextureRect" type="TextureRect" parent="Resources/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("3_5xdjt")
+texture = ExtResource("3_kyuxl")
 expand_mode = 2
 stretch_mode = 4
 
@@ -143,7 +145,7 @@ vertical_alignment = 1
 
 [node name="TextureRect2" type="TextureRect" parent="Resources/GridContainer"]
 layout_mode = 2
-texture = ExtResource("3_5xdjt")
+texture = ExtResource("4_wci68")
 expand_mode = 1
 stretch_mode = 4
 
@@ -157,7 +159,7 @@ vertical_alignment = 1
 
 [node name="TextureRect3" type="TextureRect" parent="Resources/GridContainer"]
 layout_mode = 2
-texture = ExtResource("3_5xdjt")
+texture = ExtResource("5_i8axt")
 expand_mode = 1
 stretch_mode = 4
 

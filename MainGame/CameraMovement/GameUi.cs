@@ -89,7 +89,14 @@ public partial class GameUi : Control
 	private void _on_king_pressed()
 	{
 		var hordeManager = GetNode<HordeManager>("../../HordeManager");
-		hordeManager.setSelectedHorde(0);
+		bool success = hordeManager.setSelectedHorde(0);
+		
+		if (!success)
+		{
+			GD.PrintErr("Failed to select king horde!");
+			return;
+		}
+
 		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		audioPlayer.Stream = GD.Load<AudioStream>(kingSelectionAudios[GD.Randi() % kingSelectionAudios.Length]);
 		audioPlayer.Play();
@@ -97,7 +104,13 @@ public partial class GameUi : Control
 	private void _on_horde1_pressed()
 	{
 		var hordeManager = GetNode<HordeManager>("../../HordeManager");
-		hordeManager.setSelectedHorde(1);
+		bool success = hordeManager.setSelectedHorde(1);
+
+		if (!success)
+		{
+			GD.PrintErr("Failed to select horde 1!");
+			return;
+		}
 
 		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		audioPlayer.Stream = GD.Load<AudioStream>(hordeSelectionAudios[GD.Randi() % hordeSelectionAudios.Length]);
@@ -106,7 +119,13 @@ public partial class GameUi : Control
 	private void _on_horde2_pressed()
 	{
 		var hordeManager = GetNode<HordeManager>("../../HordeManager");
-		hordeManager.setSelectedHorde(2);
+		bool success = hordeManager.setSelectedHorde(2);
+
+		if (!success)
+		{
+			GD.PrintErr("Failed to select horde 2!");
+			return;
+		}
 
 		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		audioPlayer.Stream = GD.Load<AudioStream>(hordeSelectionAudios[GD.Randi() % hordeSelectionAudios.Length]);
@@ -115,7 +134,13 @@ public partial class GameUi : Control
 	private void _on_horde3_pressed()
 	{
 		var hordeManager = GetNode<HordeManager>("../../HordeManager");
-		hordeManager.setSelectedHorde(3);
+		bool success = hordeManager.setSelectedHorde(3);
+
+		if (!success)
+		{
+			GD.PrintErr("Failed to select horde 3!");
+			return;
+		}
 
 		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		audioPlayer.Stream = GD.Load<AudioStream>(hordeSelectionAudios[GD.Randi() % hordeSelectionAudios.Length]);
@@ -124,7 +149,13 @@ public partial class GameUi : Control
 	private void _on_horde4_pressed()
 	{
 		var hordeManager = GetNode<HordeManager>("../../HordeManager");
-		hordeManager.setSelectedHorde(4);
+		bool success = hordeManager.setSelectedHorde(4);
+
+		if (!success)
+		{
+			GD.PrintErr("Failed to select horde 4!");
+			return;
+		}
 
 		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		audioPlayer.Stream = GD.Load<AudioStream>(hordeSelectionAudios[GD.Randi() % hordeSelectionAudios.Length]);

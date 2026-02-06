@@ -204,7 +204,9 @@ func mitosis(numUnits : int) -> Horde:
 	# Load new horde
 	var newHorde:Horde = load("res://Units/Scenes/horde.tscn").instantiate()
 	newHorde.horde_type = horde_types.ASSIMALTED_ACTIVE
-	print(numUnits)
+	get_parent().add_child(newHorde)
+	
+	#print(numUnits)
 	# Move units to the new horde
 	for i in range(numUnits):
 		var unit:Unit = units.pop_back()
@@ -215,7 +217,6 @@ func mitosis(numUnits : int) -> Horde:
 	recalc()
 	
 	# Instantiate the new horde
-	get_parent().add_child(newHorde)
 	mitosisHappened.emit()
 	print(newHorde.units.size())
 	print(newHorde.units)
@@ -323,11 +324,10 @@ func checkForDamage(area: Area3D):
 		gateDamaged.emit(totDamage)
 	elif in_combat:
 		in_combat = false
-		if state == states.COMBAT:
-			if _enemy_Horde:
-				change_state(states.TARGETING)
-			elif target != Vector3.ZERO:
-				change_state(states.MOVING_TO)
+		if _enemy_Horde:
+			change_state(states.TARGETING)
+		elif target != Vector3.ZERO:
+			change_state(states.MOVING_TO)
 
 
 
@@ -376,6 +376,7 @@ func _on_hitbox_input_event(camera: Node, event: InputEvent, event_position: Vec
 		if event.pressed and  event.button_index == MOUSE_BUTTON_LEFT:
 			print("Clicked!")
 			$HordeActionHandeler.Attack(get_parent().get_node("HordeManager").getSelectedHorde(), self)
+			print(get_parent().get_node("HordeManager").SelectedHorde)
 			
 	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed \
 		#and horde_type == horde_types.ENEMY:
