@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bt62anvbdurwd"]
+[gd_scene load_steps=11 format=3 uid="uid://bt62anvbdurwd"]
 
 [ext_resource type="Script" uid="uid://cq7t2pkyslgdb" path="res://Menus/Scripts/GameScene.cs" id="1_edgyv"]
 [ext_resource type="PackedScene" uid="uid://blvmyj17pw5kw" path="res://Menus/Scenes/pause_menu.tscn" id="2_idyv1"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cugh3ljdo6xar" path="res://Assets/Models/Map/game_map.tscn" id="7_a5bod"]
 [ext_resource type="PackedScene" uid="uid://shi3iohprtps" path="res://CameraMovement/player.tscn" id="8_vqgse"]
 [ext_resource type="AudioStream" uid="uid://cli42iur4apsg" path="res://Assets/Audio/Music/music_gameplay.mp3" id="9_vqgse"]
+[ext_resource type="PackedScene" uid="uid://bqi12twiio58s" path="res://Units/Scenes/horde.tscn" id="10_eojei"]
 
 [node name="GameScene" type="Node"]
 script = ExtResource("1_edgyv")
@@ -42,12 +43,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3397229, 9.885304, 0)
 [node name="MapNode" parent="." instance=ExtResource("7_a5bod")]
 
 [node name="Camera3D" parent="." instance=ExtResource("8_vqgse")]
-transform = Transform3D(0.7071068, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.7071068, -0.5, 0.5, 8.955608, 15.914242, 73.10358)
+transform = Transform3D(0.7071068, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.7071068, -0.5, 0.5, 16.794159, 13.95026, 79.0734)
+MaxMoveSpeed = 2000.0
 MaxHeight = 50.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_vqgse")
 autoplay = true
+
+[node name="Horde" parent="." instance=ExtResource("10_eojei")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.55224895, 4.7234273, 65.41621)
 
 [editable path="Buildings/MineManager"]
 [editable path="Buildings/RecruitManager"]

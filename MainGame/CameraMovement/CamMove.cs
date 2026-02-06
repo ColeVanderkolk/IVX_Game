@@ -11,7 +11,7 @@ public partial class CamMove : Camera3D
 	// Movement settings
 
 	[Export] public float MaxMoveSpeed = 25.0f;
-	[Export] public float MoveAcceleration = 24f;
+	[Export] public float MoveAcceleration = 12f;
 	[Export] public float EdgeScrollMargin = 20.0f; // pixels from edge to trigger scroll
 	[Export] Curve edgeScrollSpeedCurve;
 
@@ -28,7 +28,7 @@ public partial class CamMove : Camera3D
 	private float _zoomVelocity;
 	private Vector3 _velocity = Vector3.Zero;
 	private float _currentZoom;
-	private bool _edgeScrollingEnabled = true;
+	private bool _edgeScrollingEnabled = false;
 
 	public override void _Ready()
 	{
@@ -250,5 +250,13 @@ public partial class CamMove : Camera3D
 		var prev = _edgeScrollingEnabled;
 		_edgeScrollingEnabled = !_edgeScrollingEnabled;
 		return prev;
+	}
+	
+	private void _on_timer_timeout()
+	{
+		var screenHeight = GetViewport().GetVisibleRect().Size.Y;
+		if (GetViewport().GetMousePosition().Y < screenHeight * 0.8f) {
+			GetParent<CamMove>().ToggleEdgeScrolling(true);
+		}
 	}
 }
