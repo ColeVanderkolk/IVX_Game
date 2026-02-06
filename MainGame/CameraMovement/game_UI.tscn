@@ -196,4 +196,8 @@ text = "Pause"
 [connection signal="mouse_entered" from="HordeButtons" to="." method="_on_panel_container_mouse_entered"]
 [connection signal="mouse_exited" from="HordeButtons" to="." method="_on_panel_container_mouse_exited"]
 [connection signal="pressed" from="HordeButtons/HBoxContainer/MarginContainer/0Button" to="." method="_on_king_pressed"]
+[connection signal="pressed" from="HordeButtons/HBoxContainer/MarginContainer2/1Button" to="." method="_on_horde1_pressed"]
+[connection signal="pressed" from="HordeButtons/HBoxContainer/MarginContainer3/2Button" to="." method="_on_horde2_pressed"]
+[connection signal="pressed" from="HordeButtons/HBoxContainer/MarginContainer4/3Button" to="." method="_on_horde3_pressed"]
+[connection signal="pressed" from="HordeButtons/HBoxContainer/MarginContainer5/4Button" to="." method="_on_horde4_pressed"]
 [connection signal="pressed" from="PanelContainer/PauseButton" to="." method="_on_PauseButton_pressed"]

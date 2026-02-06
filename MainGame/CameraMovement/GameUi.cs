@@ -68,7 +68,42 @@ public partial class GameUi : Control
 		audioPlayer.Stream = GD.Load<AudioStream>(kingSelectionAudios[GD.Randi() % kingSelectionAudios.Length]);
 		audioPlayer.Play();
 	}
+	private void _on_horde1_pressed()
+	{
+		var hordeManager = GetNode<HordeManager>("../../HordeManager");
+		hordeManager.setSelectedHorde(1);
 
+		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		audioPlayer.Stream = GD.Load<AudioStream>(hordeSelectionAudios[GD.Randi() % hordeSelectionAudios.Length]);
+		audioPlayer.Play();
+	}
+	private void _on_horde2_pressed()
+	{
+		var hordeManager = GetNode<HordeManager>("../../HordeManager");
+		hordeManager.setSelectedHorde(2);
+
+		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		audioPlayer.Stream = GD.Load<AudioStream>(hordeSelectionAudios[GD.Randi() % hordeSelectionAudios.Length]);
+		audioPlayer.Play();
+	}
+	private void _on_horde3_pressed()
+	{
+		var hordeManager = GetNode<HordeManager>("../../HordeManager");
+		hordeManager.setSelectedHorde(3);
+
+		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		audioPlayer.Stream = GD.Load<AudioStream>(hordeSelectionAudios[GD.Randi() % hordeSelectionAudios.Length]);
+		audioPlayer.Play();
+	}
+	private void _on_horde4_pressed()
+	{
+		var hordeManager = GetNode<HordeManager>("../../HordeManager");
+		hordeManager.setSelectedHorde(4);
+
+		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		audioPlayer.Stream = GD.Load<AudioStream>(hordeSelectionAudios[GD.Randi() % hordeSelectionAudios.Length]);
+		audioPlayer.Play();
+	}
 	private void _on_HordeChange()
 	{
 		List<Node3D> newHordes = GetNode<HordeManager>("../../HordeManager").Hordes;
