@@ -28,6 +28,7 @@ project/assembly_name="Game"
 Assimilated=""
 Enemy=""
 Horde=""
+Gate=""
 
 [input]
 

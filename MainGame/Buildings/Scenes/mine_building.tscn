@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://ci73t0d2cm8tf"]
+[gd_scene load_steps=3 format=3 uid="uid://clshuymtyiqkc"]
 
-[ext_resource type="PackedScene" uid="uid://c0huid33if1iu" path="res://Buildings/Scenes/generic_buliding.tscn" id="1_21tdx"]
-[ext_resource type="Script" uid="uid://jan5sys6btff" path="res://Buildings/Scripts/mine_buildingscript.cs" id="2_1mpvj"]
+[ext_resource type="PackedScene" uid="uid://dfr43pq78ut23" path="res://Buildings/Scenes/generic_buliding.tscn" id="1_21tdx"]
+[ext_resource type="Script" uid="uid://8nvjvcb3o3dk" path="res://Buildings/Scripts/mine_buildingscript.cs" id="2_1mpvj"]
 
 [node name="MineBuilding" instance=ExtResource("1_21tdx")]
 script = ExtResource("2_1mpvj")
 
-[connection signal="BuildingClicked" from="StaticBody3D" to="." method="OnAssimilate"]
+[connection signal="area_entered" from="Area3D" to="." method="OnHordeEnter"]
+[connection signal="area_exited" from="Area3D" to="." method="OnHordeExit"]
