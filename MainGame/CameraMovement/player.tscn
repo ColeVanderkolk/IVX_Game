@@ -26,4 +26,5 @@ MaxHeight = 150.0
 PlaneHeight = 41.995
 rotationSensitivity = 0.003
 
-[node name="Exp" parent="." instance=ExtResource("2_jq0cr")]
+[node name="UI" parent="." instance=ExtResource("2_jq0cr")]
+anchors_preset = 15

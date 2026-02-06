@@ -1,13 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://cj6vd2x3nx5s5"]
+[gd_scene load_steps=3 format=3 uid="uid://cj6vd2x3nx5s5"]
 
 [ext_resource type="Texture2D" uid="uid://7x7il0whai7b" path="res://Assets/UI/Test.png" id="1_258ox"]
+[ext_resource type="Script" uid="uid://c66pv6xclu6sh" path="res://CameraMovement/GameUi.cs" id="1_vyq54"]
 
 [node name="Exp" type="Control"]
 layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_vyq54")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -16,12 +19,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 1.0
 offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_258ox")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.804
+anchor_top = 0.7870247
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 0.0079956055
@@ -83,3 +88,6 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Hoard 3"
+
+[connection signal="mouse_entered" from="PanelContainer" to="." method="_on_panel_container_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer" to="." method="_on_panel_container_mouse_exited"]
