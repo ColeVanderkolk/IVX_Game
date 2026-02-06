@@ -7,16 +7,20 @@ var totDamage : int
 
 @export var radius : float = 2.0; # How far units spawn from the 1st unit
 
-var moving = false # Controls whether the horde is moving
-var targetX = null # The x value of where the horde is moving to
-var targetZ = null # The z value of where the horde is moving to
+var moving:bool = false # Controls whether the horde is moving
+var target:Vector3 = Vector3.ZERO
 
-var harmable = true # Turns off for immunity frames
+var _enemy_Horde:Horde = null
+
+var sacrifice:bool = false # Once horde reaches destination they will die
+
+var harmable:bool = true # Turns off for immunity frames
 var in_combat:bool = false
+
 # Signals
 signal startedMoving()
 signal stopedMoving()
-signal unitAdded()
+signal unitAdded(tier:int)
 signal mitosisHappened()
 
 @onready var hitbox: Area3D = $Hitbox
@@ -51,11 +55,15 @@ func addUnit(tier : int = 1):
 	# Add unit as child of horde and element in units
 	units.append(newUnit)
 	add_child(newUnit)
-	unitAdded.emit()
+	unitAdded.emit(self, tier)
 	
 	recalc()
 
-# Recalculates hoard after unit change
+func removeUnit()->void:
+	var unit:Unit = units.pop_back()
+	unit.die()
+
+# Recalculates horde after unit change
 func recalc():
 	# Reposition to accomodating changing horde size
 	repositionUnits()
@@ -123,34 +131,44 @@ func mitosis(numUnits : int) -> Horde:
 
 # Commands the horde to move to a specific coordinate (x, z)
 # No need to include y because the horde never moves up or down
-func startMoving(xCoord : float, zCoord : float):
-	look_at(Vector3(xCoord, position.y, zCoord))
+func startMoving(dest:Vector3):
+	look_at(Vector3(dest.x, position.y, dest.z))
 	moving = true
-	targetX = xCoord
-	targetZ = zCoord
+	target.x = dest.x
+	target.z = dest.z
 	startedMoving.emit()
+
+func targetEnemy(enemy:Horde)->void:
+	_enemy_Horde = enemy
+	startMoving(enemy.global_position)
+
+func spendHorde(dest:Vector3)->void:
+	$Hitbox.set_deferred("monitorable", false)
+	$Hitbox.set_deferred("monitoring", false)
+	startMoving(dest)
+	sacrifice = true
 
 # Called in _physics_process to move the horde at a constant speed to the target coordinates
 func move(delta : float):
 	# Calculate move
-	var distanceX : float = targetX - position.x
-	var distanceZ : float = targetZ - position.z
+	var distanceX : float = target.x - position.x
+	var distanceZ : float = target.z - position.z
 	var angle = atan2(distanceZ, distanceX)
-	var newPositionX = move_toward(position.x, targetX, avgSpeed * delta * abs(cos(angle)))
-	var newPositionZ = move_toward(position.z, targetZ, avgSpeed * delta * abs(sin(angle)))
+	var newPositionX = move_toward(position.x, target.x, avgSpeed * delta * abs(cos(angle)))
+	var newPositionZ = move_toward(position.z, target.z, avgSpeed * delta * abs(sin(angle)))
 	
 	# Actually move by changing position
 	position.x = newPositionX
 	position.z = newPositionZ
 	
 	# Check to see if target is reached and moving is still neccesary
-	if position.x == targetX and position.z == targetZ:
+	if position.x == target.x and position.z == target.z:
 		stopedMoving.emit()
 		moving = false
 		#print("Target reached")
 
 # Returns the number of units in the horde
-func getSize():
+func getSize()->int:
 	return units.size()
 
 # Runs in physics_process for each area
@@ -173,6 +191,7 @@ func checkForDamage(area: Area3D):
 			takeDamage(horde)
 			harmable = false
 			$ImmunityFrames.start()
+
 
 func takeDamage(attacker : Horde):
 	var damageTaken = attacker.totDamage
