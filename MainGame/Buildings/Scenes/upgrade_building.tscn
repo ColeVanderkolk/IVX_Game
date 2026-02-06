@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://ds0hjcaycqx4s" path="res://Buildings/Scripts/upgrade_buildingscript.cs" id="2_ku8tw"]
 
 [node name="UpgradeBuilding" instance=ExtResource("1_bto61")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("2_ku8tw")
 UPGRADE_COSTS = PackedInt32Array(0, 10, 50)
 

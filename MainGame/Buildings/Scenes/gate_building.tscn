@@ -10,11 +10,11 @@ size = Vector3(4, 0.33, 10)
 size = Vector3(4, 8, 10)
 
 [node name="GateBuilding" groups=["Gate"] instance=ExtResource("1_hnoiu")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("2_0a5fk")
 GATE_REPAIR_COST_TYPE = 1
 GATE_REPAIR_COST_HP_RATIO = 2
 GATE_MAX_HP = 100
-GATE_STARTING_HP = 75
 
 [node name="StaticBody3D" parent="." index="0"]
 collision_layer = 1

@@ -257,9 +257,6 @@ func sacrificeSelf()->void:
 	deadHorde.emit() #just in case manager was tracking this
 	queue_free()
 	
-# Returns the number of units in the horde
-func getSize()->int:
-	return units.size()
 
 
 func spendHorde(dest:Vector3)->void:

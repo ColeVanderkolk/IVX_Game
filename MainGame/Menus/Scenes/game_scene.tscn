@@ -1,12 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://bt62anvbdurwd"]
+[gd_scene load_steps=15 format=3 uid="uid://bt62anvbdurwd"]
 
 [ext_resource type="Script" uid="uid://cq7t2pkyslgdb" path="res://Menus/Scripts/GameScene.cs" id="1_edgyv"]
 [ext_resource type="PackedScene" uid="uid://blvmyj17pw5kw" path="res://Menus/Scenes/pause_menu.tscn" id="2_idyv1"]
 [ext_resource type="PackedScene" uid="uid://dlysbb5gi8jjn" path="res://Buildings/Scenes/mine_manager.tscn" id="3_xqe0f"]
 [ext_resource type="PackedScene" uid="uid://dieh2crytxnmd" path="res://Globals/Scenes/currency_manager_node.tscn" id="3_xuhin"]
 [ext_resource type="PackedScene" uid="uid://5e6fvqqt11ut" path="res://Buildings/Scenes/recruit_manager.tscn" id="4_fwggy"]
-[ext_resource type="PackedScene" uid="uid://bqm2kback7rtj" path="res://Buildings/Scenes/upgrade_building.tscn" id="5_a5bod"]
-[ext_resource type="PackedScene" uid="uid://hv71py2pmedd" path="res://Buildings/Scenes/gate_building.tscn" id="6_vqgse"]
+[ext_resource type="PackedScene" uid="uid://04jvfacdp2xy" path="res://Buildings/Scenes/upgrade_building.tscn" id="5_a5bod"]
+[ext_resource type="PackedScene" uid="uid://clshuymtyiqkc" path="res://Buildings/Scenes/mine_building.tscn" id="5_b7b7j"]
+[ext_resource type="PackedScene" uid="uid://0wvgpvtwi0x5" path="res://Buildings/Scenes/gate_building.tscn" id="6_vqgse"]
 [ext_resource type="PackedScene" uid="uid://cugh3ljdo6xar" path="res://Assets/Models/Map/game_map.tscn" id="7_a5bod"]
 [ext_resource type="PackedScene" uid="uid://shi3iohprtps" path="res://CameraMovement/player.tscn" id="8_vqgse"]
 [ext_resource type="AudioStream" uid="uid://dmm7gcp5gqmkr" path="res://Assets/Audio/Music/music_gameplay.mp3" id="9_vqgse"]
@@ -26,24 +27,33 @@ script = ExtResource("1_edgyv")
 [node name="MineManager" parent="Buildings" instance=ExtResource("3_xqe0f")]
 
 [node name="MineBuilding" parent="Buildings/MineManager" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.6853695, 1.175317)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -43.576363, 4.6667995, 28.928062)
 
 [node name="MineBuilding2" parent="Buildings/MineManager" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0912575, 11.6853695, 1.1605368)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 23.68115, 4.6255045, -4.6240234)
+
+[node name="MineBuilding3" parent="Buildings/MineManager" instance=ExtResource("5_b7b7j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.27449, 4.7236557, -20.849613)
 
 [node name="RecruitManager" parent="Buildings" instance=ExtResource("4_fwggy")]
 
 [node name="RecruitBuilding" parent="Buildings/RecruitManager" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.78396034, 10.166865, -1.9414468)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 23.901205, 4.5126286, 49.24025)
 
 [node name="RecruitBuilding2" parent="Buildings/RecruitManager" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8592865, 10.166865, -1.91962)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -19.20108, 4.687335, -20.982998)
 
 [node name="UpgradeBuilding" parent="Buildings" instance=ExtResource("5_a5bod")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6017623, 9.885304, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -24.277319, 4.660798, 65.90021)
 
 [node name="GateBuilding" parent="Buildings" instance=ExtResource("6_vqgse")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3397229, 9.885304, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -31.952032, 4.562007, 55.868057)
+
+[node name="GateBuilding2" parent="Buildings" instance=ExtResource("6_vqgse")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 33.00741, 4.562007, 72.419174)
+
+[node name="GateBuilding3" parent="Buildings" instance=ExtResource("6_vqgse")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0.338943, 4.562007, 39.962757)
 
 [node name="MapNode" parent="." instance=ExtResource("7_a5bod")]
 
