@@ -487,118 +487,116 @@ emission_enabled = true
 emission_energy_multiplier = 1.78
 emission_texture = ExtResource("5_vs1vt")
 
-[node name="Map" type="Node2D"]
+[node name="MapNode" type="Node3D"]
 
-[node name="MapNode" type="Node3D" parent="."]
+[node name="ivxmap3" type="Node3D" parent="."]
 
-[node name="ivxmap3" type="Node3D" parent="MapNode"]
+[node name="ivxmap4" type="Node3D" parent="."]
 
-[node name="ivxmap4" type="Node3D" parent="MapNode"]
-
-[node name="city2" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="city2" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -56.011036, 5.4116116, 71.88356)
 mesh = SubResource("ArrayMesh_sq3rb")
 skeleton = NodePath("")
 
-[node name="city4" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="city4" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(-100, -8.742277e-06, 0, -1.0421608e-12, 1.1920931e-05, 48.52832, -8.742278e-06, 99.99999, -5.785028e-06, -54.857445, 2.4714243, 127.351654)
 mesh = SubResource("ArrayMesh_sq3rb")
 skeleton = NodePath("")
 
-[node name="city5" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="city5" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(-91.37795, 40.621033, 0, 4.842406e-06, 1.0893103e-05, 48.52832, 40.621033, 91.377945, -5.785028e-06, -96.5637, 2.4714262, 143.43977)
 mesh = SubResource("ArrayMesh_sq3rb")
 skeleton = NodePath("")
 
-[node name="city6" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="city6" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(93.438484, -35.62651, 0, -4.247011e-06, -1.1138736e-05, 48.52832, -35.62651, -93.43848, -5.7850275e-06, -123.42141, 10.078786, 133.75644)
 mesh = SubResource("ArrayMesh_sq3rb")
 skeleton = NodePath("")
 
-[node name="Cube_007" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="Cube_007" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(437.9192, 0, 0, 0, -5.2204025e-05, 140.17291, 0, -437.91907, -1.6709915e-05, 59.113205, 4.0313587, -20.866362)
 mesh = SubResource("ArrayMesh_vgm4c")
 skeleton = NodePath("")
 
-[node name="Cube_009" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="Cube_009" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(2086.347, 0, 0, 0, -0.00024871193, 2086.3467, 0, -2086.3467, -0.00024871193, -87.58307, 3.056339, -77.38607)
 mesh = SubResource("ArrayMesh_5uege")
 skeleton = NodePath("")
 
-[node name="Cube_011" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="Cube_011" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(767.12134, 1940.1976, 0.00041010344, 0, -0.0002487119, 3699.3354, 1940.1981, -767.12115, -0.00016214793, 132.42973, -41.60055, -180.98337)
 mesh = SubResource("ArrayMesh_5uege")
 skeleton = NodePath("")
 
-[node name="Cube_010" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="Cube_010" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(-353.07516, 2056.2542, -0.00018653396, 6.2177976e-05, 0.0002487119, 2086.347, 2056.2542, 353.07516, 0, 173.17123, -11.183666, -71.88033)
 mesh = SubResource("ArrayMesh_lfg6d")
 skeleton = NodePath("")
 
-[node name="city" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="city" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(-100, 3.8941438e-05, -2.842171e-12, 0, 5.9604645e-06, 100, 3.8941438e-05, 100, -1.1920929e-05, 28.165417, 4.4916267, 116.70938)
 mesh = SubResource("ArrayMesh_243tp")
 skeleton = NodePath("")
 
-[node name="city3" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="city3" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(-7.4490986, 99.72217, -1.188781e-05, 0, 5.9604654e-06, 100.000015, 99.72217, 7.4490986, -8.8800334e-07, 106.63913, 16.977375, 2.9059906)
 mesh = SubResource("ArrayMesh_243tp")
 skeleton = NodePath("")
 
-[node name="tunnel" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="tunnel" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(0, -0.00027904057, 1337.5782, -1337.5782, 0, 0, 0, -1337.5782, -0.0003189035, -109.070724, 32.403713, 11.805897)
 mesh = SubResource("ArrayMesh_n4p2l")
 skeleton = NodePath("")
 
-[node name="tunnel2" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="tunnel2" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(9.527743e-05, -132.67305, 788.15643, -799.245, -9.5277435e-05, 9.5277435e-05, 9.527743e-05, -788.15643, -132.67307, 10.950866, 22.075724, -38.426056)
 mesh = SubResource("ArrayMesh_n4p2l")
 skeleton = NodePath("")
 
-[node name="tunnel3" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="tunnel3" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(-7.7450735e-05, -649.4507, -18.136084, -649.70386, 3.8725368e-05, 1.2101677e-06, 1.2101677e-06, 18.136084, -649.45074, -0.0036654472, 6.7735558, 81.60003)
 mesh = SubResource("ArrayMesh_eh28s")
 skeleton = NodePath("")
 
-[node name="Plane_008" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="Plane_008" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(539.6782, 0, 0, 0, -6.433466e-05, 539.67816, 0, -539.67816, -6.433466e-05, -93.56206, 14.976757, -35.3309)
 mesh = SubResource("ArrayMesh_vs1vt")
 skeleton = NodePath("")
 
-[node name="Plane_009" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="Plane_009" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(539.6782, 0, 0, 0, -6.433466e-05, 539.67816, 0, -539.67816, -6.433466e-05, 63.223732, -0.1745491, -40.21212)
 mesh = SubResource("ArrayMesh_oc8to")
 skeleton = NodePath("")
 
-[node name="Plane_014" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="Plane_014" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(539.6782, 0, 0, 0, -6.433466e-05, 539.67816, 0, -539.67816, -6.433466e-05, 65.75533, 4.50095, -6.7782097)
 mesh = SubResource("ArrayMesh_oc8to")
 skeleton = NodePath("")
 
-[node name="Plane_010" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="Plane_010" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(327.29803, 0, 0, 0, 1.9508483e-05, 327.29803, 0, -327.29803, 1.9508483e-05, 0.45939872, 3.7672002, 74.13681)
 mesh = SubResource("ArrayMesh_kwjvk")
 skeleton = NodePath("")
 
-[node name="Plane_011" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="Plane_011" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(327.29803, 0, 0, 0, 1.9508483e-05, 327.29803, 0, -327.29803, 1.9508483e-05, -7.4364758, 3.7672002, 74.13681)
 mesh = SubResource("ArrayMesh_phiu6")
 skeleton = NodePath("")
 
-[node name="Plane_012" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="Plane_012" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(8260.185, 0, 0, 0, -0.00043647664, 2807.941, 0, -3661.4312, -0.00033473267, -17.696901, 3.495949, 10.992912)
 mesh = SubResource("ArrayMesh_a21u8")
 skeleton = NodePath("")
 
-[node name="Plane_013" type="MeshInstance3D" parent="MapNode/ivxmap4"]
+[node name="Plane_013" type="MeshInstance3D" parent="ivxmap4"]
 transform = Transform3D(327.29803, 0, 0, 0, 1.9508483e-05, 327.29803, 0, -327.29803, 1.9508483e-05, -7.4364758, 3.7672002, 74.13681)
 mesh = SubResource("ArrayMesh_ijfh3")
 skeleton = NodePath("")
 
-[node name="Lighting" type="Node3D" parent="MapNode"]
+[node name="Lighting" type="Node3D" parent="."]
 transform = Transform3D(1.5271058e-12, -3.493611e-05, 799.24506, -799.245, -3.493611e-05, 0, 3.4936107e-05, -799.24506, -3.493611e-05, 10.950866, 22.075724, -38.426056)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MapNode/Lighting"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
 transform = Transform3D(0.000876458, 0.00047886264, -0.0007536347, 0.00041688822, 0.00071440527, 0.0009387665, 0.00078960694, -0.00090871815, 0.00034088892, -0.032335736, -3.7252903e-09, 3.7252903e-09)
 light_color = Color(0.76270664, 0.5521143, 0.4174529, 1)
 light_energy = 1.212
@@ -606,243 +604,243 @@ light_indirect_energy = 0.0
 shadow_enabled = true
 sky_mode = 1
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="MapNode/Lighting/DirectionalLight3D"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting/DirectionalLight3D"]
 environment = SubResource("Environment_oc8to")
 camera_attributes = SubResource("CameraAttributesPractical_a21u8")
 
-[node name="ivxmapground" type="Node3D" parent="MapNode"]
+[node name="ivxmapground" type="Node3D" parent="."]
 transform = Transform3D(1.2889302, 0, 0, 0, 1.2889302, 0, 0, 0, 1.2889302, 8.808078, -1.2457771, -16.146088)
 
-[node name="Plane_007" type="MeshInstance3D" parent="MapNode/ivxmapground"]
+[node name="Plane_007" type="MeshInstance3D" parent="ivxmapground"]
 transform = Transform3D(6409.4766, 0, 0, 0, -0.00043647664, 2807.941, 0, -3661.4312, -0.00033473267, 0.45939872, 4.5009193, -12.106506)
 mesh = SubResource("ArrayMesh_vp1qd")
 skeleton = NodePath("")
 
-[node name="light planes" type="Node3D" parent="MapNode"]
+[node name="light planes" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(-11.362611, 3.3881318e-21, 3.9502096, 1.5236486e-14, 12.029675, 4.3827077e-14, -3.9502096, 4.640003e-14, -11.362611, 87.66706, 27.839941, -35.272873)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
 
-[node name="MeshInstance3D12" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(-11.362611, 3.3881318e-21, 3.9502096, 1.5236486e-14, 12.029675, 4.3827077e-14, -3.9502096, 4.640003e-14, -11.362611, -63.85923, 15.240961, 87.44513)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
 
-[node name="MeshInstance3D9" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(-19.476019, 5.8989456e-21, 7.102306, 2.6116013e-14, 20.944403, 7.8799184e-14, -6.770835, 8.0785307e-14, -20.429482, 93.70906, 27.839941, 43.374172)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
 
-[node name="MeshInstance3D10" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(-19.476019, 5.8989456e-21, 7.102306, 2.6116013e-14, 20.944403, 7.8799184e-14, -6.770835, 8.0785307e-14, -20.429482, 70.93846, 9.040142, 108.87283)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
 
-[node name="MeshInstance3D11" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(-19.476019, 5.8989456e-21, 7.102306, 2.6116013e-14, 20.944403, 7.8799184e-14, -6.770835, 8.0785307e-14, -20.429482, 39.489067, 9.040142, 97.93946)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(-8.283313, 3.3881318e-21, 2.879692, 1.1107353e-14, 8.769601, 3.1949825e-14, -2.879692, 3.3825502e-14, -8.283313, 87.604256, 27.839941, -29.98651)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(-8.720512, 6.7762636e-21, -13.970398, -5.4359657e-14, 15.289307, 3.334287e-14, 14.093289, 5.897285e-14, -8.644471, 92.49855, 27.839941, -14.027648)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(-6.357229, 6.7762636e-21, -10.184383, -3.962803e-14, 11.145864, 2.4306864e-14, 10.27397, 4.2991052e-14, -6.301797, 91.22096, 27.839941, -14.82559)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(-11.362611, 3.3881318e-21, 3.9502096, 1.5236486e-14, 12.029675, 4.3827077e-14, -3.9502096, 4.640003e-14, -11.362611, 66.10939, 27.839941, -68.10463)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
 
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(-8.283313, 3.3881318e-21, 2.879692, 1.1107353e-14, 8.769601, 3.1949825e-14, -2.879692, 3.3825502e-14, -8.283313, 75.918526, 27.839941, -65.39519)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
 
-[node name="MeshInstance3D13" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(-8.283313, 3.3881318e-21, 2.879692, 1.1107353e-14, 8.769601, 3.1949825e-14, -2.879692, 3.3825502e-14, -8.283313, -71.37635, 13.511799, 84.73193)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
 
-[node name="MeshInstance3D14" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(1.1056559, 1.0164395e-20, -13.194514, -5.0892965e-14, 13.240758, -4.2646483e-15, 13.194514, 5.1071337e-14, 1.1056559, -82.197685, 15.328002, 90.56333)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
 
-[node name="MeshInstance3D15" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(0.80602, 3.3881318e-21, -9.618766, -3.7100846e-14, 9.652477, -3.1089192e-15, 9.618766, 3.7230876e-14, 0.80602, -84.944695, 13.424758, 86.92699)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
 
-[node name="MeshInstance3D16" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(1.1056559, 1.0164395e-20, -13.194514, -5.0892965e-14, 13.240758, -4.2646483e-15, 13.194514, 5.1071337e-14, 1.1056559, -101.697014, 15.328002, 92.19731)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
 
-[node name="MeshInstance3D18" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(1.1056559, 1.0164395e-20, -13.194514, -5.0892965e-14, 13.240758, -4.2646483e-15, 13.194514, 5.1071337e-14, 1.1056559, -43.117474, 15.328002, 87.28854)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
 
-[node name="MeshInstance3D22" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D22" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(-8.283313, 3.3881318e-21, 2.879692, 1.1107353e-14, 8.769601, 3.1949825e-14, -2.879692, 3.3825502e-14, -8.283313, -93.69068, 13.511799, 119.617256)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
 
-[node name="MeshInstance3D23" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D23" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(1.1056559, 1.0164395e-20, -13.194514, -5.0892965e-14, 13.240758, -4.2646483e-15, 13.194514, 5.1071337e-14, 1.1056559, -20.382957, 15.328002, 99.961525)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
 
-[node name="MeshInstance3D24" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D24" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(0.80602, 3.3881318e-21, -9.618766, -3.7100846e-14, 9.652477, -3.1089192e-15, 9.618766, 3.7230876e-14, 0.80602, -39.88192, 13.424758, 93.77825)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
 
-[node name="MeshInstance3D25" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D25" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(1.1056559, 1.0164395e-20, -13.194514, -5.0892965e-14, 13.240758, -4.2646483e-15, 13.194514, 5.1071337e-14, 1.1056559, -39.882286, 15.328002, 101.595505)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
 
-[node name="MeshInstance3D26" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D26" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(1.1056559, 1.0164395e-20, -13.194514, -5.0892965e-14, 13.240758, -4.2646483e-15, 13.194514, 5.1071337e-14, 1.1056559, 18.697254, 15.328002, 96.68674)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
 
-[node name="MeshInstance3D17" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(0.80602, 3.3881318e-21, -9.618766, -3.7100846e-14, 9.652477, -3.1089192e-15, 9.618766, 3.7230876e-14, 0.80602, -99.15965, 13.424758, 88.11815)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
 
-[node name="MeshInstance3D19" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D19" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(1.4915497, 6.2697786e-21, -17.799643, -6.8655564e-14, 17.862026, -5.7530922e-15, 17.799643, 6.889618e-14, 1.4915497, 49.10307, 13.424758, 97.83814)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
 
-[node name="MeshInstance3D20" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D20" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(1.4915497, 6.2697786e-21, -17.799643, -6.8655564e-14, 17.862026, -5.7530922e-15, 17.799643, 6.889618e-14, 1.4915497, 75.103386, 13.424758, 98.964424)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
 
-[node name="MeshInstance3D21" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D21" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(1.4915497, 6.2697786e-21, -17.799643, -6.8655564e-14, 17.862026, -5.7530922e-15, 17.799643, 6.889618e-14, 1.4915497, 23.9804, 9.073193, 103.24836)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
 
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(-8.720512, 6.7762636e-21, -13.970398, -5.4359657e-14, 15.289307, 3.334287e-14, 14.093289, 5.897285e-14, -8.644471, 90.59952, 27.839941, 17.03518)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_b2huh")
 
-[node name="MeshInstance3D8" type="MeshInstance3D" parent="MapNode/light planes"]
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="light planes"]
 transform = Transform3D(-6.357229, 6.7762636e-21, -10.184383, -3.962803e-14, 11.145864, 2.4306864e-14, 10.27397, 4.2991052e-14, -6.301797, 89.83657, 27.839941, 7.819128)
 mesh = SubResource("PlaneMesh_vp1qd")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ud5m")
 
-[node name="small lights" type="Node3D" parent="MapNode"]
+[node name="small lights" type="Node3D" parent="."]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="MapNode/small lights"]
+[node name="OmniLight3D" type="OmniLight3D" parent="small lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6493812, 10.444708, 39.9899)
 light_color = Color(0.20966336, 0.51195586, 0.6888026, 1)
 light_energy = 16.0
 omni_range = 8.731252
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="MapNode/small lights"]
+[node name="OmniLight3D2" type="OmniLight3D" parent="small lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.63508, 10.444708, 1.6303043)
 light_color = Color(0.20966336, 0.51195586, 0.6888026, 1)
 light_energy = 16.0
 omni_range = 8.731252
 
-[node name="OmniLight3D13" type="OmniLight3D" parent="MapNode/small lights"]
+[node name="OmniLight3D13" type="OmniLight3D" parent="small lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.266186, 73.8293, 14.375385)
 light_color = Color(0.7242968, 0.37401545, 0.018515322, 1)
 light_energy = 4000.0
 omni_range = 91.216125
 
-[node name="OmniLight3D14" type="OmniLight3D" parent="MapNode/small lights"]
+[node name="OmniLight3D14" type="OmniLight3D" parent="small lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.636692, 73.8293, 53.288864)
 light_color = Color(0.7242968, 0.37401545, 0.018515322, 1)
 light_energy = 4000.0
 omni_range = 91.216125
 
-[node name="OmniLight3D15" type="OmniLight3D" parent="MapNode/small lights"]
+[node name="OmniLight3D15" type="OmniLight3D" parent="small lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.561398, 73.8293, 53.288864)
 light_color = Color(0.7242968, 0.37401545, 0.018515322, 1)
 light_energy = 4000.0
 omni_range = 91.216125
 
-[node name="OmniLight3D16" type="OmniLight3D" parent="MapNode/small lights"]
+[node name="OmniLight3D16" type="OmniLight3D" parent="small lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.73062, 73.8293, 42.316933)
 light_color = Color(0.7242968, 0.37401545, 0.018515322, 1)
 light_energy = 4000.0
 omni_range = 91.216125
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="MapNode/small lights"]
+[node name="OmniLight3D3" type="OmniLight3D" parent="small lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.227139, 10.444708, 53.54002)
 light_color = Color(0.20966336, 0.51195586, 0.6888026, 1)
 light_energy = 16.0
 omni_range = 8.731252
 
-[node name="OmniLight3D4" type="OmniLight3D" parent="MapNode/small lights"]
+[node name="OmniLight3D4" type="OmniLight3D" parent="small lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -71.16173, 10.444708, 65.531136)
 light_color = Color(0.20966336, 0.51195586, 0.6888026, 1)
 light_energy = 16.0
 omni_range = 8.731252
 
-[node name="OmniLight3D9" type="OmniLight3D" parent="MapNode/small lights"]
+[node name="OmniLight3D9" type="OmniLight3D" parent="small lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.115047, 10.444708, 31.034348)
 light_color = Color(0.20966336, 0.51195586, 0.6888026, 1)
 light_energy = 16.0
 omni_range = 8.731252
 
-[node name="OmniLight3D10" type="OmniLight3D" parent="MapNode/small lights"]
+[node name="OmniLight3D10" type="OmniLight3D" parent="small lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.278185, 10.444708, 60.983517)
 light_color = Color(0.20966336, 0.51195586, 0.6888026, 1)
 light_energy = 16.0
 omni_range = 8.731252
 
-[node name="OmniLight3D11" type="OmniLight3D" parent="MapNode/small lights"]
+[node name="OmniLight3D11" type="OmniLight3D" parent="small lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.411121, 10.444708, -10.289867)
 light_color = Color(0.20966336, 0.51195586, 0.6888026, 1)
 light_energy = 16.0
 omni_range = 8.731252
 
-[node name="OmniLight3D12" type="OmniLight3D" parent="MapNode/small lights"]
+[node name="OmniLight3D12" type="OmniLight3D" parent="small lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0791855, 10.444708, 60.983517)
 light_color = Color(0.20966336, 0.51195586, 0.6888026, 1)
 light_energy = 16.0
 omni_range = 8.731252
 
-[node name="OmniLight3D5" type="OmniLight3D" parent="MapNode/small lights"]
+[node name="OmniLight3D5" type="OmniLight3D" parent="small lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.902107, 10.444708, 67.5974)
 light_color = Color(0.20966336, 0.51195586, 0.6888026, 1)
 light_energy = 16.0
 omni_range = 8.731252
 
-[node name="OmniLight3D6" type="OmniLight3D" parent="MapNode/small lights"]
+[node name="OmniLight3D6" type="OmniLight3D" parent="small lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.721397, 10.444708, 74.52373)
 light_color = Color(0.20966336, 0.51195586, 0.6888026, 1)
 light_energy = 16.0
 omni_range = 8.731252
 
-[node name="OmniLight3D7" type="OmniLight3D" parent="MapNode/small lights"]
+[node name="OmniLight3D7" type="OmniLight3D" parent="small lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33011913, 10.444708, 44.354465)
 light_color = Color(0.20966336, 0.51195586, 0.6888026, 1)
 light_energy = 16.0
 omni_range = 20.060589
 
-[node name="OmniLight3D8" type="OmniLight3D" parent="MapNode/small lights"]
+[node name="OmniLight3D8" type="OmniLight3D" parent="small lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4790039, 31.940273, 62.16899)
 light_color = Color(0.20966336, 0.51195586, 0.6888026, 1)
 light_energy = 2000.0

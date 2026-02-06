@@ -67,17 +67,26 @@ public partial class MainMenu : Control
 	{
 		GD.Print("Start Button Pressed!");
 		EmitSignal(SignalName.StartButtonPressed);
+		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		audioPlayer.Stream = GD.Load<AudioStream>("res://Assets/Audio/SFX/sfx_uibuttonsound.mp3");
+		audioPlayer.Play();
 	}
 
 	private void OnOptionsButtonPressed()
 	{
 		GD.Print("Options Button Pressed!");
 		EmitSignal(SignalName.OptionsButtonPressed);
+		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		audioPlayer.Stream = GD.Load<AudioStream>("res://Assets/Audio/SFX/sfx_uibuttonsound.mp3");
+		audioPlayer.Play();
 	}
 
 	private void OnQuitButtonPressed()
 	{
 		GD.Print("Quit Button Pressed!");
 		EmitSignal(SignalName.QuitButtonPressed);
+		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		audioPlayer.Stream = GD.Load<AudioStream>("res://Assets/Audio/SFX/sfx_uibuttonsound.mp3");
+		audioPlayer.Play();
 	}
 }

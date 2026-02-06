@@ -195,6 +195,7 @@ public partial class GameController : Node
 		GD.Print("Opening Game Scene.");
 
 		await TransitionToScreen(Screens.GAMESCENE);
+		GetNode<AudioStreamPlayer>("AudioStreamPlayer").Stop();
 		UnloadMenus();
 	}
 
@@ -217,6 +218,7 @@ public partial class GameController : Node
 		GD.Print("Opening Main Menu.");
 
 		await TransitionToScreen(Screens.MAINMENU);
+		GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
 		UnloadGameScene();
 	}
 

@@ -38,7 +38,7 @@ public partial class PauseMenu : CanvasLayer
 		}
 	}
 
-	private void SetActive(bool active)
+	public void SetActive(bool active)
 	{
 		IsActive = active;
 		Visible = active;
@@ -50,12 +50,18 @@ public partial class PauseMenu : CanvasLayer
 		SetActive(false);
 
 		EmitSignal(SignalName.ReturnButtonPressed);
+		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		audioPlayer.Stream = GD.Load<AudioStream>("res://Assets/Audio/SFX/sfx_uibuttonsound.mp3");
+		audioPlayer.Play();
 	}
 
 	private void OnQuitButtonPressed()
 	{
 		GD.Print("Quit Button Pressed!");
 		EmitSignal(SignalName.QuitButtonPressed);
+		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		audioPlayer.Stream = GD.Load<AudioStream>("res://Assets/Audio/SFX/sfx_uibuttonsound.mp3");
+		audioPlayer.Play();
 	}
 
 }
