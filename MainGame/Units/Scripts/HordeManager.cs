@@ -85,6 +85,7 @@ public partial class HordeManager : Node
 					if (other_horde.Call("getSize").As<int>() < 10)
 					{
 						other_horde.Call("addUnit", tier);
+						other_horde.Call("connectToHoardManager");
 						EmitSignal("HoardChange");
 						horde.Call("removeUnit");
 						GD.Print("Added to existing horde");
@@ -105,6 +106,36 @@ public partial class HordeManager : Node
 			}
 		}
 		GD.Print("No need to split or create a new horde");
+	}
+
+	/* 
+	 * receives signal (from recruitment building) to find a horde for a new unit
+	 * will create a new horde if there are no open slots
+	 * does nothing if all hordes are filled
+	*/
+	private void on_unit_produced(int tier)
+	{
+		// Look for open horde
+		for (int i = 1; i < Hordes.Count; i++) {
+			Node3D other_horde = Hordes[i];
+			if (other_horde.Call("getSize").As<int>() < 10)
+			{
+				other_horde.Call("addUnit", tier);
+				other_horde.Call("connectToHoardManager");
+				return;
+			}
+		}
+		// Create a new one if needed
+		if (Hordes.Count < max)
+		{
+			var _new_horde_scene = GD.Load<PackedScene>("res://Units/Scenes/horde.tscn");
+			var _new_horde = _new_horde_scene.Instantiate<Node3D>();
+			AddChild(_new_horde);
+			_new_horde.Call("addUnit", tier);
+			_new_horde.Call("connectToHoardManager");
+			Hordes.Add(_new_horde);
+			return;
+		}
 	}
 
 }

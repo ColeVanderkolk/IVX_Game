@@ -17,6 +17,10 @@ public partial class mine_buildingscript : Node3D
 	// Whether this mine can function
 	private bool Assimilated = false;
 
+	// where units go to interact (die)
+    private Area3D InteractArea;
+
+
 	// The models that are swapped upon assimilation
 	private Node3D OldMesh;
 	private Node3D NewMesh;
@@ -29,6 +33,7 @@ public partial class mine_buildingscript : Node3D
 		mineTimer = GetNode<Timer>("../Timer");
 		OldMesh = GetNode<Node3D>("DefunctMesh");
 		NewMesh = GetNode<Node3D>("AssimMesh");
+		InteractArea = GetNode<Area3D>("Area3D");
 	} 
 
 	// Add whatever currency this mine generates to manager
@@ -41,7 +46,7 @@ public partial class mine_buildingscript : Node3D
 
 	// Should be signalled once the mine has been assimillated
 	// toggles assimillated model and subscribes to mineTimer to produce
-	private void OnAssimilate(Vector3 mousePos)
+	private void OnAssimilate(int a, int b)
 	{
 		if(!Assimilated)
 		{
@@ -53,5 +58,21 @@ public partial class mine_buildingscript : Node3D
 		}
 
 	}
+
+	// If a horde enters building, prepare to assimilate
+    private void OnHordeEnter(Area3D horde)
+    {
+        if (!Assimilated)
+        {
+            horde.GetParent().Connect("sacrificed", new Callable(this, "OnAssimilate"));
+        }
+    }
+
+    // In case operation is cancelled or units were just passing through somehow
+    private void OnHordeExit(Area3D horde)
+    {
+        if (horde.GetParent().IsConnected("sacrificed", new Callable(this, "OnAssimilate")))
+            horde.GetParent().Disconnect("sacrificed", new Callable(this, "OnAssimilate"));
+    }
 
 }

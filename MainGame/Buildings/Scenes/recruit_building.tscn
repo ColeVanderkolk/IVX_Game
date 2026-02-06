@@ -1,10 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://drovrskdt8d1q"]
+[gd_scene load_steps=3 format=3 uid="uid://cw2bfsrd48mcl"]
 
-[ext_resource type="PackedScene" uid="uid://c0huid33if1iu" path="res://Buildings/Scenes/generic_buliding.tscn" id="1_myyto"]
+[ext_resource type="PackedScene" uid="uid://dfr43pq78ut23" path="res://Buildings/Scenes/generic_buliding.tscn" id="1_myyto"]
 [ext_resource type="Script" uid="uid://bkjvjxhdp8rdu" path="res://Buildings/Scripts/recruit_buildingscript.cs" id="2_h58xh"]
 
 [node name="RecruitBuilding" instance=ExtResource("1_myyto")]
 script = ExtResource("2_h58xh")
 RECRUIT_COST = 100
 
-[connection signal="BuildingClicked" from="StaticBody3D" to="." method="OnAssimilate"]
+[connection signal="area_entered" from="Area3D" to="." method="OnHordeEnter"]
+[connection signal="area_exited" from="Area3D" to="." method="OnHordeExit"]

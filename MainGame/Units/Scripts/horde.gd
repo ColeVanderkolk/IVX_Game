@@ -44,11 +44,12 @@ var in_combat:bool = false
 
 # =======Signals===============
 signal startedMoving()
-signal stopedMoving()
+signal stoppedMoving()
 signal unitAdded(horde:Horde, tier:int)
 signal mitosisHappened()
 signal deadHorde(horde:Horde)
-# ============================
+signal sacrificed(tier:int, count:int)
+signal gateDamaged(damage:int)
 
 # ==========Starting functions=========================
 ## Called when the node enters the scene tree for the first time.
@@ -237,12 +238,28 @@ func move(delta : float):
 	
 	# Check to see if target is reached and moving is still neccesary
 	if position.x == target.x and position.z == target.z:
-		stopedMoving.emit()
+		stoppedMoving.emit()
 		moving = false
+		if sacrifice:
+			sacrificeSelf()
 		#print("Target reached")
 #endregion
 
-# =====================================================
+# Kill all units in this horde (to assimillate or upgrade)
+# in the event of an upgrade, all units presumed same tier
+func sacrificeSelf()->void:
+	var sacUnit:Unit = units.get(0)
+	var sacTier = sacUnit.tier
+	var sacCount = units.size()
+	while !units.is_empty():
+		removeUnit()
+	sacrificed.emit(sacTier, sacCount)
+	deadHorde.emit() #just in case manager was tracking this
+	queue_free()
+	
+# Returns the number of units in the horde
+func getSize()->int:
+	return units.size()
 
 
 func spendHorde(dest:Vector3)->void:
@@ -274,6 +291,11 @@ func checkForDamage(area: Area3D):
 			takeDamage(horde)
 			harmable = false
 			$ImmunityFrames.start()
+	# Case #3 where gate needs to take damage from this horde
+	elif horde.is_in_group("Gate") and is_in_group("Enemy"):
+		in_combat = true
+		gateDamaged.emit(totDamage)
+
 
 
 func takeDamage(attacker : Horde):

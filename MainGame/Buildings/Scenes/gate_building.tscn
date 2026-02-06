@@ -1,15 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://hv71py2pmedd"]
+[gd_scene load_steps=5 format=3 uid="uid://0wvgpvtwi0x5"]
 
-[ext_resource type="PackedScene" uid="uid://c0huid33if1iu" path="res://Buildings/Scenes/generic_buliding.tscn" id="1_hnoiu"]
+[ext_resource type="PackedScene" uid="uid://dfr43pq78ut23" path="res://Buildings/Scenes/generic_buliding.tscn" id="1_hnoiu"]
 [ext_resource type="Script" uid="uid://d3crggfyrq8oa" path="res://Buildings/Scripts/gate_buildingscript.cs" id="2_0a5fk"]
 
-[node name="GateBuilding" instance=ExtResource("1_hnoiu")]
+[sub_resource type="BoxMesh" id="BoxMesh_hnoiu"]
+size = Vector3(4, 0.33, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0a5fk"]
+size = Vector3(4, 8, 10)
+
+[node name="GateBuilding" groups=["Gate"] instance=ExtResource("1_hnoiu")]
 script = ExtResource("2_0a5fk")
 GATE_REPAIR_COST_TYPE = 1
 GATE_REPAIR_COST_HP_RATIO = 2
 GATE_MAX_HP = 100
+GATE_STARTING_HP = 75
 
 [node name="StaticBody3D" parent="." index="0"]
 collision_layer = 1
+collision_mask = 5
 
-[connection signal="BuildingClicked" from="StaticBody3D" to="." method="OnPerformRepair"]
+[node name="Area3D" parent="." index="1"]
+collision_layer = 1
+collision_mask = 6
+
+[node name="DefunctMesh" parent="." index="2"]
+mesh = SubResource("BoxMesh_hnoiu")
+
+[node name="AssimMesh" parent="." index="3"]
+mesh = SubResource("BoxMesh_0a5fk")
+
+[node name="ImmunityFrames" type="Timer" parent="." index="4"]
+one_shot = true
+
+[connection signal="area_entered" from="Area3D" to="." method="OnHordeEnter"]
+[connection signal="area_exited" from="Area3D" to="." method="OnHordeExit"]

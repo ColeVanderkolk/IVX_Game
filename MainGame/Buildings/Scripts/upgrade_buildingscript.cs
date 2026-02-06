@@ -8,6 +8,9 @@ public partial class upgrade_buildingscript : Node3D
 	private Node3D OldMesh;
 	private Node3D NewMesh;
 
+    // where units go to interact (die)
+    private Area3D InteractArea;
+
     // Whether this station can upgrade units
 	private bool Assimilated = false;
 
@@ -15,15 +18,12 @@ public partial class upgrade_buildingscript : Node3D
     [Export]
     private int[] UPGRADE_COSTS;
 
-    // current level of building
-    private int curLevel = 0;
-
     [Export]
     private CURRENCIES CostType;
 
     // Emits when an upgrade is attempted, and whether it was successful
     [Signal]
-    public delegate void UnitUpgradedEventHandler(bool success);
+    public delegate void UnitUpgradedEventHandler(int toTier);
 
     // For sfx when assimilation happens?
     [Signal]
@@ -33,10 +33,11 @@ public partial class upgrade_buildingscript : Node3D
     {
         OldMesh = GetNode<Node3D>("DefunctMesh");
         NewMesh = GetNode<Node3D>("AssimMesh");
+        InteractArea = GetNode<Area3D>("Area3D");
     }
 
     // Toggles model and whether buliding can upgrade units
-    private void OnAssimilate(Vector3 mousePos)
+    private void OnAssimilate(int whatever, int thisshouldbeadifferentsignal)
     {
         if(!Assimilated)
 		{
@@ -47,17 +48,50 @@ public partial class upgrade_buildingscript : Node3D
 		}
     }
 
-    // Attempts to upgrade whatever unit requested this, deducting currency as needed
-    // mousePos is here in case it's helpful for a future UI middleman
-    // currently just uses same input as assimilate
-    private void OnUpgrade(Vector3 mousePos)
+    // Attempts to produce units 1 tier higher than the sacrificed horde, deducting currency as needed
+    // All units presumed to be of same tier
+    // if you run out of cash, reproduces units of the same tier instead
+    private void OnUpgrade(int tier, int count)
     {
         if(Assimilated)
         {
-            // if(currencyManager.removeCurrency(CostType, upgradeCosts[curLevel]))
-            GD.Print("-" + UPGRADE_COSTS[curLevel] + " for upgrading");
-            EmitSignal(SignalName.UnitUpgraded, true);
-            // else EmitSignal(SignalName.UnitUpgraded, false);
+            int i = 0;
+            while ( i < count ) //&& currencyManager.removeCurrency(CostType, upgradeCosts[curLevel])) 
+            {
+                GD.Print("-" + UPGRADE_COSTS[tier] + " for upgrading");
+                EmitSignal(SignalName.UnitUpgraded, tier + 1);
+                i++;
+            }
+            while (i < count)
+            {
+                GD.Print("Reproduced a unit because ur too broke to upgrade it");
+                EmitSignal(SignalName.UnitUpgraded, tier);
+                i++;
+            }
         }
+    }
+
+    // If a horde enters building, prepare to either assimilate or upgrade
+    private void OnHordeEnter(Area3D horde)
+    {
+        if (Assimilated)
+        {
+            horde.GetParent().Connect("sacrificed", new Callable(this, "OnUpgrade"));
+        }
+        else
+        {
+            horde.GetParent().Connect("sacrificed", new Callable(this, "OnAssimilate"));
+        }
+    }
+
+    // In case operation is cancelled or units were just passing through somehow
+    private void OnHordeExit(Area3D horde)
+    {
+        if (horde.GetParent().IsConnected("sacrificed", new Callable(this, "OnUpgrade")))
+            horde.GetParent().Disconnect("sacrificed", new Callable(this, "OnUpgrade"));
+        if (horde.GetParent().IsConnected("sacrificed", new Callable(this, "OnAssimilate")))
+            horde.GetParent().Disconnect("sacrificed", new Callable(this, "OnAssimilate"));
+            
+
     }
 }

@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqm2kback7rtj"]
+[gd_scene load_steps=3 format=3 uid="uid://04jvfacdp2xy"]
 
-[ext_resource type="PackedScene" uid="uid://c0huid33if1iu" path="res://Buildings/Scenes/generic_buliding.tscn" id="1_bto61"]
+[ext_resource type="PackedScene" uid="uid://dfr43pq78ut23" path="res://Buildings/Scenes/generic_buliding.tscn" id="1_bto61"]
 [ext_resource type="Script" uid="uid://ds0hjcaycqx4s" path="res://Buildings/Scripts/upgrade_buildingscript.cs" id="2_ku8tw"]
 
 [node name="UpgradeBuilding" instance=ExtResource("1_bto61")]
 script = ExtResource("2_ku8tw")
-UPGRADE_COSTS = PackedInt32Array(10, 50)
+UPGRADE_COSTS = PackedInt32Array(0, 10, 50)
 
-[connection signal="BuildingClicked" from="StaticBody3D" to="." method="OnAssimilate"]
-[connection signal="BuildingClicked" from="StaticBody3D" to="." method="OnUpgrade" binds= [0]]
+[connection signal="area_entered" from="Area3D" to="." method="OnHordeEnter"]
+[connection signal="area_exited" from="Area3D" to="." method="OnHordeExit"]
