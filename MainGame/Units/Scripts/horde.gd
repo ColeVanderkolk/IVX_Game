@@ -42,11 +42,11 @@ func addUnit(tier : int = 1):
 	var newUnit = null
 	match tier:
 		2:
-			newUnit = load("res://Units/Unit - Tier 2.tscn").instantiate()
+			newUnit = load("res://Units/Scenes/Unit - Tier 2.tscn").instantiate()
 		3: 
-			newUnit = load("res://Units/Unit - Tier 3.tscn").instantiate()
+			newUnit = load("res://Units/Scenes/Unit - Tier 3.tscn").instantiate()
 		_:
-			newUnit = load("res://Units/Unit - Tier 1.tscn").instantiate()
+			newUnit = load("res://Units/Scenes/Unit - Tier 1.tscn").instantiate()
 	
 	# Add unit as child of horde and element in units
 	units.append(newUnit)
@@ -106,7 +106,7 @@ func mitosis(numUnits : int) -> Horde:
 		return null
 	
 	# Load new horde
-	var newHorde:Horde = load("res://Units/horde.tscn").instantiate()
+	var newHorde:Horde = load("res://Units/Scenes/horde.tscn").instantiate()
 	
 	# Move units to the new horde
 	for i in range(numUnits):

@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://ch8rlyv2dciye"]
 
-[ext_resource type="PackedScene" uid="uid://bqi12twiio58s" path="res://Units/Scenes/horde.tscn" id="1_0thl8"]
-[ext_resource type="Script" uid="uid://cryj3o0h7vhth" path="res://Units/Scripts/horde_example_environment.gd" id="1_eub5d"]
+[ext_resource type="Script" uid="uid://cryj3o0h7vhth" path="res://Units/Scripts/horde_example_environment.gd" id="1_aomd0"]
+[ext_resource type="PackedScene" uid="uid://bqi12twiio58s" path="res://Units/Scenes/horde.tscn" id="2_3a0eg"]
 
 [node name="HordeExampleEnvironment" type="Node3D"]
-script = ExtResource("1_eub5d")
+script = ExtResource("1_aomd0")
 
-[node name="AssimilatedHorde" parent="." groups=["Assimilated"] instance=ExtResource("1_0thl8")]
+[node name="AssimilatedHorde" parent="." groups=["Assimilated"] instance=ExtResource("2_3a0eg")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.8470756, 0.53147256, 0, -0.53147256, 0.8470756, 0, 6.553583, 9.546968)
@@ -19,7 +19,7 @@ omni_range = 18.0
 wait_time = 3.0
 autostart = true
 
-[node name="EnemyHorde" parent="." groups=["Enemy"] instance=ExtResource("1_0thl8")]
+[node name="EnemyHorde" parent="." groups=["Enemy"] instance=ExtResource("2_3a0eg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.258503, 0, -4.73978)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
