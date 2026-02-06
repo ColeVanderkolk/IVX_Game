@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://bt62anvbdurwd"]
+
+[ext_resource type="Script" uid="uid://cq7t2pkyslgdb" path="res://Menus/Scripts/GameScene.cs" id="1_edgyv"]
+[ext_resource type="PackedScene" uid="uid://blvmyj17pw5kw" path="res://Menus/Scenes/pause_menu.tscn" id="2_idyv1"]
+[ext_resource type="PackedScene" path="res://Buildings/Scenes/mine_manager.tscn" id="3_xqe0f"]
+[ext_resource type="PackedScene" uid="uid://5e6fvqqt11ut" path="res://Buildings/Scenes/recruit_manager.tscn" id="4_fwggy"]
+[ext_resource type="PackedScene" uid="uid://bqm2kback7rtj" path="res://Buildings/Scenes/upgrade_building.tscn" id="5_a5bod"]
+[ext_resource type="PackedScene" uid="uid://hv71py2pmedd" path="res://Buildings/Scenes/gate_building.tscn" id="6_vqgse"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vmwp7"]
+
+[node name="GameScene" type="Node"]
+script = ExtResource("1_edgyv")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.53242004, 0)
+mesh = SubResource("BoxMesh_vmwp7")
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(0.8871962, -0.3319483, 0.320458, -0.043613277, 0.6311006, 0.7744739, -0.45932662, -0.7010866, 0.5454328, 0.9992899, 2.0477664, 1.7866764)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
+transform = Transform3D(0.9840439, 0, 0.17792642, -0.036515947, 0.97871363, 0.20195591, -0.17413901, -0.20523065, 0.96309716, 1.3325031, 1.9438, 5.972261)
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_idyv1")]
+
+[node name="Buildings" type="Node" parent="."]
+
+[node name="MineManager" parent="Buildings" instance=ExtResource("3_xqe0f")]
+
+[node name="MineBuilding" parent="Buildings/MineManager" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.175317)
+
+[node name="MineBuilding2" parent="Buildings/MineManager" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0912575, 0, 1.1605368)
+
+[node name="RecruitManager" parent="Buildings" instance=ExtResource("4_fwggy")]
+
+[node name="RecruitBuilding" parent="Buildings/RecruitManager" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.78396034, 0, -1.9414468)
+
+[node name="RecruitBuilding2" parent="Buildings/RecruitManager" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8592865, 0, -1.91962)
+
+[node name="UpgradeBuilding" parent="Buildings" instance=ExtResource("5_a5bod")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6017623, 0, 0)
+
+[node name="GateBuilding" parent="Buildings" instance=ExtResource("6_vqgse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3397229, 0, 0)
+
+[editable path="Buildings/MineManager"]
+[editable path="Buildings/RecruitManager"]

@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://f5u2qbw8en5a"]
+
+[ext_resource type="Script" uid="uid://cb2aqawatgfg8" path="res://Menus/Scripts/MainMenu.cs" id="1_7cam4"]
+[ext_resource type="Texture2D" uid="uid://bon2u5h0slvh6" path="res://Assets/menuBackgrounds/bg-red.png" id="2_536qr"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7cam4")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_536qr")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+
+[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer"]
+z_index = 2
+layout_mode = 2
+text = "Start Game"
+
+[node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer"]
+z_index = 2
+layout_mode = 2
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+z_index = 2
+layout_mode = 2
+text = "Quit Game"
