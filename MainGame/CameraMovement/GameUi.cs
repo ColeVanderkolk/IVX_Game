@@ -47,6 +47,29 @@ public partial class GameUi : Control
 		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		audioPlayer.Stream = GD.Load<AudioStream>(uiAudio);
 		audioPlayer.Play();
+
+		var hordeManager = GetNode<HordeManager>("../../HordeManager");
+		switch (hordeManager.getSelectedHordeNumber())
+		{
+			case 0:
+				GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer/0Button").GrabFocus();
+				break;
+			case 1:
+				GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer/1Button").GrabFocus();
+				break;
+			case 2:
+				GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer/2Button").GrabFocus();
+				break;
+			case 3:
+				GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer/3Button").GrabFocus();
+				break;
+			case 4:
+				GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer/4Button").GrabFocus();
+				break;
+			default:
+				GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer/0Button").GrabFocus();
+				break;
+		}
 	}
 	private void _updateCurrency()
 	{
