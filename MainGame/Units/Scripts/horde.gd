@@ -84,7 +84,7 @@ func connectToHoardManager()->void:
 # =======================================================
 
 func change_state(new_state):
-	print(new_state)
+	#print(new_state)
 	state = new_state
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -98,8 +98,8 @@ func _physics_process(delta: float) -> void:
 			if !_enemy_Horde:
 				change_state(states.IDLE)
 				stoppedMoving.emit()
-			targetEnemy(_enemy_Horde)
-			move(delta)
+			else:
+				move(delta)
 			
 		states.COMBAT:
 			pass
@@ -184,6 +184,7 @@ func addUnit(tier : int = 1):
 	# Add unit as child of horde and element in units
 	units.append(newUnit)
 	add_child(newUnit)
+	print("added ", tier)
 	unitAdded.emit(self, tier)
 	
 	recalc()
@@ -200,16 +201,17 @@ func mitosis(numUnits : int) -> Horde:
 	# Safty check
 	if numUnits > units.size() or numUnits < 1:
 		return null
-	
 	# Load new horde
 	var newHorde:Horde = load("res://Units/Scenes/horde.tscn").instantiate()
 	newHorde.horde_type = horde_types.ASSIMALTED_ACTIVE
+	newHorde.global_position = global_position + Vector3(radius * 2.5, 0, 0)
 	get_parent().add_child(newHorde)
 	
 	#print(numUnits)
 	# Move units to the new horde
 	for i in range(numUnits):
 		var unit:Unit = units.pop_back()
+		remove_child(unit)
 		newHorde.add_child(unit)
 		newHorde.units.append(unit)
 	
@@ -218,8 +220,9 @@ func mitosis(numUnits : int) -> Horde:
 	
 	# Instantiate the new horde
 	mitosisHappened.emit()
-	print(newHorde.units.size())
-	print(newHorde.units)
+	# Ensure the new horde has correct stats and is positioned nearby
+	newHorde.recalc()
+	
 	return newHorde
 #endregion
 # ====================================================
@@ -327,6 +330,7 @@ func checkForDamage(area: Area3D):
 		if _enemy_Horde:
 			change_state(states.TARGETING)
 		elif target != Vector3.ZERO:
+			print("No Target")
 			change_state(states.MOVING_TO)
 
 

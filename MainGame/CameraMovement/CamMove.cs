@@ -208,7 +208,7 @@ public partial class CamMove : Camera3D
 
 				var angle = Mathf.Abs((0.5f * Mathf.Pi) - Mathf.Acos(forward.Dot(ground)));// calculate angle between where you clicked projected outwards and the ground
 				angle = (0.5f * Mathf.Pi) - Mathf.Abs((GlobalRotation.X));
-				GD.Print("Angle: " + (angle) + "deg");
+				// GD.Print("Angle: " + (angle) + "deg");
 
 				var adj = Position.Y - GroundLevel;
 				var opp = adj * Mathf.Tan(angle);
@@ -221,7 +221,7 @@ public partial class CamMove : Camera3D
 													pointOnGround
 												);
 
-				GD.Print("point: " + pointOnGround);
+				// GD.Print("point: " + pointOnGround);
 				if (debuganchor != null)
 					debuganchor.Position = pointOnGround;
 

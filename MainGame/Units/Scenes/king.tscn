@@ -15,8 +15,8 @@ speed = 2.0
 tier = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05456543, 1.2989502, 6.410501)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05456543, 1.2989502, 0.032100677)
 shape = SubResource("BoxShape3D_f40mk")
 
 [node name="lordofthebiomind" parent="." instance=ExtResource("1_f40mk")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 3.2583208)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -3.1200795)

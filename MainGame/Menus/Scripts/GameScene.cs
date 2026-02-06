@@ -26,7 +26,8 @@ public partial class GameScene : Node
 	
 	private void _on_timer_timeout()
 	{
-		var horde = GetNode("HordeManager/Horde") as Node; horde.Call("addUnit");
+		var horde = GetNode("HordeManager/Horde") as Node; horde.Call("addUnit", 1);
+		horde = GetNode("HordeManager/Horde") as Node; horde.Call("addUnit", 1);
 	}
 	private void _on_timer_2_timeout()
 	{
