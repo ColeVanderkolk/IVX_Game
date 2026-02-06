@@ -24,7 +24,8 @@ shape = SubResource("CylinderShape3D_rtys4")
 [node name="ImmunityFrames" type="Timer" parent="."]
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+volume_db = 80.0
+max_distance = 25000.0
 
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="input_event" from="Hitbox" to="." method="_on_hitbox_input_event"]
 [connection signal="timeout" from="ImmunityFrames" to="." method="_on_immunity_frames_timeout"]

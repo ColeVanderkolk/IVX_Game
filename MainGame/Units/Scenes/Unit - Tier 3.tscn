@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://vj2qqlm4hkdn"]
+[gd_scene load_steps=5 format=3 uid="uid://vj2qqlm4hkdn"]
 
 [ext_resource type="Script" uid="uid://bbsr66wy7tgj0" path="res://Units/Scripts/unit.gd" id="1_cqhan"]
 [ext_resource type="PackedScene" uid="uid://cg3e71iw6h26j" path="res://Units/3D-Assets/fleshcreature1plus.glb" id="2_7dco6"]
+[ext_resource type="PackedScene" uid="uid://d3j5gmynmec2v" path="res://Units/3D-Assets/fleshcreature1plusattack.glb" id="3_7dco6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ahhs1"]
 radius = 0.9277344
@@ -20,3 +21,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09277344, 0)
 shape = SubResource("CapsuleShape3D_ahhs1")
 
 [node name="fleshcreature1plus" parent="." instance=ExtResource("2_7dco6")]
+
+[node name="fleshcreature1plusattack" parent="." instance=ExtResource("3_7dco6")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.7221756, 0)
+visible = false

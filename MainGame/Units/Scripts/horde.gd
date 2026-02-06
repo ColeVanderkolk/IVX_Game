@@ -49,6 +49,8 @@ signal stoppedMoving()
 signal unitAdded(horde:Horde, tier:int)
 signal mitosisHappened()
 signal deadHorde(horde:Horde)
+signal combat()
+signal combatEnd()
 signal sacrificed(tier:int, count:int)
 signal gateDamaged(damage:int)
 
@@ -302,6 +304,7 @@ func checkForDamage(area: Area3D):
 		in_combat = true
 		if state != states.COMBAT:
 			change_state(states.COMBAT)
+			combat.emit()
 			stoppedMoving.emit()
 		if harmable:
 			takeDamage(horde)
@@ -313,6 +316,7 @@ func checkForDamage(area: Area3D):
 		in_combat = true
 		if state != states.COMBAT:
 			change_state(states.COMBAT)
+			combat.emit()
 			stoppedMoving.emit()
 			
 		if harmable:
@@ -324,6 +328,7 @@ func checkForDamage(area: Area3D):
 		in_combat = true
 		if state != states.COMBAT:
 			change_state(states.COMBAT)
+			combat.emit()
 			stoppedMoving.emit()
 			
 		gateDamaged.emit(totDamage)
@@ -331,15 +336,31 @@ func checkForDamage(area: Area3D):
 		in_combat = false
 		if _enemy_Horde:
 			change_state(states.TARGETING)
+			combatEnd.emit()
 		elif target != Vector3.ZERO:
 			print("No Target")
 			change_state(states.MOVING_TO)
+			combatEnd.emit()
+		else:
+			change_state(states.IDLE)
+			combatEnd.emit()
 
 
+@onready var damage_sounds = [
+	preload("res://Assets/Audio/SFX/sfx_damageTaken_001.mp3"),
+	preload("res://Assets/Audio/SFX/sfx_damageTaken_002.mp3"),
+	preload("res://Assets/Audio/SFX/sfx_damageTaken_003.mp3"),
+	preload("res://Assets/Audio/SFX/sfx_damageTaken_004.mp3"),
+	preload("res://Assets/Audio/SFX/sfx_damageTaken_005.mp3"),
+	preload("res://Assets/Audio/SFX/sfx_damageTaken_006.mp3"),
+	preload("res://Assets/Audio/SFX/sfx_damageTaken_007.mp3"),
+	
+]
 
 func takeDamage(attacker : Horde):
 	var damageTaken = attacker.totDamage
-	
+	$AudioStreamPlayer3D.stream = damage_sounds[randi_range(0, damage_sounds.size()-1)]
+	$AudioStreamPlayer3D.play()
 	# Apply damage to units
 	for unit:Unit in units:
 		damageTaken -= unit.health

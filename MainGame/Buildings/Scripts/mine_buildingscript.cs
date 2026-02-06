@@ -26,7 +26,7 @@ public partial class mine_buildingscript : Node3D
 	private Node3D NewMesh;
 
 
-	private currencymanager_script currencymanager_script;
+	private Node currencyManager;
 
 	public override void _Ready()
 	{
@@ -34,7 +34,7 @@ public partial class mine_buildingscript : Node3D
 		OldMesh = GetNode<Node3D>("DefunctMesh");
 		NewMesh = GetNode<Node3D>("AssimMesh");
 		InteractArea = GetNode<Area3D>("Area3D");
-		currencyManager = GetNode<CurrencyManagerScript>("../CurrencyManager");
+		currencyManager = GetNode<Node>("../CurrencyManager_Node");
 	} 
 
 	// Add whatever currency this mine generates to manager
@@ -42,7 +42,7 @@ public partial class mine_buildingscript : Node3D
 	private void OnMineTimeout()
 	{
 		GD.Print("+" + METAL_RATE + " for mining");
-		currencymanager_script.add_currency(2, METAL_RATE);
+		currencyManager.Call("add_currency", 2, METAL_RATE);
 	}
 
 	// Should be signalled once the mine has been assimillated
