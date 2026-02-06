@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cj6vd2x3nx5s5"]
 
 [ext_resource type="Script" uid="uid://c66pv6xclu6sh" path="res://CameraMovement/GameUi.cs" id="1_vyq54"]
-[ext_resource type="Texture2D" uid="uid://cvrfy0puh7f8h" path="res://Assets/UI/UITemp.png" id="2_5xdjt"]
+[ext_resource type="Texture2D" uid="uid://c153oa2m1ioiy" path="res://Assets/UI/UITemp.png" id="2_5xdjt"]
 [ext_resource type="Texture2D" uid="uid://1d7eexj3bkmg" path="res://icon.svg" id="3_5xdjt"]
 
 [node name="Exp" type="Control"]
@@ -11,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_vyq54")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -24,6 +25,7 @@ offset_right = 1.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_5xdjt")
 expand_mode = 3
 

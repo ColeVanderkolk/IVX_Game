@@ -53,7 +53,8 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -31.952032, 4.562007, 5
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 33.00741, 4.562007, 72.419174)
 
 [node name="GateBuilding3" parent="Buildings" instance=ExtResource("6_vqgse")]
-transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0.338943, 4.562007, 39.962757)
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0.3899479, 4.562007, 39.962757)
+GATE_STARTING_HP = 10
 
 [node name="MapNode" parent="." instance=ExtResource("7_a5bod")]
 
@@ -85,6 +86,8 @@ autostart = true
 wait_time = 4.0
 one_shot = true
 autostart = true
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

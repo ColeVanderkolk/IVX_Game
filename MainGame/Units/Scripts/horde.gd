@@ -335,13 +335,7 @@ func _on_immunity_frames_timeout() -> void:
 
 
 func _on_hitbox_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
-	print("EVENT")
 	if event is InputEventMouseButton:
-		print("MOUSE")
-		if event.pressed:
-			print("PRESSED")
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			print("LEFT")
 		if event.pressed and  event.button_index == MOUSE_BUTTON_LEFT:
 			print("Clicked!")
 	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed \

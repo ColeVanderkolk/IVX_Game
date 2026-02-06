@@ -23,6 +23,7 @@ func _ready() -> void:
 	death_timer.timeout.connect(self._on_death)
 	
 	add_child(audio)
+	audio.max_distance = 25000
 	audio.stream = load(death_sounds[randi_range(0, death_sounds.size()-1)])
 
 func _physics_process(_delta: float) -> void:

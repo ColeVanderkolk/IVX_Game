@@ -14,6 +14,9 @@ public partial class GameScene : Node
 
 		PMenu = GetNode<PauseMenu>("PauseMenu");
 		PMenu.QuitButtonPressed += () => QuitButtonPressed();
+		
+		var horde = GetNode("Buildings/GateBuilding3") as gate_buildingscript;
+		horde.Call("Assimilate");
 	}
 
 	private void QuitButtonPressed()

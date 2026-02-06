@@ -8,7 +8,7 @@ public partial class gate_buildingscript : Node3D
 	private Node3D NewMesh;
 
 	// where units go to interact (repair/break)
-    private Area3D InteractArea;
+	private Area3D InteractArea;
 
 	// for enemy attack iframes
 	private Timer Iframes;
@@ -136,17 +136,17 @@ public partial class gate_buildingscript : Node3D
 
 	// If a horde enters building, prepare to assimilate/repair
 	// Only friendly hordes should sac so no need to check
-    private void OnHordeEnter(Area3D horde)
-    {
-        horde.GetParent().Connect("sacrificed", new Callable(this, "OnPerformRepair"));
+	private void OnHordeEnter(Area3D horde)
+	{
+		horde.GetParent().Connect("sacrificed", new Callable(this, "OnPerformRepair"));
 		horde.GetParent().Connect("gateDamaged", new Callable(this, "OnHurt"));
-    }
+	}
 
-    // In case operation is cancelled or units were just passing through somehow
-    private void OnHordeExit(Area3D horde)
-    {
-        if (horde.GetParent().IsConnected("sacrificed", new Callable(this, "OnPerformRepair")))
-            horde.GetParent().Disconnect("sacrificed", new Callable(this, "OnPerformRepair"));
-    }
+	// In case operation is cancelled or units were just passing through somehow
+	private void OnHordeExit(Area3D horde)
+	{
+		if (horde.GetParent().IsConnected("sacrificed", new Callable(this, "OnPerformRepair")))
+			horde.GetParent().Disconnect("sacrificed", new Callable(this, "OnPerformRepair"));
+	}
 
 }
