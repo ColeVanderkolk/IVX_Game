@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ch8rlyv2dciye"]
 
-[ext_resource type="PackedScene" uid="uid://bqi12twiio58s" path="res://Units/horde.tscn" id="1_0thl8"]
-[ext_resource type="Script" uid="uid://cryj3o0h7vhth" path="res://Units/horde_example_environment.gd" id="1_eub5d"]
+[ext_resource type="PackedScene" uid="uid://bqi12twiio58s" path="res://Units/Scenes/horde.tscn" id="1_0thl8"]
+[ext_resource type="Script" uid="uid://cryj3o0h7vhth" path="res://Units/Scripts/horde_example_environment.gd" id="1_eub5d"]
 
 [node name="HordeExampleEnvironment" type="Node3D"]
 script = ExtResource("1_eub5d")

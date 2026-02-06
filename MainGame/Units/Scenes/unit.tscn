@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dlr4afw6i6ndu"]
 
-[ext_resource type="Script" uid="uid://bbsr66wy7tgj0" path="res://Units/unit.gd" id="1_j3ort"]
+[ext_resource type="Script" uid="uid://bbsr66wy7tgj0" path="res://Units/Scripts/unit.gd" id="1_j3ort"]
 [ext_resource type="PackedScene" uid="uid://cg3e71iw6h26j" path="res://Units/3D-Assets/fleshcreature1plus.glb" id="2_00fr1"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_egkjj"]
