@@ -38,7 +38,7 @@ public partial class PauseMenu : CanvasLayer
 		}
 	}
 
-	private void SetActive(bool active)
+	public void SetActive(bool active)
 	{
 		IsActive = active;
 		Visible = active;

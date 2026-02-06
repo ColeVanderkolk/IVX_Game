@@ -18,4 +18,9 @@ public partial class GameUi : Control
 			GetParent<CamMove>().ToggleEdgeScrolling(true);
 		}
 	}
+	public void _on_PauseButton_pressed()
+	{
+		var pauseMenu = GetNode<PauseMenu>("../../PauseMenu");
+		pauseMenu.SetActive(true); // call the strongly-typed method
+	}
 }
