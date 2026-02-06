@@ -17,6 +17,9 @@ public partial class HordeManager : Node
 	/* Current horde selected */
 	private int SelectedHorde = 0;
 
+	[Signal]
+	public delegate void HoardChangeEventHandler();
+
 	/** 
 	 * returns the horde currently selected
 	 */
@@ -56,6 +59,7 @@ public partial class HordeManager : Node
 	{
 		Hordes.Remove(horde);
 		SelectedHorde = 0;
+		EmitSignal("HoardChange");
 	}
 
 
@@ -76,6 +80,7 @@ public partial class HordeManager : Node
 					{
 						other_horde.Call("addUnit", tier);
 						other_horde.Call("connectToHoardManager");
+						EmitSignal("HoardChange");
 						horde.Call("removeUnit");
 						return;
 					}
@@ -87,6 +92,8 @@ public partial class HordeManager : Node
 			{
 				var _new_horde = horde.Call("mitosis", 1).As<Node3D>();
 				Hordes.Add(_new_horde);
+				_new_horde.Call("connectToHoardManager");
+				EmitSignal("HoardChange");
 				return;
 			}
 		}

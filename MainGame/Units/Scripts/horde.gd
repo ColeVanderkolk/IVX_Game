@@ -218,6 +218,7 @@ func checkForDamage(area: Area3D):
 		gateDamaged.emit(totDamage)
 
 
+
 func takeDamage(attacker : Horde):
 	var damageTaken = attacker.totDamage
 	

@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://crvdneec7ijej"]
+
+[ext_resource type="Texture2D" uid="uid://cn754qlwar5ts" path="res://Assets/GridTextures/Dark/texture_04.png" id="1_0ku3b"]
+[ext_resource type="PackedScene" uid="uid://shi3iohprtps" path="res://CameraMovement/player.tscn" id="2_mqyve"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mqyve"]
+albedo_texture = ExtResource("1_0ku3b")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nhn67"]
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_mqyve"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_mqyve"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nhn67"]
+albedo_color = Color(0.43529412, 0.8039216, 0.039215688, 1)
+
+[node name="TestMap" type="Node3D" unique_id=494240130]
+
+[node name="Ground" type="Node3D" parent="." unique_id=543138898]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=53958752]
+transform = Transform3D(185.35875, 0, 0, 0, 1, 0, 0, 0, 185.35875, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_mqyve")
+mesh = SubResource("PlaneMesh_nhn67")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground" unique_id=28619765 groups=["Ground"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D" unique_id=993298777]
+shape = SubResource("SeparationRayShape3D_mqyve")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=708033572]
+transform = Transform3D(0.7071068, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.7071068, -0.5, 0.5, 0, 10, 0)
+
+[node name="Camera3D" parent="." unique_id=1815146861 node_paths=PackedStringArray("debuganchor") instance=ExtResource("2_mqyve")]
+transform = Transform3D(0.7071067, -0.59636784, 0.37992817, 0, 0.5372996, 0.8433915, -0.7071067, -0.59636784, 0.37992817, -0.05337385, 10, -0.051741026)
+debuganchor = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=892643462]
+transform = Transform3D(2, 0, 0, 0, 0.983, 0, 0, 0, 2, 100, 0, 50)
+mesh = SubResource("SphereMesh_mqyve")
+surface_material_override/0 = SubResource("StandardMaterial3D_nhn67")

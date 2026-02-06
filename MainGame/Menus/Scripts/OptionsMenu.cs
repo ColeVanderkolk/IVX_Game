@@ -26,5 +26,8 @@ public partial class OptionsMenu : Control
 	{
 		GD.Print("Back Button Pressed!");
 		EmitSignal(SignalName.BackButtonPressed);
+		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		audioPlayer.Stream = GD.Load<AudioStream>("res://Assets/Audio/SFX/sfx_uibuttonsound.mp3");
+		audioPlayer.Play();
 	}
 }

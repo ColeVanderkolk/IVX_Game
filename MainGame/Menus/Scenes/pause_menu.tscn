@@ -5,6 +5,8 @@
 [node name="PauseMenu" type="CanvasLayer"]
 script = ExtResource("1_um7w6")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
