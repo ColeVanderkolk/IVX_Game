@@ -36,8 +36,8 @@ public partial class HordeActionHandeler : Node
      * Dest = the destination of the job
      * returns true on if the job can be completed, false if not enough units
      */
-    public void SpendUnits(Node Horde, int Required, Vector3 Dest)
+    public bool SpendUnits(Node Horde, int Required, Vector3 Dest)
     {
-
+        return false;
     }
 }
