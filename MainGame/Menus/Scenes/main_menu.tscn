@@ -12,6 +12,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7cam4")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = 1
 layout_mode = 1

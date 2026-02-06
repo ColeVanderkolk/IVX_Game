@@ -5,6 +5,19 @@ using System.Collections.Generic;
 
 public partial class GameUi : Control
 {
+	private String[] hordeSelectionAudios = new String[] {
+		"res://Assets/Audio/SFX/sfx_selecthorde_001.mp3",
+		"res://Assets/Audio/SFX/sfx_selecthorde_002.mp3",
+		"res://Assets/Audio/SFX/sfx_selecthorde_003.mp3",
+	};
+
+	private String[] kingSelectionAudios = new String[] {
+		"res://Assets/Audio/SFX/sfx_selectking_001.mp3",
+		"res://Assets/Audio/SFX/sfx_selectking_002.mp3",
+		"res://Assets/Audio/SFX/sfx_selectking_003.mp3",
+	};
+
+	private String uiAudio = "res://Assets/Audio/SFX/sfx_uibuttonsound.mp3";
 	public override void _Ready()
 	{
 		var currencyManeger = GetNode<currencymanager_script>("../../CurrencyManager_Node");
@@ -31,6 +44,9 @@ public partial class GameUi : Control
 	{
 		var pauseMenu = GetNode<PauseMenu>("../../PauseMenu");
 		pauseMenu.SetActive(true); // call the strongly-typed method
+		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		audioPlayer.Stream = GD.Load<AudioStream>(uiAudio);
+		audioPlayer.Play();
 	}
 	private void _updateCurrency()
 	{
@@ -48,6 +64,9 @@ public partial class GameUi : Control
 	{
 		var hordeManager = GetNode<HordeManager>("../../HordeManager");
 		hordeManager.setSelectedHorde(0);
+		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		audioPlayer.Stream = GD.Load<AudioStream>(kingSelectionAudios[GD.Randi() % kingSelectionAudios.Length]);
+		audioPlayer.Play();
 	}
 
 	private void _on_HordeChange()
