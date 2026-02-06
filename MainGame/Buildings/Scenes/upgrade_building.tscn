@@ -7,7 +7,5 @@
 script = ExtResource("2_ku8tw")
 UPGRADE_COSTS = PackedInt32Array(0, 10, 50)
 
-[connection signal="BuildingClicked" from="StaticBody3D" to="." method="OnAssimilate"]
-[connection signal="BuildingClicked" from="StaticBody3D" to="." method="OnUpgrade" binds= [0]]
 [connection signal="area_entered" from="Area3D" to="." method="OnHordeEnter"]
 [connection signal="area_exited" from="Area3D" to="." method="OnHordeExit"]

@@ -10,6 +10,9 @@ public partial class recruit_buildingscript : Node3D
     // Whether this station can recruit units
 	private bool Assimilated = false;
 
+    // where units go to interact (die)
+    private Area3D InteractArea;
+
     // Emits when a unit is recruited
     [Signal]
     public delegate void UnitRecruitedEventHandler(int tier);
@@ -27,6 +30,7 @@ public partial class recruit_buildingscript : Node3D
     {
         OldMesh = GetNode<Node3D>("DefunctMesh");
         NewMesh = GetNode<Node3D>("AssimMesh");
+        InteractArea = GetNode<Area3D>("Area3D");
         RecruitTimer = GetNode<Timer>("../Timer");
     }
 
@@ -52,5 +56,21 @@ public partial class recruit_buildingscript : Node3D
         EmitSignal(SignalName.UnitRecruited, 1);
         GD.Print("-" + RECRUIT_COST + " for recruiting");
         
+    }
+
+    // If a horde enters building, prepare to assimilate
+    private void OnHordeEnter(Area3D horde)
+    {
+        if (!Assimilated)
+        {
+            horde.GetParent().Connect("sacrificed", new Callable(this, "OnAssimilate"));
+        }
+    }
+
+    // In case operation is cancelled or units were just passing through somehow
+    private void OnHordeExit(Area3D horde)
+    {
+        if (horde.GetParent().IsConnected("sacrificed", new Callable(this, "OnAssimilate")))
+            horde.GetParent().Disconnect("sacrificed", new Callable(this, "OnAssimilate"));
     }
 }
