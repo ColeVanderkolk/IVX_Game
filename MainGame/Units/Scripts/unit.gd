@@ -34,20 +34,24 @@ func _ready() -> void:
 
 
 func _on_move():
+	_on_combat_end()
 	$fleshcreature1plus/AnimationPlayer.play("Armature_003")
 
 func _on_stop():
+	_on_combat_end()
 	$fleshcreature1plus/AnimationPlayer.stop()
 
 func _on_combat():
-	$fleshcreature1plus.visible = false
-	$fleshcreature1plusattack.visible = true
-	$fleshcreature1plusattack/AnimationPlayer.play("Armature_008")
+	#$fleshcreature1plus.visible = false
+	#$fleshcreature1plusattack.visible = true
+	#$fleshcreature1plusattack/AnimationPlayer.play("Armature_008")
+	pass
 
 func _on_combat_end():
-	$fleshcreature1plus.visible = true
-	$fleshcreature1plusattack.visible = false
-	$fleshcreature1plusattack/AnimationPlayer.stop()
+	#$fleshcreature1plus.visible = true
+	#$fleshcreature1plusattack.visible = false
+	#$fleshcreature1plusattack/AnimationPlayer.stop()
+	pass
 
 # Currently just removes the unit from the game, but should be modified to have different effects on deathh
 func die():

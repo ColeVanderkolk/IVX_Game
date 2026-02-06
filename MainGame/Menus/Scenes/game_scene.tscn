@@ -72,6 +72,14 @@ stream = ExtResource("11_ckvee")
 volume_db = -6.0
 autoplay = true
 
+[node name="Horde2" parent="." instance=ExtResource("10_eojei")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -23.093, 4.553, 44.089)
+horde_type = 4
+
+[node name="Horde3" parent="." instance=ExtResource("10_eojei")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.2685604, 4.553, 52.440086)
+horde_type = 4
+
 [node name="HordeManager" parent="." instance=ExtResource("10_ok13d")]
 
 [node name="Horde" parent="HordeManager" instance=ExtResource("10_eojei")]
@@ -83,7 +91,7 @@ one_shot = true
 autostart = true
 
 [node name="Timer2" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 12.0
 one_shot = true
 autostart = true
 

@@ -26,7 +26,7 @@ enum horde_types {
 	ENEMY,
 	IDLE
 }
-@export_enum("KING", "ASSIMALTED_ACTIVE", "ASSIMALTED_SPENT", "ENEMY") var horde_type:int = horde_types.ENEMY
+@export_enum("KING", "ASSIMALTED_ACTIVE", "ASSIMALTED_SPENT", "ENEMY", "IDLE") var horde_type:int = horde_types.ENEMY
 
 enum states {
 	IDLE,
@@ -72,6 +72,8 @@ func _ready() -> void:
 			add_to_group("Assimilated")
 		horde_types.ASSIMALTED_SPENT:
 			pass
+		horde_types.IDLE:
+			add_to_group("Enemy")
 		_: # ENEMY
 			# SET TARGET TO BE KING
 			targetEnemy(Globals.King)
@@ -310,6 +312,9 @@ func checkForDamage(area: Area3D):
 			takeDamage(horde)
 			harmable = false
 			$ImmunityFrames.start()
+		if horde == _enemy_Horde:
+			_enemy_Horde = null
+			target = Vector3.ZERO
 	# Case #2 where damage should be dealt
 	elif horde.is_in_group("Assimilated") and is_in_group("Enemy"):
 		#print("Enemy horde takes damage")
@@ -338,11 +343,11 @@ func checkForDamage(area: Area3D):
 			change_state(states.TARGETING)
 			combatEnd.emit()
 		elif target != Vector3.ZERO:
-			print("No Target")
 			change_state(states.MOVING_TO)
 			combatEnd.emit()
 		else:
 			change_state(states.IDLE)
+			stoppedMoving.emit()
 			combatEnd.emit()
 
 
