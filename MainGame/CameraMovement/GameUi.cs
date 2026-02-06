@@ -76,7 +76,7 @@ public partial class GameUi : Control
 	}
 	private void _updateCurrency()
 	{
-
+		GD.Print("UPDATE");
 		var coinLabel = GetNode<Label>("CoinLabel");
 		var metalLabel = GetNode<Label>("MetalLabel");
 		var bodyLabel = GetNode<Label>("BodyLabel");

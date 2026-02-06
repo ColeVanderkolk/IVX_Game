@@ -15,8 +15,11 @@ public partial class GameScene : Node
 		PMenu = GetNode<PauseMenu>("PauseMenu");
 		PMenu.QuitButtonPressed += () => QuitButtonPressed();
 		
-		var horde = GetNode("Buildings/GateBuilding3") as gate_buildingscript;
-		horde.Call("Assimilate");
+		var gate = GetNode("Buildings/GateBuilding3") as gate_buildingscript;
+		gate.Call("Assimilate");
+		
+		var mine = GetNode("Buildings/MineManager/MineBuilding") as mine_buildingscript;
+		mine.Call("OnAssimilate", 0, 0);
 	}
 
 	private void QuitButtonPressed()

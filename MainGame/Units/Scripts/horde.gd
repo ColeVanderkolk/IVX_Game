@@ -190,7 +190,6 @@ func addUnit(tier : int = 1):
 	# Add unit as child of horde and element in units
 	units.append(newUnit)
 	add_child(newUnit)
-	print("added ", tier)
 	unitAdded.emit(self, tier)
 	
 	recalc()
