@@ -7,8 +7,14 @@ public partial class gate_buildingscript : Node3D
 	private Node3D OldMesh;
 	private Node3D NewMesh;
 
-	// Used to toggle collisions when destroyed
-	private StaticBody3D Hurtbox;
+	// where units go to interact (repair/break)
+    private Area3D InteractArea;
+
+	// for enemy attack iframes
+	private Timer Iframes;
+
+	// Maybe used for pathfinding collisions idk
+	private StaticBody3D StaticBody;
 
 	// Whether this gate can repel foes
 	private bool Assimilated = false;
@@ -38,6 +44,9 @@ public partial class gate_buildingscript : Node3D
 	[Export]
 	public int GATE_MAX_HP;
 
+	[Export]
+	private int GATE_STARTING_HP;
+
 	public int GateHP;
 
 
@@ -45,8 +54,10 @@ public partial class gate_buildingscript : Node3D
 	{
 		OldMesh = GetNode<Node3D>("DefunctMesh");
 		NewMesh = GetNode<Node3D>("AssimMesh");
-		Hurtbox = GetNode<StaticBody3D>("StaticBody3D");
-		GateHP = 0;
+		StaticBody = GetNode<StaticBody3D>("StaticBody3D");
+		InteractArea = GetNode<Area3D>("Area3D");
+		Iframes = GetNode<Timer>("ImmunityFrames");
+		GateHP = GATE_STARTING_HP;
 		Assimilate();
 	}
 
@@ -61,22 +72,26 @@ public partial class gate_buildingscript : Node3D
 			NewMesh.Visible = true;
 			OldMesh.Visible = false;
 			EmitSignal(SignalName.BuildingAssimilated);
-			Hurtbox.SetCollisionLayerValue(4, true);
+			InteractArea.SetCollisionLayerValue(4, true);
 		}
 	}
 
 	// Signal to apply damage, damage can be lethal
 	public void OnHurt(int damage)
 	{
-		if (damage >= GateHP)
+		if(Iframes.TimeLeft == 0)
 		{
-			BreakGate();
-		} 
-		else
-		{
-			GateHP -= damage;
-			EmitSignal(SignalName.GateHurt);
-			GD.Print("Gate HP: " + GateHP);
+			if (damage >= GateHP)
+			{
+				BreakGate();
+			} 
+			else
+			{
+				GateHP -= damage;
+				EmitSignal(SignalName.GateHurt);
+				GD.Print("Gate HP: " + GateHP);
+				Iframes.Start();
+			}
 		}
 	}
 
@@ -88,7 +103,7 @@ public partial class gate_buildingscript : Node3D
 		OldMesh.Visible = true;
 		NewMesh.Visible = false;
 		EmitSignal(SignalName.GateBroken);
-		Hurtbox.SetCollisionLayerValue(4, false);
+		InteractArea.SetCollisionLayerValue(4, false);
 		GD.Print("Gate Broken");
 	}
 
@@ -96,7 +111,7 @@ public partial class gate_buildingscript : Node3D
 	// Signal to repair gate for as much missing hp as you can afford
 	// May recurse if you lose money while it is calculating because currency has no exclusion lock
 	// Signals repair, and Assimilates in case gate was broken prior
-	private void OnPerformRepair(Vector3 mousePos)
+	private void OnPerformRepair(int placeholdera, int placeholderb)
 	{
 		int missingHP = GATE_MAX_HP - GateHP;
 		int currBalance = 151; // currencyManager.get_currency_balance(GATE_REPAIR_COST_TYPE);
@@ -115,5 +130,20 @@ public partial class gate_buildingscript : Node3D
 		}
 		EmitSignal(SignalName.GateRepaired, false);
 	}
+
+	// If a horde enters building, prepare to assimilate/repair
+	// Only friendly hordes should sac so no need to check
+    private void OnHordeEnter(Area3D horde)
+    {
+        horde.GetParent().Connect("sacrificed", new Callable(this, "OnPerformRepair"));
+		horde.GetParent().Connect("gateDamaged", new Callable(this, "OnHurt"));
+    }
+
+    // In case operation is cancelled or units were just passing through somehow
+    private void OnHordeExit(Area3D horde)
+    {
+        if (horde.GetParent().IsConnected("sacrificed", new Callable(this, "OnPerformRepair")))
+            horde.GetParent().Disconnect("sacrificed", new Callable(this, "OnPerformRepair"));
+    }
 
 }

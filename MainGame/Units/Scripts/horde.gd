@@ -24,6 +24,7 @@ signal unitAdded(horde:Horde, tier:int)
 signal mitosisHappened()
 signal deadHorde(horde:Horde)
 signal sacrificed(tier:int, count:int)
+signal gateDamaged(damage:int)
 
 @onready var hitbox: Area3D = $Hitbox
 
@@ -211,6 +212,10 @@ func checkForDamage(area: Area3D):
 			takeDamage(horde)
 			harmable = false
 			$ImmunityFrames.start()
+	# Case #3 where gate needs to take damage from this horde
+	elif horde.is_in_group("Gate") and is_in_group("Enemy"):
+		in_combat = true
+		gateDamaged.emit(totDamage)
 
 
 func takeDamage(attacker : Horde):
