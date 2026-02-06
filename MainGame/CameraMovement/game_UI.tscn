@@ -41,7 +41,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
+theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
@@ -54,7 +54,7 @@ text = "King"
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
+theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
@@ -67,7 +67,7 @@ text = "Hoard 1"
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
+theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
@@ -80,7 +80,7 @@ text = "Hoard 2"
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
+theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 

@@ -13,6 +13,7 @@ public partial class CamMove : Camera3D
 	[Export] public float MaxMoveSpeed = 25.0f;
 	[Export] public float MoveAcceleration = 12f;
 	[Export] public float EdgeScrollMargin = 20.0f; // pixels from edge to trigger scroll
+	[Export] public float BottomEdgeScrollMargin = 20.0f; // pixels from edge to trigger scroll
 	[Export] Curve edgeScrollSpeedCurve;
 
 	// Zoom settings
@@ -104,7 +105,7 @@ public partial class CamMove : Camera3D
 
 		float lDiff = EdgeScrollMargin - mousePos.X;
 		float tDiff = EdgeScrollMargin - mousePos.Y;
-		float bDiff = mousePos.Y - (viewportSize.Y - EdgeScrollMargin);
+		float bDiff = mousePos.Y - ((viewportSize.Y * 0.7f) - BottomEdgeScrollMargin);
 		float rDiff = mousePos.X - (viewportSize.X - EdgeScrollMargin);
 
 		// magnitude values represent number of pixels from inner-edge of the margin with direction
