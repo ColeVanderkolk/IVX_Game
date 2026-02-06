@@ -14,7 +14,6 @@ public partial class GameScene : Node
 
 		PMenu = GetNode<PauseMenu>("PauseMenu");
 		PMenu.QuitButtonPressed += () => QuitButtonPressed();
-		var horde = GetNode("HordeManager/Horde") as Node; horde.Call("addUnit");
 	}
 
 	private void QuitButtonPressed()

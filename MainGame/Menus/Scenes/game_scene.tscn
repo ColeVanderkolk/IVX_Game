@@ -65,6 +65,7 @@ autoplay = true
 
 [node name="Horde" parent="HordeManager" instance=ExtResource("10_eojei")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.55224895, 4.7234273, 65.41621)
+hord_Type = 0
 
 [editable path="Buildings/MineManager"]
 [editable path="Buildings/RecruitManager"]

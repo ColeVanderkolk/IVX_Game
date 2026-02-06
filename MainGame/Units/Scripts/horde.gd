@@ -19,7 +19,21 @@ var _enemy_Horde:Horde = null # Enemy Hoard that's being targeted
 
 # =======hoard state vars======
 var sacrifice:bool = false # Once horde reaches destination they will die
+enum horde_types {
+	KING,
+	ASSIMALTED_ACTIVE,
+	ASSIMALTED_SPENT,
+	ENEMY
+}
+@export_enum("KING", "ASSIMALTED_ACTIVE", "ASSIMALTED_SPENT", "ENEMY") var hord_Type:int = horde_types.ENEMY
 
+enum states {
+	IDLE,
+	MOVING_TO,
+	TARGETING,
+	COMBAT,
+}
+var state:int = states.IDLE
 # =============================
 
 # =======combat vars===========
@@ -41,6 +55,20 @@ signal deadHorde(horde:Horde)
 func _ready() -> void:
 	# Make the hitbox shape unique to this horde
 	$Hitbox/CollisionShape3D.shape = $Hitbox/CollisionShape3D.shape.duplicate()
+	
+	match hord_Type:
+		horde_types.KING:
+			Globals.King = self
+			addUnit(999)
+		horde_types.ASSIMALTED_ACTIVE:
+			connectToHoardManager()
+		horde_types.ASSIMALTED_SPENT:
+			pass
+		_: # ENEMY
+			# SET TARGET TO BE KING
+			targetEnemy(Globals.King)
+			state = states.TARGETING
+			pass
 
 ## If this is a friendly horde this will be called to connect to the manager
 func connectToHoardManager()->void:
@@ -109,6 +137,8 @@ func setHitBoxSize():
 
 ## Returns the number of units in the horde
 func getSize()->int:
+	if hord_Type == horde_types.KING:
+		return 10
 	return units.size()
 
 #endregion
@@ -121,6 +151,8 @@ func addUnit(tier : int = 1):
 	# Load new unit
 	var newUnit = null
 	match tier:
+		999:
+			newUnit = load("res://Units/Scenes/king.tscn").instantiate()
 		2:
 			newUnit = load("res://Units/Scenes/Unit - Tier 2.tscn").instantiate()
 		3: 
