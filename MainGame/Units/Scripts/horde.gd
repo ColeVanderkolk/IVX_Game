@@ -23,7 +23,8 @@ enum horde_types {
 	KING,
 	ASSIMALTED_ACTIVE,
 	ASSIMALTED_SPENT,
-	ENEMY
+	ENEMY,
+	IDLE
 }
 @export_enum("KING", "ASSIMALTED_ACTIVE", "ASSIMALTED_SPENT", "ENEMY") var horde_type:int = horde_types.ENEMY
 
@@ -99,6 +100,7 @@ func _physics_process(delta: float) -> void:
 				change_state(states.IDLE)
 				stoppedMoving.emit()
 			else:
+				target = _enemy_Horde.global_position
 				move(delta)
 			
 		states.COMBAT:

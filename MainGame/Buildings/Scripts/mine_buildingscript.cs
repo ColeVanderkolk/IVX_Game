@@ -11,14 +11,14 @@ public partial class mine_buildingscript : Node3D
 	private int METAL_RATE = 5;
 
 	// For sfx when assimilation happens?
-    [Signal]
-    public delegate void BuildingAssimilatedEventHandler();
+	[Signal]
+	public delegate void BuildingAssimilatedEventHandler();
 	
 	// Whether this mine can function
 	private bool Assimilated = false;
 
 	// where units go to interact (die)
-    private Area3D InteractArea;
+	private Area3D InteractArea;
 
 
 	// The models that are swapped upon assimilation
@@ -26,7 +26,7 @@ public partial class mine_buildingscript : Node3D
 	private Node3D NewMesh;
 
 
-
+	private currencymanager_script currencymanager_script;
 
 	public override void _Ready()
 	{
@@ -34,6 +34,7 @@ public partial class mine_buildingscript : Node3D
 		OldMesh = GetNode<Node3D>("DefunctMesh");
 		NewMesh = GetNode<Node3D>("AssimMesh");
 		InteractArea = GetNode<Area3D>("Area3D");
+		currencyManager = GetNode<CurrencyManagerScript>("../CurrencyManager");
 	} 
 
 	// Add whatever currency this mine generates to manager
@@ -41,7 +42,7 @@ public partial class mine_buildingscript : Node3D
 	private void OnMineTimeout()
 	{
 		GD.Print("+" + METAL_RATE + " for mining");
-		// currencymanager_script.add_currency((int)CURRENCIES.METAL, COIN_RATE);
+		currencymanager_script.add_currency(2, METAL_RATE);
 	}
 
 	// Should be signalled once the mine has been assimillated
@@ -60,19 +61,19 @@ public partial class mine_buildingscript : Node3D
 	}
 
 	// If a horde enters building, prepare to assimilate
-    private void OnHordeEnter(Area3D horde)
-    {
-        if (!Assimilated)
-        {
-            horde.GetParent().Connect("sacrificed", new Callable(this, "OnAssimilate"));
-        }
-    }
+	private void OnHordeEnter(Area3D horde)
+	{
+		if (!Assimilated)
+		{
+			horde.GetParent().Connect("sacrificed", new Callable(this, "OnAssimilate"));
+		}
+	}
 
-    // In case operation is cancelled or units were just passing through somehow
-    private void OnHordeExit(Area3D horde)
-    {
-        if (horde.GetParent().IsConnected("sacrificed", new Callable(this, "OnAssimilate")))
-            horde.GetParent().Disconnect("sacrificed", new Callable(this, "OnAssimilate"));
-    }
+	// In case operation is cancelled or units were just passing through somehow
+	private void OnHordeExit(Area3D horde)
+	{
+		if (horde.GetParent().IsConnected("sacrificed", new Callable(this, "OnAssimilate")))
+			horde.GetParent().Disconnect("sacrificed", new Callable(this, "OnAssimilate"));
+	}
 
 }
