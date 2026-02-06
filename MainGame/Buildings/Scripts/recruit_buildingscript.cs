@@ -12,7 +12,7 @@ public partial class recruit_buildingscript : Node3D
 
     // Emits when a unit is recruited
     [Signal]
-    public delegate void UnitRecruitedEventHandler();
+    public delegate void UnitRecruitedEventHandler(int tier);
 
     // For sfx when assimilation happens?
     [Signal]
@@ -49,7 +49,7 @@ public partial class recruit_buildingscript : Node3D
     private void OnRecruitTimeout()
     {
         // if (currencyManager.removeCurrency(CURRENCIES.COIN, RecruitCost))
-        EmitSignal(SignalName.UnitRecruited);
+        EmitSignal(SignalName.UnitRecruited, 1);
         GD.Print("-" + RECRUIT_COST + " for recruiting");
         
     }
