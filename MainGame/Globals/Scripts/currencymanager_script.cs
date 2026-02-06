@@ -69,6 +69,7 @@ public partial class currencymanager_script : Node
 			return false;
 		}
 		currencies[id].value += amount;
+		GD.Print("ADDED");
 		EmitSignal(SignalName.AddCurrency, id, amount);
 		return true;
 	}

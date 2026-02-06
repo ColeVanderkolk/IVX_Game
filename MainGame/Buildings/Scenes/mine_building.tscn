@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://8nvjvcb3o3dk" path="res://Buildings/Scripts/mine_buildingscript.cs" id="2_1mpvj"]
 
 [node name="MineBuilding" instance=ExtResource("1_21tdx")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 script = ExtResource("2_1mpvj")
 
 [connection signal="area_entered" from="Area3D" to="." method="OnHordeEnter"]

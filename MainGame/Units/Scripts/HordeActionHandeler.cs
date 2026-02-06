@@ -6,6 +6,8 @@ using System;
  */
 public partial class HordeActionHandeler : Node
 {
+	public static HordeActionHandeler Instance;
+	
 	/**
 	 * Attack moves a Horde to attack another Horde
 	 * Horde = the horde instructed to go attack as a Node

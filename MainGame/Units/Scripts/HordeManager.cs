@@ -52,6 +52,11 @@ public partial class HordeManager : Node
 		}
 	}
 
+	public void addKing(Node3D king)
+	{
+		Hordes.Add(king);
+	}
+
 	/**
 	 * handles when a horde is empty
 	 */
@@ -82,6 +87,7 @@ public partial class HordeManager : Node
 						other_horde.Call("connectToHoardManager");
 						EmitSignal("HoardChange");
 						horde.Call("removeUnit");
+						GD.Print("Added to existing horde");
 						return;
 					}
 				}
@@ -94,9 +100,11 @@ public partial class HordeManager : Node
 				Hordes.Add(_new_horde);
 				_new_horde.Call("connectToHoardManager");
 				EmitSignal("HoardChange");
+				GD.Print("Created new horde: ", Hordes.Count);
 				return;
 			}
 		}
+		GD.Print("No need to split or create a new horde");
 	}
 
 	/* 

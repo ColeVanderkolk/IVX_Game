@@ -20,6 +20,9 @@ public partial class GameUi : Control
 	private String uiAudio = "res://Assets/Audio/SFX/sfx_uibuttonsound.mp3";
 	public override void _Ready()
 	{
+		var hordeManager = GetNode<HordeManager>("../../HordeManager");
+		hordeManager.Connect("HoardChange", new Callable(this, "_on_HordeChange"));
+
 		var currencyManeger = GetNode<currencymanager_script>("../../CurrencyManager_Node");
 		currencyManeger.Connect("AddCurrency", new Callable(this, "_updateCurrency"));
 		currencyManeger.Connect("RemoveCurrency", new Callable(this, "_updateCurrency"));
@@ -73,7 +76,7 @@ public partial class GameUi : Control
 	}
 	private void _updateCurrency()
 	{
-
+		GD.Print("UPDATE");
 		var coinLabel = GetNode<Label>("CoinLabel");
 		var metalLabel = GetNode<Label>("MetalLabel");
 		var bodyLabel = GetNode<Label>("BodyLabel");
@@ -86,7 +89,14 @@ public partial class GameUi : Control
 	private void _on_king_pressed()
 	{
 		var hordeManager = GetNode<HordeManager>("../../HordeManager");
-		hordeManager.setSelectedHorde(0);
+		bool success = hordeManager.setSelectedHorde(0);
+		
+		if (!success)
+		{
+			GD.PrintErr("Failed to select king horde!");
+			return;
+		}
+
 		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		audioPlayer.Stream = GD.Load<AudioStream>(kingSelectionAudios[GD.Randi() % kingSelectionAudios.Length]);
 		audioPlayer.Play();
@@ -94,7 +104,13 @@ public partial class GameUi : Control
 	private void _on_horde1_pressed()
 	{
 		var hordeManager = GetNode<HordeManager>("../../HordeManager");
-		hordeManager.setSelectedHorde(1);
+		bool success = hordeManager.setSelectedHorde(1);
+
+		if (!success)
+		{
+			GD.PrintErr("Failed to select horde 1!");
+			return;
+		}
 
 		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		audioPlayer.Stream = GD.Load<AudioStream>(hordeSelectionAudios[GD.Randi() % hordeSelectionAudios.Length]);
@@ -103,7 +119,13 @@ public partial class GameUi : Control
 	private void _on_horde2_pressed()
 	{
 		var hordeManager = GetNode<HordeManager>("../../HordeManager");
-		hordeManager.setSelectedHorde(2);
+		bool success = hordeManager.setSelectedHorde(2);
+
+		if (!success)
+		{
+			GD.PrintErr("Failed to select horde 2!");
+			return;
+		}
 
 		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		audioPlayer.Stream = GD.Load<AudioStream>(hordeSelectionAudios[GD.Randi() % hordeSelectionAudios.Length]);
@@ -112,7 +134,13 @@ public partial class GameUi : Control
 	private void _on_horde3_pressed()
 	{
 		var hordeManager = GetNode<HordeManager>("../../HordeManager");
-		hordeManager.setSelectedHorde(3);
+		bool success = hordeManager.setSelectedHorde(3);
+
+		if (!success)
+		{
+			GD.PrintErr("Failed to select horde 3!");
+			return;
+		}
 
 		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		audioPlayer.Stream = GD.Load<AudioStream>(hordeSelectionAudios[GD.Randi() % hordeSelectionAudios.Length]);
@@ -121,7 +149,13 @@ public partial class GameUi : Control
 	private void _on_horde4_pressed()
 	{
 		var hordeManager = GetNode<HordeManager>("../../HordeManager");
-		hordeManager.setSelectedHorde(4);
+		bool success = hordeManager.setSelectedHorde(4);
+
+		if (!success)
+		{
+			GD.PrintErr("Failed to select horde 4!");
+			return;
+		}
 
 		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		audioPlayer.Stream = GD.Load<AudioStream>(hordeSelectionAudios[GD.Randi() % hordeSelectionAudios.Length]);
@@ -130,10 +164,10 @@ public partial class GameUi : Control
 	private void _on_HordeChange()
 	{
 		List<Node3D> newHordes = GetNode<HordeManager>("../../HordeManager").Hordes;
-		var button2 = GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer/1Button");
-		var button3 = GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer/2Button");
-		var button4 = GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer/3Button");
-		var button5 = GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer/4Button");
+		var button2 = GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer2/1Button");
+		var button3 = GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer3/2Button");
+		var button4 = GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer4/3Button");
+		var button5 = GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer5/4Button");
 
 		button2.Visible = false;
 		button3.Visible = false;
@@ -162,7 +196,7 @@ public partial class GameUi : Control
 			}
 			button.Visible = true;
 			button.Text = newHordes[i].Call("getSize").As<int>().ToString() + "/10";
-	
+			GD.Print("Updated button " + i + " with horde size " + newHordes[i].Call("getSize").As<int>());
 		}
 		
 	}
