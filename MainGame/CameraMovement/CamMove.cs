@@ -235,8 +235,10 @@ public partial class CamMove : Camera3D
 					Input.WarpMouse(new Vector2(rotAnchor.mouseStartingX, GetViewport().GetMousePosition().Y));
 				rotAnchor = null;
 			}
+			
 
 		}
+		base._Input(@event);
 	}
 
 	[Export] Node3D debuganchor;

@@ -49,6 +49,7 @@ public partial class gate_buildingscript : Node3D
 
 	public int GateHP;
 
+	public bool broken = true;
 
 	public override void _Ready()
 	{
@@ -73,6 +74,7 @@ public partial class gate_buildingscript : Node3D
 			OldMesh.Visible = false;
 			EmitSignal(SignalName.BuildingAssimilated);
 			InteractArea.SetCollisionLayerValue(4, true);
+			broken = false;
 		}
 	}
 
@@ -105,6 +107,7 @@ public partial class gate_buildingscript : Node3D
 		EmitSignal(SignalName.GateBroken);
 		InteractArea.SetCollisionLayerValue(4, false);
 		GD.Print("Gate Broken");
+		broken = true;
 	}
 
 
