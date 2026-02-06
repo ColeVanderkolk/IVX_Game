@@ -3,12 +3,15 @@
 [ext_resource type="Script" uid="uid://rf83v5w1jtnr" path="res://Buildings/Scripts/buildings_colliderscript.cs" id="1_h86b2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s7uag"]
-size = Vector3(1, 0.33, 1)
+size = Vector3(10, 0.33, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_h86b2"]
-size = Vector3(1, 0.33, 1)
+size = Vector3(10, 0.33, 10)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_cybug"]
+top_radius = 5.0
+bottom_radius = 5.0
+height = 10.0
 
 [node name="GenericBuliding" type="Node3D"]
 

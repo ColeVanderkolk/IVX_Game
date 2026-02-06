@@ -46,7 +46,7 @@ public partial class mine_buildingscript : Node3D
 
 	// Should be signalled once the mine has been assimillated
 	// toggles assimillated model and subscribes to mineTimer to produce
-	private void OnAssimilate(Vector3 mousePos)
+	private void OnAssimilate(int a, int b)
 	{
 		if(!Assimilated)
 		{

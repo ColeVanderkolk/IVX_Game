@@ -35,7 +35,7 @@ public partial class recruit_buildingscript : Node3D
     }
 
     // Toggles model and whether buliding can produce units
-    private void OnAssimilate(Vector3 mousePos)
+    private void OnAssimilate(int a, int b)
     {
         if(!Assimilated)
 		{
