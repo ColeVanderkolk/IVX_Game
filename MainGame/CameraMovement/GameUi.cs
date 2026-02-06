@@ -20,6 +20,9 @@ public partial class GameUi : Control
 	private String uiAudio = "res://Assets/Audio/SFX/sfx_uibuttonsound.mp3";
 	public override void _Ready()
 	{
+		var hordeManager = GetNode<HordeManager>("../../HordeManager");
+		hordeManager.Connect("HoardChange", new Callable(this, "_on_HordeChange"));
+
 		var currencyManeger = GetNode<currencymanager_script>("../../CurrencyManager_Node");
 		currencyManeger.Connect("AddCurrency", new Callable(this, "_updateCurrency"));
 		currencyManeger.Connect("RemoveCurrency", new Callable(this, "_updateCurrency"));
@@ -129,17 +132,21 @@ public partial class GameUi : Control
 	}
 	private void _on_HordeChange()
 	{
+		GD.Print("HORDE CHANGE DETECTED, UPDATING UI");
 		List<Node3D> newHordes = GetNode<HordeManager>("../../HordeManager").Hordes;
-		var button2 = GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer/1Button");
-		var button3 = GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer/2Button");
-		var button4 = GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer/3Button");
-		var button5 = GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer/4Button");
+		var button2 = GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer2/1Button");
+		var button3 = GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer3/2Button");
+		var button4 = GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer4/3Button");
+		var button5 = GetNode<Button>("HordeButtons/HBoxContainer/MarginContainer5/4Button");
+		GD.Print("GOT BUTTONS, UPDATING VISIBILITY");
 
 		button2.Visible = false;
 		button3.Visible = false;
 		button4.Visible = false;
 		button5.Visible = false;
 
+		GD.Print("DONE WITH VISIBILITY, UPDATING TEXT");
+		GD.Print("Current number of hordes: " + newHordes.Count);
 		for (int i = 1; i < newHordes.Count; i++)
 		{
 			Button button;
@@ -162,7 +169,7 @@ public partial class GameUi : Control
 			}
 			button.Visible = true;
 			button.Text = newHordes[i].Call("getSize").As<int>().ToString() + "/10";
-	
+			GD.Print("Updated button " + i + " with horde size " + newHordes[i].Call("getSize").As<int>());
 		}
 		
 	}

@@ -9,9 +9,9 @@ size = Vector3(4.240967, 2.5769043, 8.950745)
 [node name="King" type="CharacterBody3D"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 script = ExtResource("1_dfyto")
-health = 100
-damage = 20
-speed = 10.0
+health = 20
+damage = 5
+speed = 40.0
 tier = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

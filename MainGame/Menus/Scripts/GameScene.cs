@@ -20,5 +20,10 @@ public partial class GameScene : Node
 	{
 		EmitSignal(SignalName.QuitToMainMenu);
 	}
+	
+	private void _on_timer_timeout()
+	{
+		var horde = GetNode("HordeManager/Horde") as Node; horde.Call("addUnit");
+	}
 
 }

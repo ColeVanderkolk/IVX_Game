@@ -60,6 +60,8 @@ func _ready() -> void:
 		horde_types.KING:
 			Globals.King = self
 			addUnit(999)
+			get_parent().addKing(self)
+			connectToHoardManager()
 		horde_types.ASSIMALTED_ACTIVE:
 			connectToHoardManager()
 		horde_types.ASSIMALTED_SPENT:
@@ -138,7 +140,7 @@ func setHitBoxSize():
 ## Returns the number of units in the horde
 func getSize()->int:
 	if hord_Type == horde_types.KING:
-		return 10
+		return units.size() + 9
 	return units.size()
 
 #endregion
@@ -183,10 +185,12 @@ func mitosis(numUnits : int) -> Horde:
 	# Load new horde
 	var newHorde:Horde = load("res://Units/Scenes/horde.tscn").instantiate()
 	
+	print(numUnits)
 	# Move units to the new horde
 	for i in range(numUnits):
 		var unit:Unit = units.pop_back()
 		newHorde.add_child(unit)
+		newHorde.units.append(unit)
 	
 	# Recalc units in current horde to account for now missing units
 	recalc()
@@ -194,6 +198,8 @@ func mitosis(numUnits : int) -> Horde:
 	# Instantiate the new horde
 	get_parent().add_child(newHorde)
 	mitosisHappened.emit()
+	print(newHorde.units.size())
+	print(newHorde.units)
 	return newHorde
 #endregion
 # ====================================================
