@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlysbb5gi8jjn"]
+
+[ext_resource type="PackedScene" uid="uid://ci73t0d2cm8tf" path="res://Buildings/Scenes/mine_building.tscn" id="1_6l3io"]
+
+[node name="MineManager" type="Node"]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="MineBuilding" parent="." instance=ExtResource("1_6l3io")]
+
+[node name="MineBuilding2" parent="." instance=ExtResource("1_6l3io")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0390981, 0, 0)

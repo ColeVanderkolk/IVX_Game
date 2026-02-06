@@ -5,7 +5,7 @@ Lead by Cole Vanderkolk and Camden Perkins
 
 Collaborators:
 1. Audio by:
-- First name Last name
+- James Flahiff
 - First name Last name
 2. Assets by:
 - Nathan Christner
@@ -14,6 +14,7 @@ Collaborators:
 - Madden Rota
 - Phiney Parent (phineythedm)
 - Alex Stephens (Eev)
+- Justin Shaw
 4. Story by:
 - Shane Hermanides
 - Paige Cook

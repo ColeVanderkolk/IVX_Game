@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci73t0d2cm8tf"]
+
+[ext_resource type="PackedScene" uid="uid://c0huid33if1iu" path="res://Buildings/Scenes/generic_buliding.tscn" id="1_21tdx"]
+[ext_resource type="Script" uid="uid://jan5sys6btff" path="res://Buildings/Scripts/mine_buildingscript.cs" id="2_1mpvj"]
+
+[node name="MineBuilding" instance=ExtResource("1_21tdx")]
+script = ExtResource("2_1mpvj")
+
+[connection signal="BuildingClicked" from="StaticBody3D" to="." method="OnAssimilate"]
