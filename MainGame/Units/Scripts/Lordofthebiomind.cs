@@ -17,7 +17,6 @@ public partial class Lordofthebiomind : Node3D
 		if (anim.CurrentAnimation == "Armature_001" &&
 			anim.CurrentAnimationPosition >= 1.02f)
 		{
-			GD.Print("Animation finished, switching to idle");
 			anim.Stop();
 			anim.Seek(0);
 			anim.Play("Armature_001");

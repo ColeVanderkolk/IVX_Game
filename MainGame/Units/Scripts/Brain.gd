@@ -9,10 +9,11 @@ func _ready() -> void:
 signal gameOver()
 
 func _on_moving():
-	$lordofthebiomind.AnimationPlayer.Play()
+	$lordofthebiomind.get_node("AnimationPlayer").play()
 
 func _on_stopped():
-	$lordofthebiomind.AnimationPlayer.Stop()
+	print("ALL DONE")
+	$lordofthebiomind.get_node("AnimationPlayer").stop()
 
 func _unit_death():
 	gameOver.emit()

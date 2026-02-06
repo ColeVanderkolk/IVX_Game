@@ -75,7 +75,6 @@ public partial class HordeManager : Node
 	 */
 	private void _on_unit_added(Node3D horde, int tier)
 	{
-		GD.Print("A NEW UNIT WAS ADDED TO THE HORDE");
 		if (horde.Call("getSize").As<int>() > 10)
 		{
 			// Look for open horde

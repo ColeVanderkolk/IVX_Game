@@ -83,14 +83,29 @@ func connectToHoardManager()->void:
 
 # =======================================================
 
+func change_state(new_state):
+	print(new_state)
+	state = new_state
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	if moving and !in_combat:
-		move(delta)
+	match state:
+		states.IDLE:
+			pass
+		states.MOVING_TO:
+			move(delta)
+		states.TARGETING:
+			if !_enemy_Horde:
+				change_state(states.IDLE)
+				stoppedMoving.emit()
+			targetEnemy(_enemy_Horde)
+			move(delta)
+			
+		states.COMBAT:
+			pass
+		_:
+			print("UNKNOWN STATE ", state)
 	
-	if in_combat:
-		in_combat = false
 	for area in hitbox.get_overlapping_areas():
 		checkForDamage(area)
 
@@ -220,6 +235,8 @@ func startMoving(dest:Vector3):
 	startedMoving.emit()
 
 func targetEnemy(enemy:Horde)->void:
+	if state != states.TARGETING:
+		change_state(states.TARGETING)
 	_enemy_Horde = enemy
 	startMoving(enemy.global_position)
 
@@ -239,6 +256,7 @@ func move(delta : float):
 	# Check to see if target is reached and moving is still neccesary
 	if position.x == target.x and position.z == target.z:
 		stoppedMoving.emit()
+		target = Vector3.ZERO
 		moving = false
 		if sacrifice:
 			sacrificeSelf()
@@ -276,6 +294,9 @@ func checkForDamage(area: Area3D):
 	if horde.is_in_group("Enemy") and is_in_group("Assimilated"):
 		#print("Assimilated horde takes damage")
 		in_combat = true
+		if state != states.COMBAT:
+			change_state(states.COMBAT)
+			stoppedMoving.emit()
 		if harmable:
 			takeDamage(horde)
 			harmable = false
@@ -284,15 +305,29 @@ func checkForDamage(area: Area3D):
 	elif horde.is_in_group("Assimilated") and is_in_group("Enemy"):
 		#print("Enemy horde takes damage")
 		in_combat = true
+		if state != states.COMBAT:
+			change_state(states.COMBAT)
+			stoppedMoving.emit()
+			
 		if harmable:
 			takeDamage(horde)
 			harmable = false
 			$ImmunityFrames.start()
 	# Case #3 where gate needs to take damage from this horde
-	elif horde.is_in_group("Gate") and is_in_group("Enemy"):
-		if !horde.broken:
-			in_combat = true
-			gateDamaged.emit(totDamage)
+	elif horde.is_in_group("Gate") and is_in_group("Enemy") and !horde.broken:
+		in_combat = true
+		if state != states.COMBAT:
+			change_state(states.COMBAT)
+			stoppedMoving.emit()
+			
+		gateDamaged.emit(totDamage)
+	elif in_combat:
+		in_combat = false
+		if state == states.COMBAT:
+			if _enemy_Horde:
+				change_state(states.TARGETING)
+			elif target != Vector3.ZERO:
+				change_state(states.MOVING_TO)
 
 
 
@@ -335,9 +370,13 @@ func _on_immunity_frames_timeout() -> void:
 
 
 func _on_hitbox_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	if !is_in_group("Enemy"):
+		return
 	if event is InputEventMouseButton:
 		if event.pressed and  event.button_index == MOUSE_BUTTON_LEFT:
 			print("Clicked!")
+			$HordeActionHandeler.Attack(get_parent().get_node("HordeManager").getSelectedHorde(), self)
+			
 	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed \
 		#and horde_type == horde_types.ENEMY:
 		#$HordeActionHandeler.Attack(get_parent().getSelectedHorde(), self)
