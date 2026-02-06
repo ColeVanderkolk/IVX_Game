@@ -20,8 +20,9 @@ var in_combat:bool = false
 # Signals
 signal startedMoving()
 signal stopedMoving()
-signal unitAdded(tier:int)
+signal unitAdded(horde:Horde, tier:int)
 signal mitosisHappened()
+signal deadHorde(horde:Horde)
 
 @onready var hitbox: Area3D = $Hitbox
 
@@ -218,6 +219,7 @@ func takeDamage(attacker : Horde):
 			
 			# Remove the horde from the game if it's empty
 			if units.size() < 1:
+				deadHorde.emit(self)
 				queue_free()
 			else:
 				recalc()

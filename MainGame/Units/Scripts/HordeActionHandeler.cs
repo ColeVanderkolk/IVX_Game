@@ -43,7 +43,7 @@ public partial class HordeActionHandeler : Node
 		{
 			return false;
 		}
-        _new_horde.Call("spendHorde", Dest);
+		_new_horde.Call("spendHorde", Dest);
 		return true;
 	}
 }
