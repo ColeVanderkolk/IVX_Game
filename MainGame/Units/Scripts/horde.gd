@@ -31,6 +31,10 @@ func _ready() -> void:
 	# Make the hitbox shape unique to this horde
 	$Hitbox/CollisionShape3D.shape = $Hitbox/CollisionShape3D.shape.duplicate()
 
+func connectToHoardManager()->void:
+	unitAdded.connect(get_parent()._on_unit_added)
+	deadHorde.connect(get_parent().handleDeadHorde)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if moving and !in_combat:

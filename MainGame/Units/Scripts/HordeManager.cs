@@ -38,7 +38,7 @@ public partial class HordeManager : Node
 	 */
 	public bool setSelectedHorde(int selection)
 	{
-		if (selection < Hordes.Count)
+		if (selection >= 0 && selection < Hordes.Count)
 		{
 			SelectedHorde = selection;
 			return true;
@@ -75,7 +75,8 @@ public partial class HordeManager : Node
 					if (other_horde.Call("getSize").As<int>() < 10)
 					{
 						other_horde.Call("addUnit", tier);
-						horde.Call("removeUnit", tier);
+						other_horde.Call("connectToHoardManager");
+						horde.Call("removeUnit");
 						return;
 					}
 				}
