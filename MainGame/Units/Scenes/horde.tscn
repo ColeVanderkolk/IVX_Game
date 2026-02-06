@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqi12twiio58s"]
+[gd_scene load_steps=4 format=3 uid="uid://bqi12twiio58s"]
 
 [ext_resource type="Script" uid="uid://c4q7kkcy5ydsw" path="res://Units/Scripts/horde.gd" id="1_rtys4"]
+[ext_resource type="PackedScene" uid="uid://w5uwwedy0j82" path="res://Units/Scenes/HordeActionHandeler.tscn" id="2_a51td"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_rtys4"]
 radius = 2.0
@@ -9,7 +10,10 @@ radius = 2.0
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_rtys4")
 
+[node name="HordeActionHandeler" parent="." instance=ExtResource("2_a51td")]
+
 [node name="Hitbox" type="Area3D" parent="." groups=["Assimilated", "Horde"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.98900914, 0)
 collision_layer = 6
 collision_mask = 6
 
@@ -19,4 +23,5 @@ shape = SubResource("CylinderShape3D_rtys4")
 [node name="ImmunityFrames" type="Timer" parent="."]
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="input_event" from="Hitbox" to="." method="_on_hitbox_input_event"]
 [connection signal="timeout" from="ImmunityFrames" to="." method="_on_immunity_frames_timeout"]

@@ -64,14 +64,20 @@ autoplay = true
 [node name="HordeManager" parent="." instance=ExtResource("10_ok13d")]
 
 [node name="Horde" parent="HordeManager" instance=ExtResource("10_eojei")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.55224895, 4.7234273, 65.41621)
-hord_Type = 0
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.387, 4.553, 65.416)
+horde_type = 0
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 autostart = true
 
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
 
 [editable path="Buildings/MineManager"]
 [editable path="Buildings/RecruitManager"]

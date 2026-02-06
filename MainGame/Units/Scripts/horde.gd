@@ -25,7 +25,7 @@ enum horde_types {
 	ASSIMALTED_SPENT,
 	ENEMY
 }
-@export_enum("KING", "ASSIMALTED_ACTIVE", "ASSIMALTED_SPENT", "ENEMY") var hord_Type:int = horde_types.ENEMY
+@export_enum("KING", "ASSIMALTED_ACTIVE", "ASSIMALTED_SPENT", "ENEMY") var horde_type:int = horde_types.ENEMY
 
 enum states {
 	IDLE,
@@ -56,19 +56,22 @@ func _ready() -> void:
 	# Make the hitbox shape unique to this horde
 	$Hitbox/CollisionShape3D.shape = $Hitbox/CollisionShape3D.shape.duplicate()
 	
-	match hord_Type:
+	match horde_type:
 		horde_types.KING:
 			Globals.King = self
 			addUnit(999)
 			get_parent().addKing(self)
 			connectToHoardManager()
+			add_to_group("Assimilated")
 		horde_types.ASSIMALTED_ACTIVE:
 			connectToHoardManager()
+			add_to_group("Assimilated")
 		horde_types.ASSIMALTED_SPENT:
 			pass
 		_: # ENEMY
 			# SET TARGET TO BE KING
 			targetEnemy(Globals.King)
+			add_to_group("Enemy")
 			state = states.TARGETING
 			pass
 
@@ -139,7 +142,7 @@ func setHitBoxSize():
 
 ## Returns the number of units in the horde
 func getSize()->int:
-	if hord_Type == horde_types.KING:
+	if horde_type == horde_types.KING:
 		return units.size() + 9
 	return units.size()
 
@@ -184,7 +187,7 @@ func mitosis(numUnits : int) -> Horde:
 	
 	# Load new horde
 	var newHorde:Horde = load("res://Units/Scenes/horde.tscn").instantiate()
-	
+	newHorde.horde_type = horde_types.ASSIMALTED_ACTIVE
 	print(numUnits)
 	# Move units to the new horde
 	for i in range(numUnits):
@@ -309,3 +312,12 @@ func takeDamage(attacker : Horde):
 func _on_immunity_frames_timeout() -> void:
 	harmable = true
 	#print("Immunity frames over")
+
+
+func _on_hitbox_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	#print("EVENT")
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		print("Clicked!")
+	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed \
+		#and horde_type == horde_types.ENEMY:
+		#$HordeActionHandeler.Attack(get_parent().getSelectedHorde(), self)

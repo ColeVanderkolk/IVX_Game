@@ -25,5 +25,15 @@ public partial class GameScene : Node
 	{
 		var horde = GetNode("HordeManager/Horde") as Node; horde.Call("addUnit");
 	}
-
+	private void _on_timer_2_timeout()
+	{
+		var hordeScene = GD.Load<PackedScene>("res://Units/Scenes/horde.tscn");
+		var newHorde = hordeScene.Instantiate<Node3D>();
+		newHorde.GlobalPosition = new Vector3(0, 4.5f, 0);
+		newHorde.Call("addUnit", 2);
+		newHorde.Call("addUnit", 2);
+		newHorde.Call("addUnit", 2);
+		AddChild(newHorde);
+		GD.Print("added Horde!!!");
+	}
 }
