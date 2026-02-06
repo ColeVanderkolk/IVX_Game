@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bt62anvbdurwd"]
+[gd_scene load_steps=12 format=3 uid="uid://bt62anvbdurwd"]
 
 [ext_resource type="Script" uid="uid://cq7t2pkyslgdb" path="res://Menus/Scripts/GameScene.cs" id="1_edgyv"]
 [ext_resource type="PackedScene" uid="uid://blvmyj17pw5kw" path="res://Menus/Scenes/pause_menu.tscn" id="2_idyv1"]
@@ -8,8 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://hv71py2pmedd" path="res://Buildings/Scenes/gate_building.tscn" id="6_vqgse"]
 [ext_resource type="PackedScene" uid="uid://cugh3ljdo6xar" path="res://Assets/Models/Map/game_map.tscn" id="7_a5bod"]
 [ext_resource type="PackedScene" uid="uid://shi3iohprtps" path="res://CameraMovement/player.tscn" id="8_vqgse"]
-[ext_resource type="AudioStream" uid="uid://cli42iur4apsg" path="res://Assets/Audio/Music/music_gameplay.mp3" id="9_vqgse"]
+[ext_resource type="AudioStream" uid="uid://dmm7gcp5gqmkr" path="res://Assets/Audio/Music/music_gameplay.mp3" id="9_vqgse"]
 [ext_resource type="PackedScene" uid="uid://bqi12twiio58s" path="res://Units/Scenes/horde.tscn" id="10_eojei"]
+[ext_resource type="PackedScene" path="res://Units/Scenes/HordeManager.tscn" id="10_ok13d"]
 
 [node name="GameScene" type="Node"]
 script = ExtResource("1_edgyv")
@@ -51,7 +52,9 @@ MaxHeight = 50.0
 stream = ExtResource("9_vqgse")
 autoplay = true
 
-[node name="Horde" parent="." instance=ExtResource("10_eojei")]
+[node name="HordeManager" parent="." instance=ExtResource("10_ok13d")]
+
+[node name="Horde" parent="HordeManager" instance=ExtResource("10_eojei")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.55224895, 4.7234273, 65.41621)
 
 [editable path="Buildings/MineManager"]

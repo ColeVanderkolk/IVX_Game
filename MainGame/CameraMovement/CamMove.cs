@@ -222,7 +222,8 @@ public partial class CamMove : Camera3D
 												);
 
 				GD.Print("point: " + pointOnGround);
-				debuganchor.Position = pointOnGround;
+				if (debuganchor != null)
+					debuganchor.Position = pointOnGround;
 
 				Input.SetDefaultCursorShape(Input.CursorShape.Hsize);
 
@@ -230,7 +231,8 @@ public partial class CamMove : Camera3D
 			else if (mouseButton.ButtonIndex == MouseButton.Right && mouseButton.IsReleased())
 			{
 				Input.SetDefaultCursorShape(Input.CursorShape.Arrow);
-				Input.WarpMouse(new Vector2(rotAnchor.mouseStartingX, GetViewport().GetMousePosition().Y));
+				if (rotAnchor != null)
+					Input.WarpMouse(new Vector2(rotAnchor.mouseStartingX, GetViewport().GetMousePosition().Y));
 				rotAnchor = null;
 			}
 
